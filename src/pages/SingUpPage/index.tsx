@@ -13,6 +13,10 @@ const SingUpPage = () => {
         navigate('/projects')
     }, []);
 
+    const goToSignIn = React.useCallback(() => {
+        navigate('/sign-in')
+    }, []);
+
     return (
       <div className={styles.container}>
         <span className='title'>Sign Up</span>
@@ -26,6 +30,7 @@ const SingUpPage = () => {
                 <span>Sign up as Admin</span>
             </div>
             <Button onClick={goToProjects} className={styles.button} variant="contained">Sign Up</Button>
+            <Button onClick={goToSignIn} className={styles.button} variant="contained">Go To Sign In</Button>
         </div>
       </div>)
   }

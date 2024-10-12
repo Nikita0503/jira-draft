@@ -12,6 +12,10 @@ const SignInPage = () => {
         navigate('/projects')
     }, []);
 
+    const goToSignUp = React.useCallback(() => {
+        navigate('/sign-up')
+    }, []);
+
     return (
       <div className={styles.container}>
         <span className={styles.title}>Sign In</span>
@@ -19,6 +23,7 @@ const SignInPage = () => {
             <TextField className={styles.textField} label="Email" variant="filled" />
             <TextField className={styles.textField} label="Password" variant="filled" />
             <Button onClick={goToProjects} className={styles.button} variant="contained">Sign In</Button>
+            <Button onClick={goToSignUp} className={styles.button} variant="contained">Go To Sign Up</Button>
         </div>
       </div>)
   }
