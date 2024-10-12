@@ -16,6 +16,8 @@
 /* ProjectListItem */
 
 .projectListItemContainer{
+    transition: 300ms;
+    cursor: pointer;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -73,6 +75,11 @@
 
 .projectListItemIcon {
     margin-left: 6px;
+}
+
+.projectListItemContainer:hover{
+    padding-bottom: 15px;
+    transition: 300ms;
 }
 
 @media only screen and (max-width: 1000px){
