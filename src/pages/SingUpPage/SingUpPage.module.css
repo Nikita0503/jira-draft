@@ -19,11 +19,11 @@
     align-items: start;
 }
 
-.text-field{
+.textField{
     margin-top: 12px !important;
 }
 
-.checkbox-container{
+.checkboxContainer{
     display: flex;
     flex-direction: row;
     align-items: center;

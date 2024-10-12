@@ -1,16 +1,15 @@
-import './styles.css'
+import styles from './SignInPage.module.css';
 import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 
 const SignInPage = () => {
     return (
-      <div className='container'>
-        <span className='title'>Sign In</span>
-        <div className='content'>
-            <TextField className='text-field' label="Email" variant="filled" />
-            <TextField className='text-field' label="Password" variant="filled" />
-            <Button className='button' variant="contained">Sign In</Button>
+      <div className={styles.container}>
+        <span className={styles.title}>Sign In</span>
+        <div className={styles.content}>
+            <TextField className={styles.textField} label="Email" variant="filled" />
+            <TextField className={styles.textField} label="Password" variant="filled" />
+            <Button className={styles.button} variant="contained">Sign In</Button>
         </div>
       </div>)
   }

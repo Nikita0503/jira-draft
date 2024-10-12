@@ -1,22 +1,22 @@
-import './styles.css'
+import styles from './SingUpPage.module.css';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 
 const SingUpPage = () => {
     return (
-      <div className='container'>
+      <div className={styles.container}>
         <span className='title'>Sign Up</span>
-        <div className='content'>
-            <TextField className='text-field' label="Email" variant="filled" />
-            <TextField className='text-field' label="Name" variant="filled" />
-            <TextField className='text-field' label="Password" variant="filled" />
-            <TextField className='text-field' label="Repeat Password" variant="filled" />
-            <div className='checkbox-container'>
+        <div className={styles.content}>
+            <TextField className={styles.textField} label="Email" variant="filled" />
+            <TextField className={styles.textField} label="Name" variant="filled" />
+            <TextField className={styles.textField} label="Password" variant="filled" />
+            <TextField className={styles.textField} label="Repeat Password" variant="filled" />
+            <div className={styles.checkboxContainer}>
                 <Checkbox />
                 <span>Sign up as Admin</span>
             </div>
-            <Button className='button' variant="contained">Sign Up</Button>
+            <Button className={styles.button} variant="contained">Sign Up</Button>
         </div>
       </div>)
   }
