@@ -1,3 +1,5 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { IProject } from '../../interfaces';
 import styles from './ProjectsPage.module.css';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
@@ -52,7 +54,15 @@ interface IProjectListItemProps {
 }
 
 const ProjectListItem = ({project}: IProjectListItemProps) => {
-  return (<div className={styles.projectListItemContainer}>
+
+  const navigate = useNavigate(); 
+
+  const goToProjectDetails = React.useCallback(() => {
+      navigate('/projects/1')
+  }, []);
+
+
+  return (<div className={styles.projectListItemContainer} onClick={goToProjectDetails}>
     <div className={styles.projectListItemInfo}>
       <span className={styles.projectListItemTitle}>{project.title}</span>
       <span className={styles.projectListItemDescription}>{project.description}</span>
