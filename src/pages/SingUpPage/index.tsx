@@ -17,10 +17,18 @@ const SingUpPage = () => {
         navigate('/sign-in')
     }, []);
 
+    const chooseAvatar = React.useCallback(() => {
+
+    }, []);
+
     return (
       <div className={styles.container}>
         <span className={styles.title}>Sign Up</span>
         <div className={styles.content}>
+        <div className={styles.avatarContainer}>
+                <img className={styles.avatar} src='https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg'/>
+                <Button onClick={chooseAvatar} className={styles.button} variant="contained">Choose Avatar</Button>
+            </div>
             <TextField className={styles.textField} label="Email" variant="filled" />
             <TextField className={styles.textField} label="Name" variant="filled" />
             <TextField className={styles.textField} label="Password" variant="filled" />
