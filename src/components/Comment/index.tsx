@@ -22,7 +22,7 @@ const Comment = ({comment}: IProps) => {
           </div>
         </div>
         <span className={styles.title}>{comment.message}</span>
-        <div className={styles.filesContainer}>
+        <div className={styles.fileListContainer}>
             {comment.files.map((file: IFile) => <div className={styles.fileContainer}>
               <AttachedFile file={file}/>
             </div>)}

@@ -42,8 +42,8 @@ const ProjectsPage = () => {
         <div className={styles.content}>
           {PROJECTS.map((project: IProject) => {
             return <div className={styles.projectContainer}>
-                <Project project={project}/>
-              </div>
+              <Project project={project}/>
+            </div>
           })}
         </div>
       </div>)
