@@ -66,6 +66,27 @@ const COMMENTS: IComment[] = [{
     taskId: 1,
     name: 'https://cdn-icons-png.flaticon.com/512/762/762686.png'
   }]
+},
+{
+  id: 2,
+  message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+  taskId: 1,
+  userId: 1,
+  user: {
+    id: 2,
+    email: "default@email.com",
+    role: "ADMIN",
+    name: "Default Name",
+  },
+  files: [{
+    id: 1,
+    taskId: 1,
+    name: 'https://cdn-icons-png.flaticon.com/512/747/747095.png'
+  },{
+    id: 2,
+    taskId: 1,
+    name: 'https://cdn-icons-png.flaticon.com/512/762/762686.png'
+  }]
 }]
 
 const TaskDetailsPage = () => {
@@ -77,15 +98,17 @@ const TaskDetailsPage = () => {
         <span className={styles.title}>{TASK.title}</span>
         <div className={styles.content}>
           <span className={styles.description}>{TASK.description}</span>
-          <span className={styles.filesTitle}>Files:</span>
-          <div className={styles.filesContainer}>
+          <span className={styles.fileListTitle}>Files:</span>
+          <div className={styles.fileList}>
             {TASK.files.map((file: IFile) => <div className={styles.fileContainer}>
               <AttachedFile file={file}/>
             </div>)}
           </div>
-          <span className={styles.commentTitle}>Comments:</span>
-          <div className={styles.commentsContainer}>
-            {COMMENTS.map((comment: IComment) => <Comment comment={comment} />)}
+          <span className={styles.commentListTitle}>Comments:</span>
+          <div className={styles.commentList}>
+            {COMMENTS.map((comment: IComment) => <div className={styles.commentContainer}>
+              <Comment comment={comment} />
+            </div>)}
           </div>
         </div>
       </div>)

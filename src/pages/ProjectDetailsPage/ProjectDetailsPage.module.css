@@ -6,6 +6,13 @@
     height: 100vh;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
 .title{
     font-size: 24px;
     font-weight: bold;
@@ -13,127 +20,13 @@
     margin-bottom: 24px;
 }
 
-.content {
-    display: flex;
-    flex-direction: column;
-    width: 50vw;
-}
-
 .titleTaskList{
     font-size: 20px;
     font-weight: bold;
     margin-top: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
 }
 
-/* TaskListItem */
-
-.taskListItemContainer{
-    transition: 300ms;
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 50vw;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-    padding: 12px;
-    border-radius: 12px;
-    margin-bottom: 18px;
-}
-
-.taskListItemInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: center;
-}
-
-.taskListItemTitle{
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 4px;
-}
-
-.taskListItemDescription{
-    font-size: 14px;
-    color: #575757;
-    margin-bottom: 4px;
-}
-
-.taskListItemAdditionalInfo{
-    display: flex;
-    flex-direction: row;
-    align-self: center;
-    margin-top: 12px;
-}
-
-.taskListItemTasksCount{
-    font-size: 14px;
-    color: #575757;
-    margin-right: 6px;
-}
-
-.taskListItemUsersCount{
-    font-size: 14px;
-    color: #575757;
-    margin-left: 6px;
-}
-
-.taskListItemActions{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 4px;
-}
-
-.taskListItemIcon {
-    margin-left: 6px;
-}
-
-.taskListItemContainer:hover{
-    padding-bottom: 15px;
-    transition: 300ms;
-}
-
-.taskListItemStatusTypeUserContainer{
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-}
-
-.taskListItemTypeContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 4px;
-}
-
-.taskListItemStatusContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 4px;
-}
-
-.taskListItemUserContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 4px;
-}
-
-.taskListItemFilesContainer{
-    display: flex;
-    flex-direction: row;
-    margin-top: 12px;
-}
-
-.taskListItemFileContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 4px;
-}
 
 @media only screen and (max-width: 1000px){
     .content{

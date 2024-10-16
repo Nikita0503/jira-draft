@@ -7,6 +7,7 @@ import EditIcon from '@mui/icons-material/EditOutlined';
 import Status from '../../components/Status';
 import Type from '../../components/Type';
 import TaskUser from '../../components/TaskUser';
+import Task from '../../components/Task';
 
 const PROJECT: IProject = {
   id: 1,
@@ -129,45 +130,10 @@ const ProjectDetailsPage = () => {
         <div className={styles.content}>
           <span className={styles.titleTaskList}>Tasks:</span>
           {TASKS.map((task: ITask) => {
-          return <TaskListItem task={task}/>
-        })}
+            return <Task task={task}/>
+          })}
         </div>
       </div>)
 }
 
 export default ProjectDetailsPage;
-
-interface ITaskListItemProps {
-  task: ITask;
-}
-
-const TaskListItem = ({task}: ITaskListItemProps) => {
-
-  const navigate = useNavigate(); 
-
-  const goToTaskDetails = React.useCallback(() => {
-      navigate('/projects/1/tasks/1')
-  }, []);
-
-  return (<div className={styles.taskListItemContainer} onClick={goToTaskDetails}>
-    <div className={styles.taskListItemInfo}>
-      <span className={styles.taskListItemTitle}>{task.title}</span>
-      <span className={styles.taskListItemDescription}>{task.description}</span>
-      <div className={styles.taskListItemStatusTypeUserContainer}>
-        <div className={styles.taskListItemTypeContainer}>
-          <Type type={task.type}/>
-        </div>
-        <div className={styles.taskListItemStatusContainer}>
-          <Status status={task.status}/>
-        </div>
-        <div className={styles.taskListItemUserContainer}>
-          <TaskUser user={task.user}/>
-        </div>
-      </div>
-    </div>
-    <div className={styles.taskListItemActions}>
-      <EditIcon className={styles.taskListItemIcon}/>
-      <DeleteIcon className={styles.taskListItemIcon}/>
-    </div>
-  </div>)
-}

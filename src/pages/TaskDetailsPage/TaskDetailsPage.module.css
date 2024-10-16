@@ -25,39 +25,39 @@
     margin-bottom: 4px;
 }
 
-.filesContainer{
-    display: flex;
-    flex-direction: row;
-    margin-top: 12px;
-}
-
-.filesTitle{
+.fileListTitle{
     font-size: 20px;
     font-weight: bold;
     margin-top: 12px;
     margin-bottom: 12px;
+}
+
+.fileList{
+    display: flex;
+    flex-direction: row;
+    margin-top: 12px;
 }
 
 .fileContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-right: 4px;
 }
 
-.commentTitle{
+.commentListTitle{
     font-size: 20px;
     font-weight: bold;
     margin-top: 12px;
     margin-bottom: 12px;
 }
 
-.commentsContainer{
+.commentList{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-top: 12px;
 }
 
+.commentContainer{
+    margin-bottom: 18px;
+}
 
 @media only screen and (max-width: 1000px){
     .content{
