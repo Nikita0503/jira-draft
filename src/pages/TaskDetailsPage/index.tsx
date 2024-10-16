@@ -1,6 +1,6 @@
 import { IComment, IFile, IProject, ITask } from '../../interfaces';
 import styles from './TaskDetailsPage.module.css';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import Status from '../../components/Status';
@@ -8,6 +8,8 @@ import Type from '../../components/Type';
 import TaskUser from '../../components/TaskUser';
 import AttachedFile from '../../components/AttachedFile';
 import Comment from '../../components/Comment';
+import React from 'react';
+import { Button } from '@mui/material';
 
 const TASK: ITask = {
   id: 2,
@@ -91,13 +93,38 @@ const COMMENTS: IComment[] = [{
 
 const TaskDetailsPage = () => {
 
+  const navigate = useNavigate(); 
+
+    const goToEditTask = React.useCallback(() => {
+        //navigate('/projects')
+    }, []);
+
+    const deleteCurrentTask = React.useCallback(() => {
+      
+    }, []);
+
     const { id } = useParams(); 
 
     return (
       <div className={styles.container}>
         <span className={styles.title}>{TASK.title}</span>
         <div className={styles.content}>
+        <div className={styles.buttonsContainer}>
+            <Button onClick={goToEditTask} className={styles.button} variant="contained">Edit</Button>
+            <Button onClick={deleteCurrentTask} className={styles.button} variant="contained">Delete</Button>
+          </div>
           <span className={styles.description}>{TASK.description}</span>
+          <div className={styles.additionalInfo}>
+            <div className={styles.additionalInfoItem}>
+              <Type type={TASK.type}/>
+            </div>
+            <div className={styles.additionalInfoItem}>
+              <Status status={TASK.status}/>
+            </div>
+            <div className={styles.additionalInfoItem}>
+              <TaskUser user={TASK.user}/>
+            </div>
+          </div>
           <span className={styles.fileListTitle}>Files:</span>
           <div className={styles.fileList}>
             {TASK.files.map((file: IFile) => <div className={styles.fileContainer}>

@@ -25,7 +25,7 @@ const Project = ({project}: IProps) => {
           <span className={styles.taskCount}>Task Count: {project.tasksCount}</span>
           <span className={styles.userCount}>Members: {project.users.length}</span>
         </div>
-        </div>
+      </div>
       <div className={styles.actionsContainer}>
         <EditIcon className={styles.actionIcon}/>
         <DeleteIcon className={styles.actionIcon}/>

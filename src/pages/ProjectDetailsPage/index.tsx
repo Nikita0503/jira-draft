@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './ProjectDetailsPage.module.css';
 import { IProject, ITask } from '../../interfaces';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Task from '../../components/Task';
+import { Button } from '@mui/material';
 
 const PROJECT: IProject = {
   id: 1,
@@ -117,12 +118,26 @@ const TASKS: ITask[] = [{
 
 const ProjectDetailsPage = () => {
 
+    const navigate = useNavigate(); 
+
+    const goToEditProject = React.useCallback(() => {
+        //navigate('/projects')
+    }, []);
+
+    const deleteCurrentProject = React.useCallback(() => {
+      
+    }, []);
+
     const { projectId } = useParams(); 
 
     return (
       <div className={styles.container}>
         <span className={styles.title}>{PROJECT.title}</span>
         <div className={styles.content}>
+          <div className={styles.buttonsContainer}>
+            <Button onClick={goToEditProject} className={styles.button} variant="contained">Edit</Button>
+            <Button onClick={deleteCurrentProject} className={styles.button} variant="contained">Delete</Button>
+          </div>
           {TASKS.map((task: ITask) => {
             return <div className={styles.taskContainer}>
               <Task task={task}/>
