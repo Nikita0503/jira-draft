@@ -118,25 +118,29 @@ const TASKS: ITask[] = [{
 
 const ProjectDetailsPage = () => {
 
-    const navigate = useNavigate(); 
-
-    const goToEditProject = React.useCallback(() => {
-        //navigate('/projects')
-    }, []);
+    const { projectId } = useParams(); 
+    const navigate = useNavigate();
 
     const deleteCurrentProject = React.useCallback(() => {
       
     }, []);
 
-    const { projectId } = useParams(); 
+    const goToProjectEditor = React.useCallback(() => {
+      
+    }, []);
+
+    const goToTaskEditor = React.useCallback(() => {
+
+    }, []);
 
     return (
       <div className={styles.container}>
         <span className={styles.title}>{PROJECT.title}</span>
         <div className={styles.content}>
           <div className={styles.buttonsContainer}>
-            <Button onClick={goToEditProject} className={styles.button} variant="contained">Edit</Button>
-            <Button onClick={deleteCurrentProject} className={styles.button} variant="contained">Delete</Button>
+            <Button onClick={deleteCurrentProject} className={styles.button} variant="contained">Delete Project</Button>
+            <Button onClick={goToProjectEditor} className={styles.button} variant="contained">Edit Project</Button>
+            <Button onClick={goToTaskEditor} className={styles.button} variant="contained">Create Task</Button>
           </div>
           {TASKS.map((task: ITask) => {
             return <div className={styles.taskContainer}>

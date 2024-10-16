@@ -13,6 +13,17 @@
     margin-bottom: 24px;
 }
 
+.buttonsContainer{
+    display: flex;
+    flex-direction: row;
+    align-self: end;
+    margin-bottom: 8px;
+}
+
+.button{
+    margin-left: 4px !important;
+}
+
 .content {
     width: 50vw;
     display: flex;

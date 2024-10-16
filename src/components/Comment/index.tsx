@@ -4,6 +4,7 @@ import { IComment, IFile } from '../../interfaces';
 import AttachedFile from '../AttachedFile';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
+import AddFileButton from '../AddFileButton';
 
 interface IProps {
     comment: IComment
@@ -26,6 +27,7 @@ const Comment = ({comment}: IProps) => {
             {comment.files.map((file: IFile) => <div className={styles.fileContainer}>
               <AttachedFile file={file}/>
             </div>)}
+            <AddFileButton addFile={() => {}}/>
           </div>
       </div>)
   }

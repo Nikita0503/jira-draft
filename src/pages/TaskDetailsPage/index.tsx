@@ -10,6 +10,7 @@ import AttachedFile from '../../components/AttachedFile';
 import Comment from '../../components/Comment';
 import React from 'react';
 import { Button } from '@mui/material';
+import AddFileButton from '../../components/AddFileButton';
 
 const TASK: ITask = {
   id: 2,
@@ -93,25 +94,29 @@ const COMMENTS: IComment[] = [{
 
 const TaskDetailsPage = () => {
 
-  const navigate = useNavigate(); 
-
-    const goToEditTask = React.useCallback(() => {
-        //navigate('/projects')
-    }, []);
+    const { id } = useParams(); 
+    const navigate = useNavigate(); 
 
     const deleteCurrentTask = React.useCallback(() => {
-      
+        
+    }, []);
+    
+    const goToTaskEditor = React.useCallback(() => {
+
     }, []);
 
-    const { id } = useParams(); 
+    const goToCommentEditor = React.useCallback(() => {
+
+    }, []);
 
     return (
       <div className={styles.container}>
         <span className={styles.title}>{TASK.title}</span>
         <div className={styles.content}>
-        <div className={styles.buttonsContainer}>
-            <Button onClick={goToEditTask} className={styles.button} variant="contained">Edit</Button>
-            <Button onClick={deleteCurrentTask} className={styles.button} variant="contained">Delete</Button>
+          <div className={styles.buttonsContainer}>
+            <Button onClick={deleteCurrentTask} className={styles.button} variant="contained">Delete Task</Button>
+            <Button onClick={goToTaskEditor} className={styles.button} variant="contained">Edit Task</Button>
+            <Button onClick={goToCommentEditor} className={styles.button} variant="contained">Create Comment</Button>
           </div>
           <span className={styles.description}>{TASK.description}</span>
           <div className={styles.additionalInfo}>
@@ -130,6 +135,7 @@ const TaskDetailsPage = () => {
             {TASK.files.map((file: IFile) => <div className={styles.fileContainer}>
               <AttachedFile file={file}/>
             </div>)}
+            <AddFileButton addFile={() => {}} />
           </div>
           <span className={styles.commentListTitle}>Comments:</span>
           <div className={styles.commentList}>

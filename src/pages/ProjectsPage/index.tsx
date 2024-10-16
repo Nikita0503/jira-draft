@@ -2,6 +2,7 @@ import React from 'react';
 import { IProject } from '../../interfaces';
 import styles from './ProjectsPage.module.css';
 import Project from '../../components/Project';
+import { Button } from '@mui/material';
 
 const PROJECTS: IProject[] = [{
   id: 1,
@@ -36,10 +37,18 @@ const PROJECTS: IProject[] = [{
 ]
 
 const ProjectsPage = () => {
+
+  const goToProjectEditor = React.useCallback(() => {
+      
+  }, []); 
+
     return (
       <div className={styles.container}>
         <span className={styles.title}>Projects</span>
         <div className={styles.content}>
+          <div className={styles.buttonsContainer}>
+            <Button onClick={goToProjectEditor} className={styles.button} variant="contained">Create Project</Button>
+          </div>
           {PROJECTS.map((project: IProject) => {
             return <div className={styles.projectContainer}>
               <Project project={project}/>
