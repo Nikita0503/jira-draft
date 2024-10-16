@@ -11,7 +11,8 @@ export interface IUser {
     id: number;
     name: string;
     email: string;
-    role: TUserRole
+    role: TUserRole;
+    avatar?: string;
 }
 
 export interface IProject {
@@ -46,6 +47,15 @@ export interface ITask {
     userId: number;
     status: IStatus;
     type: IType;
+    user: IUser;
+    files: IFile[];
+}
+
+export interface IComment {
+    id: number;
+    message: string;
+    taskId: number;
+    userId: number;
     user: IUser;
     files: IFile[];
 }

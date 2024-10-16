@@ -1,12 +1,12 @@
+import React from 'react';
 import { IFile, IProject, ITask } from '../../interfaces';
 import styles from './ProjectDetailsPage.module.css';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import Status from '../../components/Status';
 import Type from '../../components/Type';
 import TaskUser from '../../components/TaskUser';
-import AttachedFile from '../../components/AttachedFile';
 
 const PROJECT: IProject = {
   id: 1,
@@ -121,7 +121,7 @@ const TASKS: ITask[] = [{
 
 const ProjectDetailsPage = () => {
 
-    const { id } = useParams(); 
+    const { projectId } = useParams(); 
 
     return (
       <div className={styles.container}>
@@ -142,7 +142,14 @@ interface ITaskListItemProps {
 }
 
 const TaskListItem = ({task}: ITaskListItemProps) => {
-  return (<div className={styles.taskListItemContainer}>
+
+  const navigate = useNavigate(); 
+
+  const goToTaskDetails = React.useCallback(() => {
+      navigate('/projects/1/tasks/1')
+  }, []);
+
+  return (<div className={styles.taskListItemContainer} onClick={goToTaskDetails}>
     <div className={styles.taskListItemInfo}>
       <span className={styles.taskListItemTitle}>{task.title}</span>
       <span className={styles.taskListItemDescription}>{task.description}</span>
@@ -156,11 +163,6 @@ const TaskListItem = ({task}: ITaskListItemProps) => {
         <div className={styles.taskListItemUserContainer}>
           <TaskUser user={task.user}/>
         </div>
-      </div>
-      <div className={styles.taskListItemFilesContainer}>
-        {task.files.map((file: IFile) => <div className={styles.taskListItemFileContainer}>
-          <AttachedFile file={file}/>
-        </div>)}
       </div>
     </div>
     <div className={styles.taskListItemActions}>
