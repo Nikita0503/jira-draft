@@ -19,7 +19,7 @@ const SingUpPage = () => {
 
     return (
       <div className={styles.container}>
-        <span className='title'>Sign Up</span>
+        <span className={styles.title}>Sign Up</span>
         <div className={styles.content}>
             <TextField className={styles.textField} label="Email" variant="filled" />
             <TextField className={styles.textField} label="Name" variant="filled" />
