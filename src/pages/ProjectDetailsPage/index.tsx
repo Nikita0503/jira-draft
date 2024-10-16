@@ -1,12 +1,7 @@
 import React from 'react';
-import { IFile, IProject, ITask } from '../../interfaces';
 import styles from './ProjectDetailsPage.module.css';
-import { useNavigate, useParams } from "react-router-dom";
-import DeleteIcon from '@mui/icons-material/DeleteOutline';
-import EditIcon from '@mui/icons-material/EditOutlined';
-import Status from '../../components/Status';
-import Type from '../../components/Type';
-import TaskUser from '../../components/TaskUser';
+import { IProject, ITask } from '../../interfaces';
+import { useParams } from "react-router-dom";
 import Task from '../../components/Task';
 
 const PROJECT: IProject = {
@@ -128,9 +123,10 @@ const ProjectDetailsPage = () => {
       <div className={styles.container}>
         <span className={styles.title}>{PROJECT.title}</span>
         <div className={styles.content}>
-          <span className={styles.titleTaskList}>Tasks:</span>
           {TASKS.map((task: ITask) => {
-            return <Task task={task}/>
+            return <div className={styles.taskContainer}>
+              <Task task={task}/>
+            </div>
           })}
         </div>
       </div>)

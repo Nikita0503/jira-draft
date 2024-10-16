@@ -39,11 +39,13 @@ const ProjectsPage = () => {
     return (
       <div className={styles.container}>
         <span className={styles.title}>Projects</span>
-        {PROJECTS.map((project: IProject) => {
-          return <div className={styles.projectContainer}>
-              <Project project={project}/>
-            </div>
-        })}
+        <div className={styles.content}>
+          {PROJECTS.map((project: IProject) => {
+            return <div className={styles.projectContainer}>
+                <Project project={project}/>
+              </div>
+          })}
+        </div>
       </div>)
 }
 
