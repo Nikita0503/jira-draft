@@ -114,9 +114,9 @@ const TaskDetailsPage = () => {
         <span className={styles.title}>{TASK.title}</span>
         <div className={styles.content}>
           <div className={styles.buttonsContainer}>
-            <Button onClick={deleteCurrentTask} className={styles.button} variant="contained">Delete Task</Button>
-            <Button onClick={goToTaskEditor} className={styles.button} variant="contained">Edit Task</Button>
             <Button onClick={goToCommentEditor} className={styles.button} variant="contained">Create Comment</Button>
+            <Button onClick={goToTaskEditor} className={styles.button} variant="contained">Edit Task</Button>
+            <Button onClick={deleteCurrentTask} className={styles.button} variant="outlined" color='error'>Delete Task</Button>
           </div>
           <span className={styles.description}>{TASK.description}</span>
           <div className={styles.additionalInfo}>
