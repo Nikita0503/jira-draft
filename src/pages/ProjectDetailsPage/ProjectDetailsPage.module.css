@@ -32,18 +32,6 @@
     margin-left: 4px !important;
 }
 
-.userListTitle{
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 12px;
-    margin-bottom: 12px;
-}
-
-.userList{
-    display: flex;
-    flex-direction: column;
-}
-
 .fileListTitle{
     font-size: 20px;
     font-weight: bold;

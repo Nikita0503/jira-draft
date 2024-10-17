@@ -9,6 +9,11 @@
     border-radius: 12px;
 }
 
+.container:hover{
+    padding-bottom: 15px;
+    transition: 300ms;
+}
+
 .content {
     display: flex;
     flex-direction: column;
@@ -28,15 +33,11 @@
     margin-bottom: 4px;
 }
 
-.container:hover{
-    padding-bottom: 15px;
-    transition: 300ms;
-}
-
 .additionalInfo{
     display: flex;
     flex: 1;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .additionalInfoItem{
@@ -44,12 +45,13 @@
     align-items: center;
     justify-content: center;
     margin-right: 4px;
+    margin-top: 4px;
 }
 
 .actionsContainer{
     display: flex;
     flex-direction: row;
-    margin-top: 12px;
+    margin-left: 4px;
 }
 
 .actionIcon{

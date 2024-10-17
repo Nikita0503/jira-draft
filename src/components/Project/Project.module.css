@@ -54,11 +54,13 @@
 
 .actionsContainer{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
     margin-left: 4px;
 }
 
 .actionIcon {
-    margin-left: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
 }

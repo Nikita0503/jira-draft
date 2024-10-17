@@ -121,6 +121,10 @@ const ProjectDetailsPage = () => {
     const { projectId } = useParams(); 
     const navigate = useNavigate();
 
+    const showModalUsersInProject = React.useCallback(() => {
+
+    }, []);
+
     const deleteCurrentProject = React.useCallback(() => {
       
     }, []);
@@ -138,6 +142,7 @@ const ProjectDetailsPage = () => {
         <span className={styles.title}>{PROJECT.title}</span>
         <div className={styles.content}>
           <div className={styles.buttonsContainer}>
+            <Button onClick={showModalUsersInProject} className={styles.button} variant="contained">Users In Project</Button>
             <Button onClick={deleteCurrentProject} className={styles.button} variant="contained">Delete Project</Button>
             <Button onClick={goToProjectEditor} className={styles.button} variant="contained">Edit Project</Button>
             <Button onClick={goToTaskEditor} className={styles.button} variant="contained">Create Task</Button>
