@@ -14,9 +14,11 @@ const Comment = ({comment}: IProps) => {
 
     return (
       <div className={styles.container}>
-        <div className={styles.userContainer}>
-          <img className={styles.userAvatar} src={comment.user.avatar ?? 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png'} />
-          <span className={styles.userName}>{comment.user.name}</span>
+        <div className={styles.content}>
+          <div className={styles.userContainer}>
+            <img className={styles.userAvatar} src={comment.user.avatar ?? 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png'} />
+            <span className={styles.userName}>{comment.user.name}</span>
+          </div>
           <div className={styles.actionsContainer}>
             <EditIcon className={styles.actionIcon}/>
             <DeleteIcon className={styles.actionIcon}/>
