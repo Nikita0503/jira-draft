@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './ProjectDetailsPage.module.css';
-import { IProject, ITask } from '../../interfaces';
+import { IProject, ITask, IUser } from '../../interfaces';
 import { useNavigate, useParams } from "react-router-dom";
 import Task from '../../components/Task';
 import { Button } from '@mui/material';

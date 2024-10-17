@@ -13,6 +13,12 @@
     margin-bottom: 24px;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+}
+
 .buttonsContainer{
     display: flex;
     flex-direction: row;
@@ -22,12 +28,6 @@
 
 .button{
     margin-left: 4px !important;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    width: 50vw;
 }
 
 .description{
