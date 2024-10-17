@@ -3,6 +3,7 @@ import { IProject } from '../../interfaces';
 import styles from './ProjectsPage.module.css';
 import Project from '../../components/Project';
 import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const PROJECTS: IProject[] = [{
   id: 1,
@@ -38,8 +39,10 @@ const PROJECTS: IProject[] = [{
 
 const ProjectsPage = () => {
 
+  const navigate = useNavigate(); 
+
   const goToProjectEditor = React.useCallback(() => {
-      
+    navigate('/projects/create')
   }, []); 
 
     return (

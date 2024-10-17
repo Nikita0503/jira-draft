@@ -130,11 +130,11 @@ const ProjectDetailsPage = () => {
     }, []);
 
     const goToProjectEditor = React.useCallback(() => {
-      
+      navigate('/projects/edit/1')
     }, []);
 
     const goToTaskEditor = React.useCallback(() => {
-
+      navigate('/projects/1/tasks/create')
     }, []);
 
     return (

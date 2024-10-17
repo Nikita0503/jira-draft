@@ -102,7 +102,7 @@ const TaskDetailsPage = () => {
     }, []);
     
     const goToTaskEditor = React.useCallback(() => {
-
+      navigate('/projects/1/tasks/edit/1')
     }, []);
 
     const goToCommentEditor = React.useCallback(() => {

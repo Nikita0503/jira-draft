@@ -5,6 +5,9 @@ import SignUpPage from './pages/SingUpPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetailsPage from './pages/ProjectDetailsPage';
 import TaskDetailsPage from './pages/TaskDetailsPage';
+import ProjectEditor from './pages/ProjectEditorPage';
+import ProjectEditorPage from './pages/ProjectEditorPage';
+import TaskEditorPage from './pages/TaskEditorPage';
 
 
 const App = () => {
@@ -17,6 +20,10 @@ const App = () => {
         <Route path='projects' element={<ProjectsPage/>}/>
         <Route path='projects/:projectId' element={<ProjectDetailsPage />}/>
         <Route path='projects/:projectId/tasks/:taskId' element={<TaskDetailsPage />}/>
+        <Route path='projects/create' element={<ProjectEditorPage />} />
+        <Route path='projects/edit/:projectId' element={<ProjectEditorPage />} />
+        <Route path='projects/:projectId/tasks/create' element={<TaskEditorPage />}/>
+        <Route path='projects/:projectId/tasks/edit/:taskId' element={<TaskEditorPage />}/>
       </Routes>
     </BrowserRouter>
   )
