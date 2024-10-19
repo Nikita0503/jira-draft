@@ -1,5 +1,5 @@
 import React from 'react';
-import { ITask } from '../../interfaces';
+import { IFile, ITask } from '../../interfaces';
 import styles from './TaskEditorPage.module.css';
 import { Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ import TaskUser from '../../components/TaskUser';
 import TypePicker from '../../components/pickers/TypePicker';
 import StatusPicker from '../../components/pickers/StatusPicker';
 import TaskUserPicker from '../../components/pickers/TaskUserPicker';
+import AttachedFile from '../../components/AttachedFile';
 
 
 const TASK: ITask = {
@@ -89,6 +90,15 @@ const TaskEditorPage = () => {
               <TaskUserPicker />
             </div>
           </div>
+          <span className={styles.fileListTitle}>Files</span>
+          <div className={styles.fileList}>
+            {TASK.files.map((file: IFile) => <div className={styles.fileContainer}>
+                <AttachedFile file={file}/>
+                <Button className={styles.buttonDeleteFile} variant="contained">Delete</Button>
+              </div>)}
+          </div>
+          <Button className={styles.buttonAddFile} variant="contained">Add File</Button>
+          
           <Button onClick={createNewProject} className={styles.button} variant="contained">Create New Task</Button>
       </div>
     </div>)
