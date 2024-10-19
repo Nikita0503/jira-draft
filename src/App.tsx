@@ -8,6 +8,7 @@ import TaskDetailsPage from './pages/TaskDetailsPage';
 import ProjectEditor from './pages/ProjectEditorPage';
 import ProjectEditorPage from './pages/ProjectEditorPage';
 import TaskEditorPage from './pages/TaskEditorPage';
+import CommentEditorPage from './pages/CommentEditorPage';
 
 
 const App = () => {
@@ -24,6 +25,8 @@ const App = () => {
         <Route path='projects/edit/:projectId' element={<ProjectEditorPage />} />
         <Route path='projects/:projectId/tasks/create' element={<TaskEditorPage />}/>
         <Route path='projects/:projectId/tasks/edit/:taskId' element={<TaskEditorPage />}/>
+        <Route path='projects/:projectId/tasks/:taskId/comments/create' element={<CommentEditorPage />}/>
+        <Route path='projects/:projectId/tasks/:taskId/comments/:commentId/edit' element={<CommentEditorPage />}/>
       </Routes>
     </BrowserRouter>
   )

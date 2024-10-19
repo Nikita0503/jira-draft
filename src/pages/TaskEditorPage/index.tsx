@@ -53,7 +53,7 @@ const TaskEditorPage = () => {
 
   const navigate = useNavigate(); 
 
-  const createNewProject = React.useCallback(() => {
+  const createNewTask = React.useCallback(() => {
     navigate(-1);
   }, []); 
 
@@ -99,7 +99,7 @@ const TaskEditorPage = () => {
           </div>
           <Button className={styles.buttonAddFile} variant="contained">Add File</Button>
           
-          <Button onClick={createNewProject} className={styles.button} variant="contained">Create New Task</Button>
+          <Button onClick={createNewTask} className={styles.button} variant="contained">Create New Task</Button>
       </div>
     </div>)
 }

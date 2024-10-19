@@ -106,7 +106,7 @@ const TaskDetailsPage = () => {
     }, []);
 
     const goToCommentEditor = React.useCallback(() => {
-
+      navigate('/projects/1/tasks/1/comments/create')
     }, []);
 
     return (
