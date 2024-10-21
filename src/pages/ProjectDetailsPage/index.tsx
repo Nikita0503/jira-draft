@@ -4,6 +4,7 @@ import { IProject, ITask, IUser } from '../../interfaces';
 import { useNavigate, useParams } from "react-router-dom";
 import Task from '../../components/Task';
 import { Button } from '@mui/material';
+import UsersInProjectPicker from '../../components/pickers/UsersInProjectPicker';
 
 const PROJECT: IProject = {
   id: 1,
@@ -142,7 +143,7 @@ const ProjectDetailsPage = () => {
         <span className={styles.title}>{PROJECT.title}</span>
         <div className={styles.content}>
           <div className={styles.buttonsContainer}>
-            <Button onClick={showModalUsersInProject} className={styles.button} variant="contained">Users In Project</Button>
+            <UsersInProjectPicker />
             <Button onClick={goToTaskEditor} className={styles.button} variant="contained">Create Task</Button>
             <Button onClick={goToProjectEditor} className={styles.button} variant="contained">Edit Project</Button>
             <Button onClick={deleteCurrentProject} className={styles.button} variant="outlined" color='error'>Delete Project</Button>
