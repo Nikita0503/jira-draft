@@ -3,6 +3,7 @@ import styles from './UsersInProjectModal.module.css';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import { IUser } from '../../../interfaces';
+import UsersTabs from './UsersTabs';
 
 export interface IProps {
   usersInProject: IUser[];
@@ -22,9 +23,13 @@ const UsersInProjectModal = ({
   return (
     <Dialog onClose={closeModal} open={true}>
       <div className={styles.container}>
-        <span className={styles.title}>Users In Project</span>
+        <span className={styles.title}>Users</span>
         <div className={styles.content}>
-            
+            <UsersTabs 
+              usersInProject={usersInProject}
+              usersOutsideProject={usersOutsideProject}
+              addUserToProject={addUserToProject}
+              removeUserFromProject={removeUserFromProject}/>
             <Button onClick={closeModal} className={styles.button} variant="contained">Close</Button>
         </div>
       </div>
