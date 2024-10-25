@@ -1,61 +1,60 @@
-.container{
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-    padding: 12px;
-    border-radius: 12px;
+.container {
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  border-radius: 12px;
 }
 
 .content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.userContainer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 4px;
+.userContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 4px;
 }
 
 .userAvatar {
-    width: 25px;
-    height: 25px;
-    object-fit: contain;
-    border-radius: 25px;
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  border-radius: 25px;
 }
 
-.userName{
-    font-size: 14px;
-    font-weight: bold;
-    margin-left: 4px;
+.userName {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 4px;
 }
 
-.actionsContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 4px;
+.actionsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
 }
 
 .actionIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
 }
 
-.fileList{
-    display: flex;
-    flex-direction: row;
-    margin-top: 12px;
+.fileList {
+  display: flex;
+  flex-direction: row;
+  margin-top: 12px;
 }
 
-.fileContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 4px;
+.fileContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
 }
-

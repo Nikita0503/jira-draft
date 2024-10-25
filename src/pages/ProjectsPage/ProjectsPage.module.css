@@ -1,50 +1,50 @@
-.container{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
 }
 
-.title{
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 12px;
-    margin-bottom: 24px;
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 12px;
+  margin-bottom: 24px;
 }
 
 .content {
-    width: 50vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.buttonsContainer{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 8px;
-    overflow-x: auto;
-    white-space: nowrap; 
-    width: 50vw;
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 50vw;
 }
 
-.button{
-    margin-left: 4px !important;
-    flex-shrink: 0; 
+.button {
+  margin-left: 4px !important;
+  flex-shrink: 0;
 }
 
-.projectContainer{
-    margin-bottom: 18px;
+.projectContainer {
+  margin-bottom: 18px;
 }
 
-@media only screen and (max-width: 1000px){
-    .content{
-        width: 90vw;
-    }
+@media only screen and (max-width: 1000px) {
+  .content {
+    width: 90vw;
+  }
 
-    .buttonsContainer{
-        width: 90vw;
-    }
+  .buttonsContainer {
+    width: 90vw;
+  }
 }

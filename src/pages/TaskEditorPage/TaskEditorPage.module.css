@@ -1,87 +1,87 @@
-.container{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
 }
 
-.title{
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 12px;
-    margin-bottom: 24px;
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 12px;
+  margin-bottom: 24px;
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.textField{
-    margin-top: 12px !important;
+.textField {
+  margin-top: 12px !important;
 }
 
-.additionalInfo{
-    width: 100%;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    margin-top: 4px;
-    margin-bottom: 4px;
+.additionalInfo {
+  width: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
-.additionalInfoItem{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 4px;
-    margin-bottom: 8px;
+.additionalInfoItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 4px;
+  margin-bottom: 8px;
 }
 
-.additionalInfoItemTitle{
-    font-size: 16px;
-    margin-bottom: 4px;
+.additionalInfoItemTitle {
+  font-size: 16px;
+  margin-bottom: 4px;
 }
 
-.fileListTitle{
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 12px;
-    margin-bottom: 12px;
+.fileListTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
-.fileList{
-    display: flex;
-    flex-direction: column;
-    margin-top: 12px;
-    margin-bottom: 12px;
+.fileList {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
-.fileContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 1;
-    margin-right: 4px;
+.fileContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 1;
+  margin-right: 4px;
 }
 
-.buttonDeleteFile{
-    margin-left: 4px !important;
+.buttonDeleteFile {
+  margin-left: 4px !important;
 }
 
-.buttonAddFile{
-    margin-bottom: 8px;
+.buttonAddFile {
+  margin-bottom: 8px;
 }
 
-.button{
-    margin-top: 4px !important;
+.button {
+  margin-top: 4px !important;
 }
 
-@media only screen and (max-width: 1000px){
-    .content{
-        width: 50vw;
-    }
+@media only screen and (max-width: 1000px) {
+  .content {
+    width: 50vw;
+  }
 }

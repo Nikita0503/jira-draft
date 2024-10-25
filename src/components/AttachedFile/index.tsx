@@ -1,19 +1,18 @@
-import React from 'react';
-import styles from './AttachedFile.module.css';
-import { IFile } from '../../interfaces';
 import DeleteIcon from '@mui/icons-material/DeleteForeverSharp';
+import { IFile } from '../../interfaces';
+import styles from './AttachedFile.module.css';
 
 interface IProps {
-    file: IFile
+  file: IFile;
 }
 
-const AttachedFile = ({file}: IProps) => {
+const AttachedFile = ({ file }: IProps) => {
+  return (
+    <div className={styles.container}>
+      <img className={styles.image} src={file.name} />
+      <DeleteIcon color="error" className={styles.deleteIcon} />
+    </div>
+  );
+};
 
-    return (
-      <div className={styles.container}>
-        <img className={styles.image} src={file.name}/>
-        <DeleteIcon color='error' className={styles.deleteIcon}/>
-      </div>)
-  }
-
-export default AttachedFile
+export default AttachedFile;

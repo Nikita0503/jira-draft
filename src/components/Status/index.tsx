@@ -1,17 +1,16 @@
-import React from 'react';
-import styles from './Status.module.css';
 import { IStatus } from '../../interfaces';
+import styles from './Status.module.css';
 
 interface IProps {
-    status: IStatus
+  status: IStatus;
 }
 
-const Status = ({status}: IProps) => {
+const Status = ({ status }: IProps) => {
+  return (
+    <div className={styles.container}>
+      <span className={styles.title}>{status.title}</span>
+    </div>
+  );
+};
 
-    return (
-      <div className={styles.container}>
-        <span className={styles.title}>{status.title}</span>
-      </div>)
-  }
-
-export default Status
+export default Status;
