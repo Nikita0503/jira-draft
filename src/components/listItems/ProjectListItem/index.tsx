@@ -2,14 +2,14 @@ import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IProject } from '../../interfaces';
-import styles from './Project.module.css';
+import { IProject } from '../../../interfaces';
+import styles from './ProjectListItem.module.css';
 
 interface IProps {
   project: IProject;
 }
 
-const Project = ({ project }: IProps) => {
+const ProjectListItem = ({ project }: IProps) => {
   const navigate = useNavigate();
 
   const goToProjectDetails = React.useCallback(() => {
@@ -38,4 +38,4 @@ const Project = ({ project }: IProps) => {
   );
 };
 
-export default Project;
+export default ProjectListItem;

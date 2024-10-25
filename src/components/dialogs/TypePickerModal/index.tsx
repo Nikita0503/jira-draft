@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import { IType } from '../../../interfaces';
-import Type from '../../Type';
+import TaskType from '../../TaskType';
 import styles from './TypePickerModal.module.css';
 
 export interface IProps {
@@ -41,7 +41,7 @@ const TypePickerModal = ({ type, selectType, closeModal }: IProps) => {
                 className={styles.typeContainer}
                 onClick={() => selectType(typeItem)}
               >
-                <Type type={typeItem} />
+                <TaskType type={typeItem} />
               </div>
             ))}
           </div>

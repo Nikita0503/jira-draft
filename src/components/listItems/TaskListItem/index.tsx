@@ -2,17 +2,17 @@ import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Status from '../../components/Status';
-import TaskUser from '../../components/TaskUser';
-import Type from '../../components/Type';
-import { ITask } from '../../interfaces';
-import styles from './Task.module.css';
+import { ITask } from '../../../interfaces';
+import TaskStatus from '../../TaskStatus';
+import TaskType from '../../TaskType';
+import TaskUser from '../../TaskUser';
+import styles from './TaskListItem.module.css';
 
 interface IProps {
   task: ITask;
 }
 
-const Task = ({ task }: IProps) => {
+const TaskListItem = ({ task }: IProps) => {
   const navigate = useNavigate();
 
   const goToTaskDetails = React.useCallback(() => {
@@ -26,10 +26,10 @@ const Task = ({ task }: IProps) => {
         <span className={styles.description}>{task.description}</span>
         <div className={styles.additionalInfo}>
           <div className={styles.additionalInfoItem}>
-            <Type type={task.type} />
+            <TaskType type={task.type} />
           </div>
           <div className={styles.additionalInfoItem}>
-            <Status status={task.status} />
+            <TaskStatus status={task.status} />
           </div>
           <div className={styles.additionalInfoItem}>
             <TaskUser user={task.user} />
@@ -44,4 +44,4 @@ const Task = ({ task }: IProps) => {
   );
 };
 
-export default Task;
+export default TaskListItem;

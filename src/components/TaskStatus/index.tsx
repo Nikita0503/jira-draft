@@ -1,11 +1,11 @@
 import { IStatus } from '../../interfaces';
-import styles from './Status.module.css';
+import styles from './TaskStatus.module.css';
 
 interface IProps {
   status: IStatus;
 }
 
-const Status = ({ status }: IProps) => {
+const TaskStatus = ({ status }: IProps) => {
   return (
     <div className={styles.container}>
       <span className={styles.title}>{status.title}</span>
@@ -13,4 +13,4 @@ const Status = ({ status }: IProps) => {
   );
 };
 
-export default Status;
+export default TaskStatus;

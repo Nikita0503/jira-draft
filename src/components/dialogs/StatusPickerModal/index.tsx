@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import { IStatus } from '../../../interfaces';
-import Status from '../../Status';
+import Status from '../../TaskStatus';
 import styles from './StatusPickerModal.module.css';
 
 export interface IProps {

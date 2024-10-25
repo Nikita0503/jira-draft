@@ -1,8 +1,8 @@
 import { Button } from '@mui/material';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import TaskListItem from '../../components/listItems/TaskListItem';
 import UsersInProjectPicker from '../../components/pickers/UsersInProjectPicker';
-import Task from '../../components/Task';
 import { IProject, ITask } from '../../interfaces';
 import styles from './ProjectDetailsPage.module.css';
 
@@ -177,7 +177,7 @@ const ProjectDetailsPage = () => {
         {TASKS.map((task: ITask) => {
           return (
             <div key={task.id} className={styles.taskContainer}>
-              <Task task={task} />
+              <TaskListItem task={task} />
             </div>
           );
         })}

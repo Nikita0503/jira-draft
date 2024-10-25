@@ -1,15 +1,15 @@
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
-import { IComment, IFile } from '../../interfaces';
-import AddFileButton from '../AddFileButton';
-import AttachedFile from '../AttachedFile';
-import styles from './Comment.module.css';
+import { IComment, IFile } from '../../../interfaces';
+import AddFileButton from '../../AddFileButton';
+import AttachedFile from '../../AttachedFile';
+import styles from './CommentListItem.module.css';
 
 interface IProps {
   comment: IComment;
 }
 
-const Comment = ({ comment }: IProps) => {
+const CommentListItem = ({ comment }: IProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -41,4 +41,4 @@ const Comment = ({ comment }: IProps) => {
   );
 };
 
-export default Comment;
+export default CommentListItem;

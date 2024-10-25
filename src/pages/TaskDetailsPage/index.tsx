@@ -3,10 +3,10 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import AddFileButton from '../../components/AddFileButton';
 import AttachedFile from '../../components/AttachedFile';
-import Comment from '../../components/Comment';
-import Status from '../../components/Status';
+import CommentListItem from '../../components/listItems/CommentListItem';
+import TaskStatus from '../../components/TaskStatus';
+import TaskType from '../../components/TaskType';
 import TaskUser from '../../components/TaskUser';
-import Type from '../../components/Type';
 import { IComment, IFile, ITask } from '../../interfaces';
 import styles from './TaskDetailsPage.module.css';
 
@@ -149,10 +149,10 @@ const TaskDetailsPage = () => {
         <span className={styles.description}>{TASK.description}</span>
         <div className={styles.additionalInfo}>
           <div className={styles.additionalInfoItem}>
-            <Type type={TASK.type} />
+            <TaskType type={TASK.type} />
           </div>
           <div className={styles.additionalInfoItem}>
-            <Status status={TASK.status} />
+            <TaskStatus status={TASK.status} />
           </div>
           <div className={styles.additionalInfoItem}>
             <TaskUser user={TASK.user} />
@@ -171,7 +171,7 @@ const TaskDetailsPage = () => {
         <div className={styles.commentList}>
           {COMMENTS.map((comment: IComment) => (
             <div key={comment.id} className={styles.commentContainer}>
-              <Comment comment={comment} />
+              <CommentListItem comment={comment} />
             </div>
           ))}
         </div>

@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Project from '../../components/Project';
+import ProjectListItem from '../../components/listItems/ProjectListItem';
 import { IProject } from '../../interfaces';
 import styles from './ProjectsPage.module.css';
 
@@ -67,7 +67,7 @@ const ProjectsPage = () => {
         {PROJECTS.map((project: IProject) => {
           return (
             <div key={project.id} className={styles.projectContainer}>
-              <Project project={project} />
+              <ProjectListItem project={project} />
             </div>
           );
         })}
