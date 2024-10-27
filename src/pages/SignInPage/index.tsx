@@ -1,15 +1,22 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { AppDispatch } from '../../store';
+import { signInAsyncAction } from '../../store/actions';
 import styles from './SignInPage.module.css';
 
 const SignInPage = () => {
-  const navigate = useNavigate();
+  const [email, setEmail] = React.useState<string>('');
+  const [password, setPassword] = React.useState<string>('');
 
-  const goToProjects = React.useCallback(() => {
-    navigate('/projects');
-  }, []);
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const signIn = React.useCallback(() => {
+    dispatch(signInAsyncAction({ email: email, password: password }));
+  }, [email, password]);
 
   const goToSignUp = React.useCallback(() => {
     navigate('/sign-up');
@@ -23,17 +30,17 @@ const SignInPage = () => {
           className={styles.textField}
           label="Email"
           variant="filled"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
         />
         <TextField
           className={styles.textField}
           label="Password"
           variant="filled"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
         />
-        <Button
-          onClick={goToProjects}
-          className={styles.button}
-          variant="contained"
-        >
+        <Button onClick={signIn} className={styles.button} variant="contained">
           Sign In
         </Button>
         <Button
