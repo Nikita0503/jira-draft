@@ -3,7 +3,7 @@ import { IAuthReducerState } from '../../interfaces/reducers/authReducer';
 import { setAccessTokenAction } from '../actions/authActions';
 
 const initialState: IAuthReducerState = {
-  accessToken: '',
+  accessToken: undefined,
 };
 
 const authReducer = createReducer<IAuthReducerState>(initialState, (builder) =>

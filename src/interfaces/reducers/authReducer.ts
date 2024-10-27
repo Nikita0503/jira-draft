@@ -1,3 +1,3 @@
 export interface IAuthReducerState {
-  accessToken: string;
+  accessToken: string | undefined;
 }

@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ProtectedRoute from '../ProtectedRoute';
 import CommentEditorPage from './../../pages/CommentEditorPage';
 import ProjectDetailsPage from './../../pages/ProjectDetailsPage';
 import ProjectEditorPage from './../../pages/ProjectEditorPage';
@@ -14,32 +15,77 @@ const AppNavigation = () => {
       <Routes>
         <Route path="sign-in" element={<SignInPage />} />
         <Route path="sign-up" element={<SignUpPage />} />
-        <Route path="projects" element={<ProjectsPage />} />
-        <Route path="projects/:projectId" element={<ProjectDetailsPage />} />
+        <Route
+          path="projects"
+          element={
+            <ProtectedRoute>
+              <ProjectsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="projects/:projectId"
+          element={
+            <ProtectedRoute>
+              <ProjectDetailsPage />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="projects/:projectId/tasks/:taskId"
-          element={<TaskDetailsPage />}
+          element={
+            <ProtectedRoute>
+              <TaskDetailsPage />
+            </ProtectedRoute>
+          }
         />
-        <Route path="projects/create" element={<ProjectEditorPage />} />
+        <Route
+          path="projects/create"
+          element={
+            <ProtectedRoute>
+              <ProjectEditorPage />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="projects/edit/:projectId"
-          element={<ProjectEditorPage />}
+          element={
+            <ProtectedRoute>
+              <ProjectEditorPage />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="projects/:projectId/tasks/create"
-          element={<TaskEditorPage />}
+          element={
+            <ProtectedRoute>
+              <TaskEditorPage />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="projects/:projectId/tasks/edit/:taskId"
-          element={<TaskEditorPage />}
+          element={
+            <ProtectedRoute>
+              <TaskEditorPage />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="projects/:projectId/tasks/:taskId/comments/create"
-          element={<CommentEditorPage />}
+          element={
+            <ProtectedRoute>
+              <CommentEditorPage />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="projects/:projectId/tasks/:taskId/comments/:commentId/edit"
-          element={<CommentEditorPage />}
+          element={
+            <ProtectedRoute>
+              <CommentEditorPage />
+            </ProtectedRoute>
+          }
         />
       </Routes>
     </BrowserRouter>
