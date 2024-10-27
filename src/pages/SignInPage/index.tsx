@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { AppDispatch } from '../../store';
+import { TAppDispatch } from '../../store';
 import { signInAsyncAction } from '../../store/actions';
 import styles from './SignInPage.module.css';
 
@@ -12,7 +12,7 @@ const SignInPage = () => {
   const [password, setPassword] = React.useState<string>('');
 
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<TAppDispatch>();
 
   const signIn = React.useCallback(() => {
     dispatch(signInAsyncAction({ email: email, password: password }));
