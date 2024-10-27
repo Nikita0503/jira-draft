@@ -15,8 +15,18 @@ const SignInPage = () => {
   const dispatch = useDispatch<TAppDispatch>();
 
   const signIn = React.useCallback(() => {
-    dispatch(signInAsyncAction({ email: email, password: password }));
+    dispatch(
+      signInAsyncAction({
+        email: email,
+        password: password,
+        onSuccess: goToProjects,
+      })
+    );
   }, [email, password]);
+
+  const goToProjects = React.useCallback(() => {
+    navigate('/projects');
+  }, []);
 
   const goToSignUp = React.useCallback(() => {
     navigate('/sign-up');

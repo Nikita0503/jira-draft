@@ -5,6 +5,7 @@ import { ISetAccessTokenAction } from '../../interfaces/actions';
 interface ISignInParams {
   email: string;
   password: string;
+  onSuccess: () => void;
 }
 
 export const setAccessTokenAction = createAction<ISetAccessTokenAction>(
@@ -13,13 +14,19 @@ export const setAccessTokenAction = createAction<ISetAccessTokenAction>(
 
 export const signInAsyncAction = createAsyncThunk(
   'auth/signInAsyncAction',
-  async ({ email, password }: ISignInParams, { getState, dispatch }) => {
+  async (
+    { email, password, onSuccess }: ISignInParams,
+    { getState, dispatch }
+  ) => {
     try {
       const res = await signInApi(email, password);
       if (res.token) {
         dispatch(setAccessTokenAction({ accessToken: res.token }));
       }
       console.log({ token: res.token });
+      if (onSuccess) {
+        onSuccess();
+      }
     } catch (e: any) {
       const errorDetails = e.response.data;
       console.log('authActions::login error:', errorDetails);
