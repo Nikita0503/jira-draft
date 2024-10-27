@@ -8,8 +8,8 @@ import { signInAsyncAction } from '../../store/actions';
 import styles from './SignInPage.module.css';
 
 const SignInPage = () => {
-  const [email, setEmail] = React.useState<string>('');
-  const [password, setPassword] = React.useState<string>('');
+  const [email, setEmail] = React.useState<string>('admin@gmail.com');
+  const [password, setPassword] = React.useState<string>('Password12345');
 
   const navigate = useNavigate();
   const dispatch = useDispatch<TAppDispatch>();
