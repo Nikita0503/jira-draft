@@ -53,6 +53,7 @@ const SignInPage = () => {
           variant="filled"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
+          type="password"
         />
         <Button
           disabled={loading}
