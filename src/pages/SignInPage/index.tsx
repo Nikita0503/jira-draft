@@ -1,9 +1,9 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { TAppDispatch } from '../../store';
+import { TAppDispatch, TRootState } from '../../store';
 import { signInAsyncAction } from '../../store/actions';
 import styles from './SignInPage.module.css';
 
@@ -13,6 +13,10 @@ const SignInPage = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch<TAppDispatch>();
+
+  const loading = useSelector<TRootState, boolean>(
+    (state: TRootState) => state.auth.loading
+  );
 
   const signIn = React.useCallback(() => {
     dispatch(
@@ -50,7 +54,12 @@ const SignInPage = () => {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
-        <Button onClick={signIn} className={styles.button} variant="contained">
+        <Button
+          disabled={loading}
+          onClick={signIn}
+          className={styles.button}
+          variant="contained"
+        >
           Sign In
         </Button>
         <Button

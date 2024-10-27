@@ -1,6 +1,9 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { signInApi } from '../../api';
-import { ISetAccessTokenAction } from '../../interfaces/actions';
+import {
+  ISetAccessTokenAction,
+  ISetLoadingAction,
+} from '../../interfaces/actions';
 
 interface ISignInParams {
   email: string;
@@ -9,7 +12,11 @@ interface ISignInParams {
 }
 
 export const setAccessTokenAction = createAction<ISetAccessTokenAction>(
-  'setAccessTokenAction'
+  'auth/setAccessTokenAction'
+);
+
+export const setLoadingAction = createAction<ISetLoadingAction>(
+  'auth/setLoadingAction'
 );
 
 export const signInAsyncAction = createAsyncThunk(
@@ -19,6 +26,7 @@ export const signInAsyncAction = createAsyncThunk(
     { getState, dispatch }
   ) => {
     try {
+      dispatch(setLoadingAction({ loading: true }));
       const res = await signInApi(email, password);
       if (res.token) {
         dispatch(setAccessTokenAction({ accessToken: res.token }));
@@ -42,6 +50,8 @@ export const signInAsyncAction = createAsyncThunk(
         }
       }
       alert(errorText);
+    } finally {
+      dispatch(setLoadingAction({ loading: false }));
     }
   }
 );
