@@ -1,5 +1,6 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { signInApi } from '../../api';
+import { TUserRole } from '../../interfaces';
 import {
   ISetAccessTokenAction,
   ISetLoadingAction,
@@ -8,6 +9,16 @@ import {
 interface ISignInParams {
   email: string;
   password: string;
+  onSuccess: () => void;
+}
+
+interface ISignUpParams {
+  email: string;
+  name: string;
+  password: string;
+  repeatPassword: string;
+  role: TUserRole;
+  avatar: File;
   onSuccess: () => void;
 }
 
@@ -37,7 +48,7 @@ export const signInAsyncAction = createAsyncThunk(
       }
     } catch (e: any) {
       const errorDetails = e.response.data;
-      console.log('authActions::login error:', errorDetails);
+      console.log('authActions::signInAsyncAction error:', errorDetails);
       let errorText = '';
       if (errorDetails.message) {
         errorText = errorText + `${errorDetails.message}. `;
@@ -50,6 +61,40 @@ export const signInAsyncAction = createAsyncThunk(
         }
       }
       alert(errorText);
+    } finally {
+      dispatch(setLoadingAction({ loading: false }));
+    }
+  }
+);
+
+export const signUpAsyncAction = createAsyncThunk(
+  'auth/signUpAsyncAction',
+  async (
+    {
+      email,
+      name,
+      password,
+      repeatPassword,
+      role,
+      avatar,
+      onSuccess,
+    }: ISignUpParams,
+    { getState, dispatch }
+  ) => {
+    try {
+      console.log(
+        email,
+        name,
+        password,
+        repeatPassword,
+        role,
+        avatar,
+        onSuccess
+      );
+      dispatch(setLoadingAction({ loading: true }));
+    } catch (e: any) {
+      const errorDetails = e.response.data;
+      console.log('authActions::signUpAsyncAction error:', errorDetails);
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
