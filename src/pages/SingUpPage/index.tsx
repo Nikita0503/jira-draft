@@ -2,8 +2,12 @@ import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import FilePicker from '../../components/pickers/FilePicker';
+import { TUserRole } from '../../interfaces';
+import { TAppDispatch } from '../../store';
+import { signUpAsyncAction } from '../../store/actions';
 import styles from './SingUpPage.module.css';
 
 const SingUpPage = () => {
@@ -15,13 +19,29 @@ const SingUpPage = () => {
   const [isAdmin, setIsAdmin] = React.useState<boolean>(false);
   const [avatar, setAvatar] = React.useState<File | undefined>(undefined);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch<TAppDispatch>();
+
   const avatarUrl = React.useMemo(() => {
     return avatar
       ? URL.createObjectURL(avatar)
       : 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
   }, [avatar]);
 
-  const navigate = useNavigate();
+  const signUp = React.useCallback(() => {
+    const role: TUserRole = isAdmin ? 'ADMIN' : 'USER';
+    dispatch(
+      signUpAsyncAction({
+        email: email,
+        name: name,
+        password: password,
+        repeatPassword: repeatPassword,
+        role: role,
+        avatar: avatar,
+        onSuccess: goToProjects,
+      })
+    );
+  }, [email, name, password, repeatPassword, isAdmin, avatar]);
 
   const goToProjects = React.useCallback(() => {
     navigate('/projects');
@@ -82,11 +102,7 @@ const SingUpPage = () => {
           />
           <span>Sign up as Admin</span>
         </div>
-        <Button
-          onClick={goToProjects}
-          className={styles.button}
-          variant="contained"
-        >
+        <Button onClick={signUp} className={styles.button} variant="contained">
           Sign Up
         </Button>
         <Button
