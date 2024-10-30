@@ -1,51 +1,28 @@
 import { Button } from '@mui/material';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ProjectListItem from '../../components/listItems/ProjectListItem';
 import { IProject } from '../../interfaces';
+import { TAppDispatch, TRootState } from '../../store';
+import { fetchProjectsAsyncAction } from '../../store/actions/projectsActions';
 import styles from './ProjectsPage.module.css';
-
-const PROJECTS: IProject[] = [
-  {
-    id: 1,
-    title: 'Project title 1',
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    tasksCount: 12,
-    users: [
-      {
-        id: 1,
-        name: 'User Name',
-        email: 'user@email.com',
-        role: 'ADMIN',
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: 'Project title 2',
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    tasksCount: 15,
-    users: [
-      {
-        id: 1,
-        name: 'User Name',
-        email: 'user@email.com',
-        role: 'ADMIN',
-      },
-      {
-        id: 2,
-        name: 'User Name',
-        email: 'user@email.com',
-        role: 'ADMIN',
-      },
-    ],
-  },
-];
 
 const ProjectsPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<TAppDispatch>();
+
+  const projects = useSelector<TRootState, IProject[]>(
+    (state: TRootState) => state.projects.projects
+  );
+
+  const loading = useSelector<TRootState, boolean>(
+    (state: TRootState) => state.projects.loading
+  );
+
+  React.useEffect(() => {
+    dispatch(fetchProjectsAsyncAction());
+  }, []);
 
   const goToProjectEditor = React.useCallback(() => {
     navigate('/projects/create');
@@ -64,7 +41,7 @@ const ProjectsPage = () => {
             Create Project
           </Button>
         </div>
-        {PROJECTS.map((project: IProject) => {
+        {projects.map((project: IProject) => {
           return (
             <div key={project.id} className={styles.projectContainer}>
               <ProjectListItem project={project} />

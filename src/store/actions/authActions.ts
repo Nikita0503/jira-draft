@@ -1,5 +1,5 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { signInApi, signUpApi } from '../../api';
+import { signInApi, signUpApi } from '../../api/authApi';
 import { TUserRole } from '../../interfaces';
 import {
   ISetAccessTokenAction,
