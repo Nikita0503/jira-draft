@@ -4,7 +4,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { TAppDispatch, TRootState } from '../../store';
-import { signInAsyncAction } from '../../store/actions';
+import { signInAsyncAction } from '../../store/actions/authActions';
 import styles from './SignInPage.module.css';
 
 const SignInPage = () => {

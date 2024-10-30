@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import FilePicker from '../../components/pickers/FilePicker';
 import { TUserRole } from '../../interfaces';
 import { TAppDispatch } from '../../store';
-import { signUpAsyncAction } from '../../store/actions';
+import { signUpAsyncAction } from '../../store/actions/authActions';
 import styles from './SingUpPage.module.css';
 
 const SingUpPage = () => {

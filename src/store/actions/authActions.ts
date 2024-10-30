@@ -4,7 +4,7 @@ import { TUserRole } from '../../interfaces';
 import {
   ISetAccessTokenAction,
   ISetLoadingAction,
-} from '../../interfaces/actions';
+} from '../../interfaces/actions/authActions';
 
 interface ISignInParams {
   email: string;
