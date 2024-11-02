@@ -1,16 +1,16 @@
+import { signUpAsyncAction } from '@actions/authActions';
+import FilePicker from '@components/pickers/FilePicker';
+import { TUserRole } from '@interfaces';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
+import { TAppDispatch } from '@store';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import FilePicker from '../../components/pickers/FilePicker';
-import { TUserRole } from '../../interfaces';
-import { TAppDispatch } from '../../store';
-import { signUpAsyncAction } from '../../store/actions/authActions';
-import styles from './SingUpPage.module.css';
+import styles from './SignUpPage.module.css';
 
-const SingUpPage = () => {
+const SignUpPage = () => {
   const [email, setEmail] = React.useState<string>('admin@gmail.com');
   const [name, setName] = React.useState<string>('AdminUser');
   const [password, setPassword] = React.useState<string>('Password12345');
@@ -117,4 +117,4 @@ const SingUpPage = () => {
   );
 };
 
-export default SingUpPage;
+export default SignUpPage;

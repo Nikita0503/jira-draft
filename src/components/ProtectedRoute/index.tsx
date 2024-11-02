@@ -1,6 +1,6 @@
+import { TRootState } from '@store';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { TRootState } from '../../store';
 
 interface IProps {
   children: any;

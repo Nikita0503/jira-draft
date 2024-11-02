@@ -1,13 +1,13 @@
+import ProtectedRoute from '@components/ProtectedRoute';
+import CommentEditorPage from '@pages/CommentEditorPage';
+import ProjectDetailsPage from '@pages/ProjectDetailsPage';
+import ProjectEditorPage from '@pages/ProjectEditorPage';
+import ProjectsPage from '@pages/ProjectsPage';
+import SignInPage from '@pages/SignInPage';
+import SignUpPage from '@pages/SignUpPage';
+import TaskDetailsPage from '@pages/TaskDetailsPage';
+import TaskEditorPage from '@pages/TaskEditorPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import ProtectedRoute from '../ProtectedRoute';
-import CommentEditorPage from './../../pages/CommentEditorPage';
-import ProjectDetailsPage from './../../pages/ProjectDetailsPage';
-import ProjectEditorPage from './../../pages/ProjectEditorPage';
-import ProjectsPage from './../../pages/ProjectsPage';
-import SignInPage from './../../pages/SignInPage';
-import SignUpPage from './../../pages/SingUpPage';
-import TaskDetailsPage from './../../pages/TaskDetailsPage';
-import TaskEditorPage from './../../pages/TaskEditorPage';
 
 const AppNavigation = () => {
   return (

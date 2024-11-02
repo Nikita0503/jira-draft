@@ -1,11 +1,11 @@
+import { fetchProjectsAsyncAction } from '@actions/projectsActions';
+import ProjectListItem from '@components/listItems/ProjectListItem';
+import { IProject } from '@interfaces';
 import { Button } from '@mui/material';
+import { TAppDispatch, TRootState } from '@store';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import ProjectListItem from '../../components/listItems/ProjectListItem';
-import { IProject } from '../../interfaces';
-import { TAppDispatch, TRootState } from '../../store';
-import { fetchProjectsAsyncAction } from '../../store/actions/projectsActions';
 import styles from './ProjectsPage.module.css';
 
 const ProjectsPage = () => {

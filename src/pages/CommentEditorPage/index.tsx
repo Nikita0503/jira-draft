@@ -1,8 +1,8 @@
+import AttachedFile from '@components/AttachedFile';
+import { IFile } from '@interfaces';
 import { Button, TextField } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import AttachedFile from '../../components/AttachedFile';
-import { IFile } from '../../interfaces';
 import styles from './CommentEditorPage.module.css';
 
 const FILES: IFile[] = [

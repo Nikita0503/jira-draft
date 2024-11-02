@@ -1,13 +1,13 @@
+import AddFileButton from '@components/AddFileButton';
+import AttachedFile from '@components/AttachedFile';
+import CommentListItem from '@components/listItems/CommentListItem';
+import TaskStatus from '@components/TaskStatus';
+import TaskType from '@components/TaskType';
+import TaskUser from '@components/TaskUser';
+import { IComment, IFile, ITask } from '@interfaces';
 import { Button } from '@mui/material';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import AddFileButton from '../../components/AddFileButton';
-import AttachedFile from '../../components/AttachedFile';
-import CommentListItem from '../../components/listItems/CommentListItem';
-import TaskStatus from '../../components/TaskStatus';
-import TaskType from '../../components/TaskType';
-import TaskUser from '../../components/TaskUser';
-import { IComment, IFile, ITask } from '../../interfaces';
 import styles from './TaskDetailsPage.module.css';
 
 const TASK: ITask = {

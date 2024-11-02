@@ -1,11 +1,11 @@
+import AttachedFile from '@components/AttachedFile';
+import StatusPicker from '@components/pickers/StatusPicker';
+import TaskUserPicker from '@components/pickers/TaskUserPicker';
+import TypePicker from '@components/pickers/TypePicker';
+import { IFile, ITask } from '@interfaces';
 import { Button, TextField } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import AttachedFile from '../../components/AttachedFile';
-import StatusPicker from '../../components/pickers/StatusPicker';
-import TaskUserPicker from '../../components/pickers/TaskUserPicker';
-import TypePicker from '../../components/pickers/TypePicker';
-import { IFile, ITask } from '../../interfaces';
 import styles from './TaskEditorPage.module.css';
 
 const TASK: ITask = {

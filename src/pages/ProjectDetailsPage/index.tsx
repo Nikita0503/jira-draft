@@ -1,9 +1,9 @@
+import TaskListItem from '@components/listItems/TaskListItem';
+import UsersInProjectPicker from '@components/pickers/UsersInProjectPicker';
+import { IProject, ITask } from '@interfaces';
 import { Button } from '@mui/material';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import TaskListItem from '../../components/listItems/TaskListItem';
-import UsersInProjectPicker from '../../components/pickers/UsersInProjectPicker';
-import { IProject, ITask } from '../../interfaces';
 import styles from './ProjectDetailsPage.module.css';
 
 const PROJECT: IProject = {
