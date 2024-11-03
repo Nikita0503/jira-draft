@@ -1,26 +1,11 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { signInApi, signUpApi } from '../../api/authApi';
-import { TUserRole } from '../../interfaces';
 import {
   ISetAccessTokenAction,
   ISetLoadingAction,
+  ISignInAsyncAction,
+  ISignUpAsyncAction,
 } from '../../interfaces/actions/authActions';
-
-interface ISignInParams {
-  email: string;
-  password: string;
-  onSuccess: () => void;
-}
-
-interface ISignUpParams {
-  email: string;
-  name: string;
-  password: string;
-  repeatPassword: string;
-  role: TUserRole;
-  avatar?: File;
-  onSuccess: () => void;
-}
 
 export const setAccessTokenAction = createAction<ISetAccessTokenAction>(
   'auth/setAccessTokenAction'
@@ -30,10 +15,10 @@ export const setLoadingAction = createAction<ISetLoadingAction>(
   'auth/setLoadingAction'
 );
 
-export const signInAsyncAction = createAsyncThunk(
+export const signInAsyncAction = createAsyncThunk<void, ISignInAsyncAction>(
   'auth/signInAsyncAction',
   async (
-    { email, password, onSuccess }: ISignInParams,
+    { email, password, onSuccess }: ISignInAsyncAction,
     { getState, dispatch }
   ) => {
     try {
@@ -67,7 +52,7 @@ export const signInAsyncAction = createAsyncThunk(
   }
 );
 
-export const signUpAsyncAction = createAsyncThunk(
+export const signUpAsyncAction = createAsyncThunk<void, ISignUpAsyncAction>(
   'auth/signUpAsyncAction',
   async (
     {
@@ -78,7 +63,7 @@ export const signUpAsyncAction = createAsyncThunk(
       role,
       avatar,
       onSuccess,
-    }: ISignUpParams,
+    }: ISignUpAsyncAction,
     { getState, dispatch }
   ) => {
     try {

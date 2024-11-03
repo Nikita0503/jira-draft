@@ -23,3 +23,9 @@ export interface ISetError {
 export interface ISetLoadingAction {
   loading: boolean;
 }
+
+export interface ICreateProjectAsyncAction {
+  title: string;
+  description: string;
+  onSuccess?: () => void;
+}

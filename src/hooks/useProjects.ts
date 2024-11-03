@@ -1,4 +1,7 @@
-import { fetchProjectsAsyncAction } from '@actions/projectsActions';
+import {
+  createProjectAsyncAction,
+  fetchProjectsAsyncAction,
+} from '@actions/projectsActions';
 import { IProject } from '@interfaces';
 import { TAppDispatch, TRootState } from '@store';
 import React from 'react';
@@ -23,7 +26,20 @@ const useProjects = () => {
     dispatch(fetchProjectsAsyncAction());
   }, []);
 
-  return { projects, error, loading, fetchProjects };
+  const createProject = React.useCallback(
+    (title: string, description: string, onSuccess?: () => void) => {
+      dispatch(
+        createProjectAsyncAction({
+          title: title,
+          description: description,
+          onSuccess: onSuccess,
+        })
+      );
+    },
+    []
+  );
+
+  return { projects, error, loading, fetchProjects, createProject };
 };
 
 export default useProjects;
