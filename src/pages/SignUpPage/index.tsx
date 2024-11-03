@@ -4,9 +4,9 @@ import { TUserRole } from '@interfaces';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
-import { TAppDispatch } from '@store';
+import { TAppDispatch, TRootState } from '@store';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './SignUpPage.module.css';
 
@@ -21,6 +21,10 @@ const SignUpPage = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch<TAppDispatch>();
+
+  const loading = useSelector<TRootState, boolean>(
+    (state: TRootState) => state.auth.loading
+  );
 
   const avatarUrl = React.useMemo(() => {
     return avatar
@@ -102,7 +106,12 @@ const SignUpPage = () => {
           />
           <span>Sign up as Admin</span>
         </div>
-        <Button onClick={signUp} className={styles.button} variant="contained">
+        <Button
+          disabled={loading}
+          onClick={signUp}
+          className={styles.button}
+          variant="contained"
+        >
           Sign Up
         </Button>
         <Button

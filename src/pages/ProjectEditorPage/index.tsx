@@ -10,7 +10,7 @@ const ProjectEditorPage = () => {
 
   const navigate = useNavigate();
 
-  const { createProject } = useProjects();
+  const { loading, createProject } = useProjects();
 
   const createNewProject = React.useCallback(() => {
     createProject(title, description, goToProjects);
@@ -42,6 +42,7 @@ const ProjectEditorPage = () => {
           onClick={createNewProject}
           className={styles.button}
           variant="contained"
+          disabled={loading}
         >
           Create New Project
         </Button>
