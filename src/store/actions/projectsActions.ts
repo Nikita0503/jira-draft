@@ -3,6 +3,7 @@ import { fetchProjectsApi } from '../../api/projectsApi';
 import {
   IAddProjectAction,
   IRemoveProjectAction,
+  ISetError,
   ISetLoadingAction,
   ISetProjectsAction,
   IUpdateProjectAction,
@@ -24,6 +25,10 @@ export const removeProjectAction = createAction<IRemoveProjectAction>(
   'projects/removeProjectAction'
 );
 
+export const setErrorAction = createAction<ISetError>(
+  'projects/setErrorAction'
+);
+
 export const setLoadingAction = createAction<ISetLoadingAction>(
   'projects/setLoadingAction'
 );
@@ -35,7 +40,9 @@ export const fetchProjectsAsyncAction = createAsyncThunk(
       dispatch(setLoadingAction({ loading: true }));
       const res = await fetchProjectsApi();
       dispatch(setProjectsAction({ projects: res.projects }));
+      dispatch(setErrorAction({ error: undefined }));
     } catch (e: any) {
+      dispatch(setErrorAction({ error: e }));
       console.log('projectsActions::fetchProjectsAsyncAction error:', e);
     } finally {
       dispatch(setLoadingAction({ loading: false }));

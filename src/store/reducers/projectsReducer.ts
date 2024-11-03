@@ -4,6 +4,7 @@ import { IProjectsReducerState } from '../../interfaces/reducers/projectsReducer
 import {
   addProjectAction,
   removeProjectAction,
+  setErrorAction,
   setLoadingAction,
   setProjectsAction,
   updateProjectAction,
@@ -11,6 +12,7 @@ import {
 
 const initialState: IProjectsReducerState = {
   projects: [],
+  error: undefined,
   loading: false,
 };
 
@@ -37,6 +39,10 @@ const projectsReducer = createReducer<IProjectsReducerState>(
         projects: store.projects.filter(
           (currentProject: IProject) => currentProject.id !== project.id
         ),
+      }))
+      .addCase(setErrorAction, (store, { payload: { error } }) => ({
+        ...store,
+        error: error,
       }))
       .addCase(setLoadingAction, (store, { payload: { loading } }) => ({
         ...store,

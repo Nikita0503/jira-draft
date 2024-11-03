@@ -16,6 +16,10 @@ export interface IRemoveProjectAction {
   project: IProject;
 }
 
+export interface ISetError {
+  error: any;
+}
+
 export interface ISetLoadingAction {
   loading: boolean;
 }

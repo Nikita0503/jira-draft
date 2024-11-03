@@ -1,27 +1,17 @@
-import { fetchProjectsAsyncAction } from '@actions/projectsActions';
-import ProjectListItem from '@components/listItems/ProjectListItem';
-import { IProject } from '@interfaces';
+import ProjectList from '@components/lists/ProjectList';
+import useProjects from '@hooks/useProjects';
 import { Button } from '@mui/material';
-import { TAppDispatch, TRootState } from '@store';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './ProjectsPage.module.css';
 
 const ProjectsPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch<TAppDispatch>();
 
-  const projects = useSelector<TRootState, IProject[]>(
-    (state: TRootState) => state.projects.projects
-  );
-
-  const loading = useSelector<TRootState, boolean>(
-    (state: TRootState) => state.projects.loading
-  );
+  const { projects, error, loading, fetchProjects } = useProjects();
 
   React.useEffect(() => {
-    dispatch(fetchProjectsAsyncAction());
+    fetchProjects();
   }, []);
 
   const goToProjectEditor = React.useCallback(() => {
@@ -41,13 +31,7 @@ const ProjectsPage = () => {
             Create Project
           </Button>
         </div>
-        {projects.map((project: IProject) => {
-          return (
-            <div key={project.id} className={styles.projectContainer}>
-              <ProjectListItem project={project} />
-            </div>
-          );
-        })}
+        <ProjectList projects={projects} error={error} loading={loading} />
       </div>
     </div>
   );
