@@ -40,7 +40,8 @@ export const fetchProjectsAsyncAction = createAsyncThunk(
     try {
       dispatch(setLoadingAction({ loading: true }));
       const res = await fetchProjectsApi();
-      dispatch(setProjectsAction({ projects: res.projects }));
+      const projects = res.projects.reverse();
+      dispatch(setProjectsAction({ projects: projects }));
       dispatch(setErrorAction({ error: undefined }));
     } catch (e: any) {
       dispatch(setErrorAction({ error: e }));
