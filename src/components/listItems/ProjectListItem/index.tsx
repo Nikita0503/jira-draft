@@ -13,8 +13,8 @@ const ProjectListItem = ({ project }: IProps) => {
   const navigate = useNavigate();
 
   const goToProjectDetails = React.useCallback(() => {
-    navigate('/projects/1');
-  }, []);
+    navigate(`/projects/${project.id}`);
+  }, [project]);
 
   return (
     <div className={styles.container} onClick={goToProjectDetails}>

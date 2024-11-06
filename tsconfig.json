@@ -21,6 +21,7 @@
       "@components/*": ["components/*"],
       "@interfaces": ["interfaces"],
       "@actions/*": ["store/actions/*"],
+      "@selectors/*": ["store/selectors/*"],
       "@images/*": ["assets/*"],
       "@hooks/*": ["hooks/*"],
       "@utils/*": ["utils/*"],
