@@ -1,6 +1,8 @@
 import {
   createProjectAsyncAction,
+  deleteProjectAsyncAction,
   fetchProjectsAsyncAction,
+  updateProjectAsyncAction,
 } from '@actions/projectsActions';
 import { IProject } from '@interfaces';
 import { TAppDispatch, TRootState } from '@store';
@@ -39,7 +41,46 @@ const useProjects = () => {
     []
   );
 
-  return { projects, error, loading, fetchProjects, createProject };
+  const updateProject = React.useCallback(
+    (
+      projectId: number,
+      title: string,
+      description: string,
+      onSuccess?: () => void
+    ) => {
+      dispatch(
+        updateProjectAsyncAction({
+          projectId: projectId,
+          title: title,
+          description: description,
+          onSuccess: onSuccess,
+        })
+      );
+    },
+    []
+  );
+
+  const deleteProject = React.useCallback(
+    (projectId: number, onSuccess?: () => void) => {
+      dispatch(
+        deleteProjectAsyncAction({
+          projectId: projectId,
+          onSuccess: onSuccess,
+        })
+      );
+    },
+    []
+  );
+
+  return {
+    projects,
+    error,
+    loading,
+    fetchProjects,
+    createProject,
+    updateProject,
+    deleteProject,
+  };
 };
 
 export default useProjects;

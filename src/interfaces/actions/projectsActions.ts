@@ -29,3 +29,15 @@ export interface ICreateProjectAsyncAction {
   description: string;
   onSuccess?: () => void;
 }
+
+export interface IUpdateProjectAsyncAction {
+  projectId: number;
+  title: string;
+  description: string;
+  onSuccess?: () => void;
+}
+
+export interface IDeleteProjectAsyncAction {
+  projectId: number;
+  onSuccess?: () => void;
+}

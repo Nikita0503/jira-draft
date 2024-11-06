@@ -1,13 +1,20 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { createProjectApi, fetchProjectsApi } from '../../api/projectsApi';
+import {
+  createProjectApi,
+  deleteProjectApi,
+  fetchProjectsApi,
+  updateProjectApi,
+} from '../../api/projectsApi';
 import {
   IAddProjectAction,
   ICreateProjectAsyncAction,
+  IDeleteProjectAsyncAction,
   IRemoveProjectAction,
   ISetError,
   ISetLoadingAction,
   ISetProjectsAction,
   IUpdateProjectAction,
+  IUpdateProjectAsyncAction,
 } from '../../interfaces/actions/projectsActions';
 
 export const setProjectsAction = createAction<ISetProjectsAction>(
@@ -71,6 +78,56 @@ export const createProjectAsyncAction = createAsyncThunk<
       }
     } catch (e: any) {
       console.log('projectsActions::createProjectAsyncAction error:', e);
+    } finally {
+      dispatch(setLoadingAction({ loading: false }));
+    }
+  }
+);
+
+export const updateProjectAsyncAction = createAsyncThunk<
+  void,
+  IUpdateProjectAsyncAction
+>(
+  'projects/updateProjectAsyncAction',
+  async (
+    { projectId, title, description, onSuccess }: IUpdateProjectAsyncAction,
+    { getState, dispatch }
+  ) => {
+    try {
+      dispatch(setLoadingAction({ loading: true }));
+      const res = await updateProjectApi(projectId, title, description);
+      console.log('Updated Project: ', res);
+      dispatch(fetchProjectsAsyncAction());
+      if (onSuccess) {
+        onSuccess();
+      }
+    } catch (e: any) {
+      console.log('projectsActions::updateProjectAsyncAction error:', e);
+    } finally {
+      dispatch(setLoadingAction({ loading: false }));
+    }
+  }
+);
+
+export const deleteProjectAsyncAction = createAsyncThunk<
+  void,
+  IDeleteProjectAsyncAction
+>(
+  'projects/deleteProjectAsyncAction',
+  async (
+    { projectId, onSuccess }: IDeleteProjectAsyncAction,
+    { getState, dispatch }
+  ) => {
+    try {
+      dispatch(setLoadingAction({ loading: true }));
+      const res = await deleteProjectApi(projectId);
+      console.log('Deleted Project: ', res);
+      dispatch(fetchProjectsAsyncAction());
+      if (onSuccess) {
+        onSuccess();
+      }
+    } catch (e: any) {
+      console.log('projectsActions::deleteProjectAsyncAction error:', e);
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }

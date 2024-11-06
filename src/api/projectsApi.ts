@@ -12,3 +12,20 @@ export const createProjectApi = async (title: string, description: string) => {
   });
   return res.data;
 };
+
+export const updateProjectApi = async (
+  projectId: number,
+  title: string,
+  description: string
+) => {
+  const res = await axiosInstance.put(`/projects/${projectId}`, {
+    title: title,
+    description: description,
+  });
+  return res.data;
+};
+
+export const deleteProjectApi = async (projectId: number) => {
+  const res = await axiosInstance.delete(`/projects/${projectId}`);
+  return res.data;
+};

@@ -1,3 +1,4 @@
+import useProjects from '@hooks/useProjects';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import React from 'react';
@@ -12,9 +13,22 @@ interface IProps {
 const ProjectListItem = ({ project }: IProps) => {
   const navigate = useNavigate();
 
+  const { deleteProject } = useProjects();
+
   const goToProjectDetails = React.useCallback(() => {
     navigate(`/projects/${project.id}`);
   }, [project]);
+
+  const deleteCurrentProject = React.useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+      const isConfirmed = window.confirm('Are you sure you want to delete?');
+      if (isConfirmed) {
+        deleteProject(project.id!);
+      }
+    },
+    [project]
+  );
 
   return (
     <div className={styles.container} onClick={goToProjectDetails}>
@@ -32,7 +46,9 @@ const ProjectListItem = ({ project }: IProps) => {
       </div>
       <div className={styles.actionsContainer}>
         <EditIcon className={styles.actionIcon} />
-        <DeleteIcon className={styles.actionIcon} />
+        <div onClick={deleteCurrentProject}>
+          <DeleteIcon className={styles.actionIcon} />
+        </div>
       </div>
     </div>
   );

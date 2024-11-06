@@ -1,5 +1,6 @@
 import TaskList from '@components/lists/TaskList';
 import UsersInProjectPicker from '@components/pickers/UsersInProjectPicker';
+import useProjects from '@hooks/useProjects';
 import useTasks from '@hooks/useTasks';
 import { IProject } from '@interfaces';
 import { Button } from '@mui/material';
@@ -18,6 +19,8 @@ const ProjectDetailsPage = () => {
   const projectInfo = useSelector<TRootState, IProject | undefined>(
     (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
   );
+
+  const { deleteProject } = useProjects();
   const { tasks, error, loading, fetchTasks } = useTasks(parseInt(projectId!));
 
   React.useEffect(() => {
@@ -26,7 +29,12 @@ const ProjectDetailsPage = () => {
 
   const showModalUsersInProject = React.useCallback(() => {}, []);
 
-  const deleteCurrentProject = React.useCallback(() => {}, []);
+  const deleteCurrentProject = React.useCallback(() => {
+    const isConfirmed = window.confirm('Are you sure you want to delete?');
+    if (isConfirmed) {
+      deleteProject(parseInt(projectId!), goToProjects);
+    }
+  }, [projectId]);
 
   const goToProjectEditor = React.useCallback(() => {
     navigate(`/projects/edit/${projectId}`);
@@ -35,6 +43,10 @@ const ProjectDetailsPage = () => {
   const goToTaskEditor = React.useCallback(() => {
     navigate(`/projects/${projectId}/tasks/create`);
   }, [projectId]);
+
+  const goToProjects = React.useCallback(() => {
+    navigate(-1);
+  }, []);
 
   return (
     <div className={styles.container}>
