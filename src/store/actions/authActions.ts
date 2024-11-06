@@ -1,5 +1,5 @@
+import { signInApi, signUpApi } from '@api/authApi';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { signInApi, signUpApi } from '../../api/authApi';
 import {
   ISetAccessTokenAction,
   ISetLoadingAction,

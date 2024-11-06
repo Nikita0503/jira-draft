@@ -1,4 +1,4 @@
-import { ITask } from '..';
+import { ITask } from '@interfaces';
 
 export interface ITasksReducerState {
   tasks: ITask[];

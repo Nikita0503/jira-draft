@@ -25,6 +25,7 @@
       "@images/*": ["assets/*"],
       "@hooks/*": ["hooks/*"],
       "@utils/*": ["utils/*"],
+      "@api/*": ["api/*"],
       "@store": ["store"]
     }
   },

@@ -1,5 +1,5 @@
+import { createTaskApi, fetchTasksApi } from '@api/tasksApi';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { createTaskApi, fetchTasksApi } from 'api/tasksApi';
 import {
   IAddTaskAction,
   ICreateTaskAsyncAction,

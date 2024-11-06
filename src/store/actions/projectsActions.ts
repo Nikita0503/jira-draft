@@ -1,10 +1,10 @@
-import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   createProjectApi,
   deleteProjectApi,
   fetchProjectsApi,
   updateProjectApi,
-} from '../../api/projectsApi';
+} from '@api/projectsApi';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   IAddProjectAction,
   ICreateProjectAsyncAction,
