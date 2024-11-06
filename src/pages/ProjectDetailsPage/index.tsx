@@ -14,11 +14,11 @@ import styles from './ProjectDetailsPage.module.css';
 const ProjectDetailsPage = () => {
   const { projectId } = useParams();
 
-  const navigate = useNavigate();
-
   const projectInfo = useSelector<TRootState, IProject | undefined>(
     (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
   );
+
+  const navigate = useNavigate();
 
   const { deleteProject } = useProjects();
   const { tasks, error, loading, fetchTasks } = useTasks(parseInt(projectId!));
@@ -40,7 +40,7 @@ const ProjectDetailsPage = () => {
     navigate(`/projects/edit/${projectId}`);
   }, [projectId]);
 
-  const goToTaskEditor = React.useCallback(() => {
+  const goToTaskCreator = React.useCallback(() => {
     navigate(`/projects/${projectId}/tasks/create`);
   }, [projectId]);
 
@@ -55,7 +55,7 @@ const ProjectDetailsPage = () => {
         <div className={styles.buttonsContainer}>
           <UsersInProjectPicker />
           <Button
-            onClick={goToTaskEditor}
+            onClick={goToTaskCreator}
             className={styles.button}
             variant="contained"
           >

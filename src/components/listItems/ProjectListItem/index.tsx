@@ -19,6 +19,14 @@ const ProjectListItem = ({ project }: IProps) => {
     navigate(`/projects/${project.id}`);
   }, [project]);
 
+  const goToProjectEditor = React.useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+      navigate(`/projects/edit/${project.id}`);
+    },
+    [project]
+  );
+
   const deleteCurrentProject = React.useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
       event.stopPropagation();
@@ -45,7 +53,9 @@ const ProjectListItem = ({ project }: IProps) => {
         </div>
       </div>
       <div className={styles.actionsContainer}>
-        <EditIcon className={styles.actionIcon} />
+        <div onClick={goToProjectEditor}>
+          <EditIcon className={styles.actionIcon} />
+        </div>
         <div onClick={deleteCurrentProject}>
           <DeleteIcon className={styles.actionIcon} />
         </div>

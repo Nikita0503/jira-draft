@@ -1,5 +1,6 @@
 import ProtectedRoute from '@components/ProtectedRoute';
 import CommentEditorPage from '@pages/CommentEditorPage';
+import ProjectCreatorPage from '@pages/ProjectCreatorPage';
 import ProjectDetailsPage from '@pages/ProjectDetailsPage';
 import ProjectEditorPage from '@pages/ProjectEditorPage';
 import ProjectsPage from '@pages/ProjectsPage';
@@ -43,7 +44,7 @@ const AppNavigation = () => {
           path="projects/create"
           element={
             <ProtectedRoute>
-              <ProjectEditorPage />
+              <ProjectCreatorPage />
             </ProtectedRoute>
           }
         />

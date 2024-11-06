@@ -14,7 +14,7 @@ const ProjectsPage = () => {
     fetchProjects();
   }, []);
 
-  const goToProjectEditor = React.useCallback(() => {
+  const goToProjectCreator = React.useCallback(() => {
     navigate('/projects/create');
   }, []);
 
@@ -24,7 +24,7 @@ const ProjectsPage = () => {
       <div className={styles.content}>
         <div className={styles.buttonsContainer}>
           <Button
-            onClick={goToProjectEditor}
+            onClick={goToProjectCreator}
             className={styles.button}
             variant="contained"
           >
