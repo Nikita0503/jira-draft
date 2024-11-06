@@ -11,12 +11,12 @@ const SignInPage = () => {
   const [email, setEmail] = React.useState<string>('admin@gmail.com');
   const [password, setPassword] = React.useState<string>('Password12345');
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch<TAppDispatch>();
-
   const loading = useSelector<TRootState, boolean>(
     (state: TRootState) => state.auth.loading
   );
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch<TAppDispatch>();
 
   const signIn = React.useCallback(() => {
     dispatch(

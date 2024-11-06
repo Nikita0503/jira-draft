@@ -6,13 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import styles from './ProjectsPage.module.css';
 
 const ProjectsPage = () => {
-  const navigate = useNavigate();
-
   const { projects, error, loading, fetchProjects } = useProjects();
 
   React.useEffect(() => {
     fetchProjects();
   }, []);
+
+  const navigate = useNavigate();
 
   const goToProjectCreator = React.useCallback(() => {
     navigate('/projects/create');

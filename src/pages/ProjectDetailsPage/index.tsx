@@ -18,14 +18,14 @@ const ProjectDetailsPage = () => {
     (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
   );
 
-  const navigate = useNavigate();
-
   const { deleteProject } = useProjects();
   const { tasks, error, loading, fetchTasks } = useTasks(parseInt(projectId!));
 
   React.useEffect(() => {
     fetchTasks();
   }, []);
+
+  const navigate = useNavigate();
 
   const showModalUsersInProject = React.useCallback(() => {}, []);
 

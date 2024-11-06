@@ -19,9 +19,9 @@ const ProjectEditorPage = ({ projectId, title, description }: IProps) => {
   const [newDescription, setNewDescription] =
     React.useState<string>(description);
 
-  const navigate = useNavigate();
-
   const { loading, updateProject } = useProjects();
+
+  const navigate = useNavigate();
 
   const updateCurrentProject = React.useCallback(() => {
     updateProject(projectId, newTitle, newDescription, goToProjects);

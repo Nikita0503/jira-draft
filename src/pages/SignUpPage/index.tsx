@@ -19,18 +19,18 @@ const SignUpPage = () => {
   const [isAdmin, setIsAdmin] = React.useState<boolean>(false);
   const [avatar, setAvatar] = React.useState<File | undefined>(undefined);
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch<TAppDispatch>();
-
-  const loading = useSelector<TRootState, boolean>(
-    (state: TRootState) => state.auth.loading
-  );
-
   const avatarUrl = React.useMemo(() => {
     return avatar
       ? URL.createObjectURL(avatar)
       : 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
   }, [avatar]);
+
+  const loading = useSelector<TRootState, boolean>(
+    (state: TRootState) => state.auth.loading
+  );
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch<TAppDispatch>();
 
   const signUp = React.useCallback(() => {
     const role: TUserRole = isAdmin ? 'ADMIN' : 'USER';
