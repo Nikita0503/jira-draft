@@ -6,11 +6,12 @@ import projectsReducer from './projectsReducer';
 import statusesReducer from './statusesReducer';
 import tasksReducer from './tasksReducer';
 import typesReducer from './typesReducer';
+import usersReducer from './usersReducer';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth', 'projects', 'tasks', 'statuses', 'types'],
+  whitelist: ['auth', 'projects', 'tasks', 'statuses', 'types', 'users'],
 };
 
 const rootReducer = combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   tasks: tasksReducer,
   statuses: statusesReducer,
   types: typesReducer,
+  users: usersReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);
