@@ -72,6 +72,10 @@ const useProjects = () => {
     []
   );
 
+  const addUserToProject = React.useCallback(() => {}, []);
+
+  const removeUserFromProject = React.useCallback(() => {}, []);
+
   return {
     projects,
     error,

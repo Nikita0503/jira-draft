@@ -1,46 +1,31 @@
+import useUsers from '@hooks/useUsers';
 import { Button } from '@mui/material';
+import { usersOutsideProjectSelector } from '@selectors/usersSelectors';
+import { TRootState } from '@store';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { IUser } from '../../../interfaces';
 import UsersInProjectModal from '../../dialogs/UsersInProjectModal';
 import styles from './UsersInProjectPicker.module.css';
 
-const USERS_IN_PROJECT: IUser[] = [
-  {
-    id: 1,
-    email: 'some@email.com',
-    role: 'USER',
-    name: 'Default Name',
-  },
-  {
-    id: 2,
-    email: 'default@email.com',
-    role: 'ADMIN',
-    name: 'Default Name',
-  },
-];
+interface IProps {
+  usersInProject: IUser[];
+}
 
-const USERS_OUTSIDE_PROJECT: IUser[] = [
-  {
-    id: 3,
-    email: 'user@email.com',
-    role: 'USER',
-    name: 'Default Name',
-  },
-  {
-    id: 4,
-    email: 'admin@email.com',
-    role: 'ADMIN',
-    name: 'Default Name',
-  },
-];
-
-const UsersInProjectPicker = () => {
+const UsersInProjectPicker = ({ usersInProject }: IProps) => {
   const [open, setOpen] = React.useState(false);
-  const [usersInProject, setUsersInProject] =
-    React.useState<IUser[]>(USERS_IN_PROJECT);
-  const [usersOutsideProject, setUsersOutsideProject] = React.useState<IUser[]>(
-    USERS_OUTSIDE_PROJECT
+
+  console.log({ usersInProject });
+
+  const usersOutsideProject = useSelector<TRootState, IUser[]>(
+    (state: TRootState) => usersOutsideProjectSelector(usersInProject)(state)
   );
+
+  const { fetchUsers } = useUsers();
+
+  React.useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const openModal = React.useCallback(() => {
     setOpen(true);
