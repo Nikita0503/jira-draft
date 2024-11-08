@@ -4,9 +4,13 @@ import { IUser } from '../../../interfaces';
 import TaskUserPickerModal from '../../dialogs/TaskUserPickerModal';
 import styles from './TaskUserPicker.module.css';
 
-const TaskUserPicker = () => {
+interface IProps {
+  user: IUser | undefined;
+  setUser: (user: IUser) => void;
+}
+
+const TaskUserPicker = ({ user, setUser }: IProps) => {
   const [open, setOpen] = React.useState(false);
-  const [user, setUser] = React.useState<IUser | undefined>();
 
   const openModal = React.useCallback(() => {
     setOpen(true);
@@ -27,7 +31,6 @@ const TaskUserPicker = () => {
         <span className={styles.title}>{user?.email ?? 'Not selected'}</span>
         {open && (
           <TaskUserPickerModal
-            user={user}
             selectUser={selectUser}
             closeModal={closeModal}
           />

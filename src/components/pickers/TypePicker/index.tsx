@@ -4,9 +4,13 @@ import { IType } from '../../../interfaces';
 import TypePickerModal from '../../dialogs/TypePickerModal';
 import styles from './TypePicker.module.css';
 
-const TypePicker = () => {
+interface IProps {
+  type: IType | undefined;
+  setType: (type: IType) => void;
+}
+
+const TypePicker = ({ type, setType }: IProps) => {
   const [open, setOpen] = React.useState(false);
-  const [type, setType] = React.useState<IType | undefined>();
 
   const openModal = React.useCallback(() => {
     setOpen(true);
@@ -26,11 +30,7 @@ const TypePicker = () => {
       <div className={styles.content}>
         <span className={styles.title}>{type?.title ?? 'Not selected'}</span>
         {open && (
-          <TypePickerModal
-            type={type}
-            selectType={selectType}
-            closeModal={closeModal}
-          />
+          <TypePickerModal selectType={selectType} closeModal={closeModal} />
         )}
       </div>
       <Button onClick={openModal} className={styles.button} variant="contained">

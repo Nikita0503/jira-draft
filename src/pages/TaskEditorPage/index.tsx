@@ -2,7 +2,7 @@ import AttachedFile from '@components/AttachedFile';
 import StatusPicker from '@components/pickers/StatusPicker';
 import TaskUserPicker from '@components/pickers/TaskUserPicker';
 import TypePicker from '@components/pickers/TypePicker';
-import { IFile, ITask } from '@interfaces';
+import { IFile, IStatus, ITask, IType, IUser } from '@interfaces';
 import { Button, TextField } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +14,7 @@ const TASK: ITask = {
   description:
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   timeTracked: 40,
-  timeAlloted: 120,
+  timeAllotted: 120,
   projectId: 1,
   statusId: 2,
   typeId: 2,
@@ -50,17 +50,19 @@ const TASK: ITask = {
 };
 
 const TaskEditorPage = () => {
+  const [title, setTitle] = React.useState<string>('');
+  const [description, setDescription] = React.useState<string>('');
+  const [timeAllotted, setTimeAllotted] = React.useState<number>(0);
+  const [type, setType] = React.useState<IType | undefined>();
+  const [status, setStatus] = React.useState<IStatus | undefined>();
+  const [user, setUser] = React.useState<IUser | undefined>();
+
   const navigate = useNavigate();
 
   const createNewTask = React.useCallback(() => {
-    navigate(-1);
-  }, []);
-
-  const showModalTypePicker = React.useCallback(() => {}, []);
-
-  const showModalStatusPicker = React.useCallback(() => {}, []);
-
-  const showModalUserPicker = React.useCallback(() => {}, []);
+    // navigate(-1);
+    console.log({ title, description, timeAllotted, type, status, user });
+  }, [title, description, timeAllotted, type, status, user]);
 
   return (
     <div className={styles.container}>
@@ -70,38 +72,43 @@ const TaskEditorPage = () => {
           className={styles.textField}
           label="Title"
           variant="filled"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
         />
         <TextField
           className={styles.textField}
           label="Desription"
           variant="filled"
+          value={description}
+          onChange={(event) => setDescription(event.target.value)}
         />
         <TextField
           className={styles.textField}
           label="Time Allotted (minutes)"
           variant="filled"
+          type="number"
+          value={timeAllotted}
+          onChange={(event) => {
+            const value = event.target.value;
+            if (value === '') {
+              setTimeAllotted(0);
+            } else if (/^\d+$/.test(value)) {
+              setTimeAllotted(Number(value));
+            }
+          }}
         />
         <div className={styles.additionalInfo}>
-          <div
-            className={styles.additionalInfoItem}
-            onClick={showModalTypePicker}
-          >
+          <div className={styles.additionalInfoItem}>
             <span className={styles.additionalInfoItemTitle}>Type:</span>
-            <TypePicker />
+            <TypePicker type={type} setType={setType} />
           </div>
-          <div
-            className={styles.additionalInfoItem}
-            onClick={showModalStatusPicker}
-          >
+          <div className={styles.additionalInfoItem}>
             <span className={styles.additionalInfoItemTitle}>Status:</span>
-            <StatusPicker />
+            <StatusPicker status={status} setStatus={setStatus} />
           </div>
-          <div
-            className={styles.additionalInfoItem}
-            onClick={showModalUserPicker}
-          >
+          <div className={styles.additionalInfoItem}>
             <span className={styles.additionalInfoItemTitle}>User:</span>
-            <TaskUserPicker />
+            <TaskUserPicker user={user} setUser={setUser} />
           </div>
         </div>
         <span className={styles.fileListTitle}>Files</span>

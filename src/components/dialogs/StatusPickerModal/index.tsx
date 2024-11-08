@@ -1,41 +1,30 @@
+import useStatuses from '@hooks/useStatuses';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
+import React from 'react';
 import { IStatus } from '../../../interfaces';
 import Status from '../../TaskStatus';
 import styles from './StatusPickerModal.module.css';
 
 export interface IProps {
-  status: IStatus | undefined;
   selectStatus: (selectedStatus: IStatus) => void;
   closeModal: () => void;
 }
 
-const STATUSES: IStatus[] = [
-  {
-    id: 1,
-    title: 'Backlog',
-    color: '#00ff00',
-  },
-  {
-    id: 2,
-    title: 'In Progress',
-    color: '#00ff00',
-  },
-  {
-    id: 3,
-    title: 'Done',
-    color: '#00ff00',
-  },
-];
+const StatusPickerModal = ({ selectStatus, closeModal }: IProps) => {
+  const { statuses, error, loading, fetchStatuses } = useStatuses();
 
-const StatusPickerModal = ({ status, selectStatus, closeModal }: IProps) => {
+  React.useEffect(() => {
+    fetchStatuses();
+  }, []);
+
   return (
     <Dialog onClose={closeModal} open={true}>
       <div className={styles.container}>
         <span className={styles.title}>Select Status</span>
         <div className={styles.content}>
           <div>
-            {STATUSES.map((statusItem: IStatus) => (
+            {statuses.map((statusItem: IStatus) => (
               <div
                 key={statusItem.id}
                 className={styles.statusContainer}

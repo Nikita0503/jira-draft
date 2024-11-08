@@ -16,7 +16,7 @@ const TASK: ITask = {
   description:
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   timeTracked: 40,
-  timeAlloted: 120,
+  timeAllotted: 120,
   projectId: 1,
   statusId: 2,
   typeId: 2,

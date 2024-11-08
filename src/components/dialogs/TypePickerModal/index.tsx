@@ -1,41 +1,30 @@
+import useTypes from '@hooks/useTypes';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
+import React from 'react';
 import { IType } from '../../../interfaces';
 import TaskType from '../../TaskType';
 import styles from './TypePickerModal.module.css';
 
 export interface IProps {
-  type: IType | undefined;
   selectType: (selectedType: IType) => void;
   closeModal: () => void;
 }
 
-const TYPES: IType[] = [
-  {
-    id: 1,
-    title: 'Task',
-    color: '#0000ff',
-  },
-  {
-    id: 2,
-    title: 'Story',
-    color: '#0000ff',
-  },
-  {
-    id: 3,
-    title: 'Bug',
-    color: '#0000ff',
-  },
-];
+const TypePickerModal = ({ selectType, closeModal }: IProps) => {
+  const { types, error, loading, fetchTypes } = useTypes();
 
-const TypePickerModal = ({ type, selectType, closeModal }: IProps) => {
+  React.useEffect(() => {
+    fetchTypes();
+  }, []);
+
   return (
     <Dialog onClose={closeModal} open={true}>
       <div className={styles.container}>
         <span className={styles.title}>Select Type</span>
         <div className={styles.content}>
           <div>
-            {TYPES.map((typeItem: IType) => (
+            {types.map((typeItem: IType) => (
               <div
                 key={typeItem.id}
                 className={styles.typeContainer}

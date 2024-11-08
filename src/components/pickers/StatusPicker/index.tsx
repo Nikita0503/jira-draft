@@ -4,9 +4,13 @@ import { IStatus } from '../../../interfaces';
 import StatusPickerModal from '../../dialogs/StatusPickerModal';
 import styles from './StatusPicker.module.css';
 
-const StatusPicker = () => {
+interface IProps {
+  status: IStatus | undefined;
+  setStatus: (status: IStatus) => void;
+}
+
+const StatusPicker = ({ status, setStatus }: IProps) => {
   const [open, setOpen] = React.useState(false);
-  const [status, setStatus] = React.useState<IStatus | undefined>();
 
   const openModal = React.useCallback(() => {
     setOpen(true);
@@ -27,7 +31,6 @@ const StatusPicker = () => {
         <span className={styles.title}>{status?.title ?? 'Not selected'}</span>
         {open && (
           <StatusPickerModal
-            status={status}
             selectStatus={selectStatus}
             closeModal={closeModal}
           />
