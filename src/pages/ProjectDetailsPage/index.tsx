@@ -53,7 +53,10 @@ const ProjectDetailsPage = () => {
       <span className={styles.title}>{projectInfo?.title}</span>
       <div className={styles.content}>
         <div className={styles.buttonsContainer}>
-          <UsersInProjectPicker usersInProject={projectInfo?.users ?? []} />
+          <UsersInProjectPicker
+            projectId={parseInt(projectId!)}
+            usersInProject={projectInfo?.users ?? []}
+          />
           <Button
             onClick={goToTaskCreator}
             className={styles.button}

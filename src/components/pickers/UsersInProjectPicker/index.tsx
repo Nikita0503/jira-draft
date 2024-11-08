@@ -1,3 +1,4 @@
+import useProjects from '@hooks/useProjects';
 import useUsers from '@hooks/useUsers';
 import { Button } from '@mui/material';
 import { usersOutsideProjectSelector } from '@selectors/usersSelectors';
@@ -9,19 +10,19 @@ import UsersInProjectModal from '../../dialogs/UsersInProjectModal';
 import styles from './UsersInProjectPicker.module.css';
 
 interface IProps {
+  projectId: number;
   usersInProject: IUser[];
 }
 
-const UsersInProjectPicker = ({ usersInProject }: IProps) => {
+const UsersInProjectPicker = ({ projectId, usersInProject }: IProps) => {
   const [open, setOpen] = React.useState(false);
-
-  console.log({ usersInProject });
 
   const usersOutsideProject = useSelector<TRootState, IUser[]>(
     (state: TRootState) => usersOutsideProjectSelector(usersInProject)(state)
   );
 
   const { fetchUsers } = useUsers();
+  const { addUserToProject, removeUserFromProject } = useProjects();
 
   React.useEffect(() => {
     fetchUsers();
@@ -35,11 +36,18 @@ const UsersInProjectPicker = ({ usersInProject }: IProps) => {
     setOpen(false);
   }, []);
 
-  const addUserToProject = React.useCallback((selectedUser: IUser) => {}, []);
+  const addUserToCurrentProject = React.useCallback(
+    (selectedUser: IUser) => {
+      addUserToProject(projectId, selectedUser.id);
+    },
+    [projectId]
+  );
 
-  const removeUserFromProject = React.useCallback(
-    (selectedUser: IUser) => {},
-    []
+  const removeUserFromCurrentProject = React.useCallback(
+    (selectedUser: IUser) => {
+      removeUserFromProject(projectId, selectedUser.id);
+    },
+    [projectId]
   );
 
   return (
@@ -49,8 +57,8 @@ const UsersInProjectPicker = ({ usersInProject }: IProps) => {
           <UsersInProjectModal
             usersInProject={usersInProject}
             usersOutsideProject={usersOutsideProject}
-            addUserToProject={addUserToProject}
-            removeUserFromProject={removeUserFromProject}
+            addUserToProject={addUserToCurrentProject}
+            removeUserFromProject={removeUserFromCurrentProject}
             closeModal={closeModal}
           />
         )}

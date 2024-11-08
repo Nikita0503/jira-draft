@@ -1,15 +1,19 @@
 import {
+  addUserToProjectApi,
   createProjectApi,
   deleteProjectApi,
   fetchProjectsApi,
+  removeUserFromProjectApi,
   updateProjectApi,
 } from '@api/projectsApi';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   IAddProjectAction,
+  IAddUserToProjectAsyncAction,
   ICreateProjectAsyncAction,
   IDeleteProjectAsyncAction,
   IRemoveProjectAction,
+  IRemoveUserFromProjectAsyncAction,
   ISetError,
   ISetLoadingAction,
   ISetProjectsAction,
@@ -128,6 +132,57 @@ export const deleteProjectAsyncAction = createAsyncThunk<
       }
     } catch (e: any) {
       console.log('projectsActions::deleteProjectAsyncAction error:', e);
+    } finally {
+      dispatch(setLoadingAction({ loading: false }));
+    }
+  }
+);
+
+export const addUserToProjectAsyncAction = createAsyncThunk<
+  void,
+  IAddUserToProjectAsyncAction
+>(
+  'projects/addUserToProjectAsyncAction',
+  async (
+    { projectId, userId, onSuccess }: IAddUserToProjectAsyncAction,
+    { getState, dispatch }
+  ) => {
+    try {
+      dispatch(setLoadingAction({ loading: true }));
+      const res = await addUserToProjectApi(projectId, userId);
+      dispatch(fetchProjectsAsyncAction());
+      if (onSuccess) {
+        onSuccess();
+      }
+    } catch (e: any) {
+      console.log('projectsActions::addUserToProjectAsyncAction error:', e);
+    } finally {
+      dispatch(setLoadingAction({ loading: false }));
+    }
+  }
+);
+
+export const removeUserFromProjectAsyncAction = createAsyncThunk<
+  void,
+  IRemoveUserFromProjectAsyncAction
+>(
+  'projects/removeUserFromProjectAsyncAction',
+  async (
+    { projectId, userId, onSuccess }: IRemoveUserFromProjectAsyncAction,
+    { getState, dispatch }
+  ) => {
+    try {
+      dispatch(setLoadingAction({ loading: true }));
+      const res = await removeUserFromProjectApi(projectId, userId);
+      dispatch(fetchProjectsAsyncAction());
+      if (onSuccess) {
+        onSuccess();
+      }
+    } catch (e: any) {
+      console.log(
+        'projectsActions::removeUserFromProjectAsyncAction error:',
+        e
+      );
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }

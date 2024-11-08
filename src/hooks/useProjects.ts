@@ -1,7 +1,9 @@
 import {
+  addUserToProjectAsyncAction,
   createProjectAsyncAction,
   deleteProjectAsyncAction,
   fetchProjectsAsyncAction,
+  removeUserFromProjectAsyncAction,
   updateProjectAsyncAction,
 } from '@actions/projectsActions';
 import { IProject } from '@interfaces';
@@ -72,9 +74,26 @@ const useProjects = () => {
     []
   );
 
-  const addUserToProject = React.useCallback(() => {}, []);
+  const addUserToProject = React.useCallback(
+    (projectId: number, userId: number) => {
+      dispatch(
+        addUserToProjectAsyncAction({ projectId: projectId, userId: userId })
+      );
+    },
+    []
+  );
 
-  const removeUserFromProject = React.useCallback(() => {}, []);
+  const removeUserFromProject = React.useCallback(
+    (projectId: number, userId: number) => {
+      dispatch(
+        removeUserFromProjectAsyncAction({
+          projectId: projectId,
+          userId: userId,
+        })
+      );
+    },
+    []
+  );
 
   return {
     projects,
@@ -84,6 +103,8 @@ const useProjects = () => {
     createProject,
     updateProject,
     deleteProject,
+    addUserToProject,
+    removeUserFromProject,
   };
 };
 

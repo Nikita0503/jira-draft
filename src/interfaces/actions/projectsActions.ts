@@ -41,3 +41,15 @@ export interface IDeleteProjectAsyncAction {
   projectId: number;
   onSuccess?: () => void;
 }
+
+export interface IAddUserToProjectAsyncAction {
+  projectId: number;
+  userId: number;
+  onSuccess?: () => void;
+}
+
+export interface IRemoveUserFromProjectAsyncAction {
+  projectId: number;
+  userId: number;
+  onSuccess?: () => void;
+}
