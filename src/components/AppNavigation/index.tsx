@@ -6,8 +6,8 @@ import ProjectEditorPage from '@pages/ProjectEditorPage';
 import ProjectsPage from '@pages/ProjectsPage';
 import SignInPage from '@pages/SignInPage';
 import SignUpPage from '@pages/SignUpPage';
+import TaskCreatorPage from '@pages/TaskCreatorPage';
 import TaskDetailsPage from '@pages/TaskDetailsPage';
-import TaskEditorPage from '@pages/TaskEditorPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const AppNavigation = () => {
@@ -60,7 +60,7 @@ const AppNavigation = () => {
           path="projects/:projectId/tasks/create"
           element={
             <ProtectedRoute>
-              <TaskEditorPage />
+              <TaskCreatorPage />
             </ProtectedRoute>
           }
         />
@@ -68,7 +68,7 @@ const AppNavigation = () => {
           path="projects/:projectId/tasks/edit/:taskId"
           element={
             <ProtectedRoute>
-              <TaskEditorPage />
+              <TaskCreatorPage />
             </ProtectedRoute>
           }
         />

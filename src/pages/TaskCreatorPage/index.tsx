@@ -8,9 +8,9 @@ import { IStatus, IType, IUser } from '@interfaces';
 import { Button, TextField } from '@mui/material';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import styles from './TaskEditorPage.module.css';
+import styles from './TaskCreatorPage.module.css';
 
-const TaskEditorPage = () => {
+const TaskCreatorPage = () => {
   const { projectId } = useParams();
 
   const [title, setTitle] = React.useState<string>('');
@@ -139,4 +139,4 @@ const TaskEditorPage = () => {
   );
 };
 
-export default TaskEditorPage;
+export default TaskCreatorPage;
