@@ -1,7 +1,7 @@
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ITask } from '../../../interfaces';
 import TaskStatus from '../../TaskStatus';
 import TaskType from '../../TaskType';
@@ -13,11 +13,12 @@ interface IProps {
 }
 
 const TaskListItem = ({ task }: IProps) => {
+  const { projectId } = useParams();
   const navigate = useNavigate();
 
   const goToTaskDetails = React.useCallback(() => {
-    navigate('/projects/1/tasks/1');
-  }, []);
+    navigate(`/projects/${projectId}/tasks/${task.id}`);
+  }, [projectId, task]);
 
   return (
     <div className={styles.container} onClick={goToTaskDetails}>
