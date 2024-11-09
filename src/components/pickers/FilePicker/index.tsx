@@ -21,7 +21,6 @@ const FilePicker = ({ children, setFile }: IProps) => {
       const file = files[0];
       if (file) {
         setFile(file);
-        console.log('Выбранный файл:', file);
       }
     }
   };

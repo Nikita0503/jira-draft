@@ -20,32 +20,27 @@ const TaskEditorPage = () => {
 
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    console.log({ files });
-  }, [files]);
-
   const addFile = React.useCallback(
     (file: File) => {
-      const isSelectedFile = files.some(
-        (uploadedFile: File) => uploadedFile.lastModified === file.lastModified
-      );
-
-      if (isSelectedFile) {
-        alert('You have already selected this file');
-        return;
-      }
-
-      setFiles([...files, file]);
+      setFiles((uploadedFiles: File[]) => {
+        const isSelectedFile = files.some(
+          (uploadedFile: File) => uploadedFile.name === file.name
+        );
+        if (isSelectedFile) {
+          alert('You have already selected a file with this name');
+          return uploadedFiles;
+        }
+        return [...uploadedFiles, file];
+      });
     },
     [files]
   );
 
   const deleteFile = React.useCallback(
     (file: File) => {
-      setFiles(
-        files.filter(
-          (uploadedFile: File) =>
-            uploadedFile.lastModified !== file.lastModified
+      setFiles((uploadedFiles: File[]) =>
+        uploadedFiles.filter(
+          (uploadedFile: File) => uploadedFile.name !== file.name
         )
       );
     },

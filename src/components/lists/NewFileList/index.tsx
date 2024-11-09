@@ -15,7 +15,7 @@ const NewFileList = ({ files, deleteFile }: IProps) => {
   return (
     <>
       {files.map((file: File) => (
-        <div key={file.lastModified} className={styles.fileContainer}>
+        <div key={file.name} className={styles.fileContainer}>
           <NewFile file={file} deleteFile={deleteFile} />
         </div>
       ))}
