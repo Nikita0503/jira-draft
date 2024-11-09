@@ -3,13 +3,16 @@ import FilePicker from '@components/pickers/FilePicker';
 import StatusPicker from '@components/pickers/StatusPicker';
 import TaskUserPicker from '@components/pickers/TaskUserPicker';
 import TypePicker from '@components/pickers/TypePicker';
+import useTasks from '@hooks/useTasks';
 import { IStatus, IType, IUser } from '@interfaces';
 import { Button, TextField } from '@mui/material';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from './TaskEditorPage.module.css';
 
 const TaskEditorPage = () => {
+  const { projectId } = useParams();
+
   const [title, setTitle] = React.useState<string>('');
   const [description, setDescription] = React.useState<string>('');
   const [timeAllotted, setTimeAllotted] = React.useState<number>(0);
@@ -17,6 +20,8 @@ const TaskEditorPage = () => {
   const [status, setStatus] = React.useState<IStatus | undefined>();
   const [user, setUser] = React.useState<IUser | undefined>();
   const [files, setFiles] = React.useState<File[]>([]);
+
+  const { loading, createTask } = useTasks(parseInt(projectId!));
 
   const navigate = useNavigate();
 
@@ -48,9 +53,21 @@ const TaskEditorPage = () => {
   );
 
   const createNewTask = React.useCallback(() => {
-    // navigate(-1);
-    console.log({ title, description, timeAllotted, type, status, user });
-  }, [title, description, timeAllotted, type, status, user]);
+    createTask(
+      title,
+      description,
+      status!,
+      type!,
+      user!,
+      timeAllotted,
+      files,
+      goToProjectDetails
+    );
+  }, [title, description, timeAllotted, type, status, user, files]);
+
+  const goToProjectDetails = React.useCallback(() => {
+    navigate(-1);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -113,6 +130,7 @@ const TaskEditorPage = () => {
           onClick={createNewTask}
           className={styles.button}
           variant="contained"
+          disabled={loading}
         >
           Create New Task
         </Button>
