@@ -60,14 +60,6 @@
   margin-bottom: 12px;
 }
 
-.fileContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 1;
-  margin-right: 4px;
-}
-
 .buttonDeleteFile {
   margin-left: 4px !important;
 }

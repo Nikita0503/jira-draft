@@ -1,53 +1,13 @@
-import AttachedFile from '@components/AttachedFile';
+import NewFileList from '@components/lists/NewFileList';
+import FilePicker from '@components/pickers/FilePicker';
 import StatusPicker from '@components/pickers/StatusPicker';
 import TaskUserPicker from '@components/pickers/TaskUserPicker';
 import TypePicker from '@components/pickers/TypePicker';
-import { IFile, IStatus, ITask, IType, IUser } from '@interfaces';
+import { IStatus, IType, IUser } from '@interfaces';
 import { Button, TextField } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './TaskEditorPage.module.css';
-
-const TASK: ITask = {
-  id: 2,
-  title: 'Task title 2',
-  description:
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-  timeTracked: 40,
-  timeAllotted: 120,
-  projectId: 1,
-  statusId: 2,
-  typeId: 2,
-  userId: 2,
-  status: {
-    id: 2,
-    title: 'Testing',
-    color: '#00ff00',
-  },
-  type: {
-    id: 2,
-    title: 'Story',
-    color: '#0000ff',
-  },
-  user: {
-    id: 2,
-    email: 'default@email.com',
-    role: 'ADMIN',
-    name: 'Default Name',
-  },
-  files: [
-    {
-      id: 1,
-      taskId: 1,
-      name: 'https://cdn-icons-png.flaticon.com/512/747/747095.png',
-    },
-    {
-      id: 2,
-      taskId: 1,
-      name: 'https://cdn-icons-png.flaticon.com/512/762/762686.png',
-    },
-  ],
-};
 
 const TaskEditorPage = () => {
   const [title, setTitle] = React.useState<string>('');
@@ -56,8 +16,41 @@ const TaskEditorPage = () => {
   const [type, setType] = React.useState<IType | undefined>();
   const [status, setStatus] = React.useState<IStatus | undefined>();
   const [user, setUser] = React.useState<IUser | undefined>();
+  const [files, setFiles] = React.useState<File[]>([]);
 
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    console.log({ files });
+  }, [files]);
+
+  const addFile = React.useCallback(
+    (file: File) => {
+      const isSelectedFile = files.some(
+        (uploadedFile: File) => uploadedFile.lastModified === file.lastModified
+      );
+
+      if (isSelectedFile) {
+        alert('You have already selected this file');
+        return;
+      }
+
+      setFiles([...files, file]);
+    },
+    [files]
+  );
+
+  const deleteFile = React.useCallback(
+    (file: File) => {
+      setFiles(
+        files.filter(
+          (uploadedFile: File) =>
+            uploadedFile.lastModified !== file.lastModified
+        )
+      );
+    },
+    [files]
+  );
 
   const createNewTask = React.useCallback(() => {
     // navigate(-1);
@@ -111,21 +104,16 @@ const TaskEditorPage = () => {
             <TaskUserPicker user={user} setUser={setUser} />
           </div>
         </div>
-        <span className={styles.fileListTitle}>Files</span>
-        <div className={styles.fileList}>
-          {TASK.files.map((file: IFile) => (
-            <div key={file.id} className={styles.fileContainer}>
-              <AttachedFile file={file} />
-              <Button className={styles.buttonDeleteFile} variant="contained">
-                Delete
-              </Button>
-            </div>
-          ))}
-        </div>
-        <Button className={styles.buttonAddFile} variant="contained">
-          Add File
-        </Button>
 
+        <span className={styles.fileListTitle}>New Files</span>
+        <div className={styles.fileList}>
+          <NewFileList files={files} deleteFile={deleteFile} />
+        </div>
+        <FilePicker setFile={addFile}>
+          <Button className={styles.buttonAddFile} variant="contained">
+            Add File
+          </Button>
+        </FilePicker>
         <Button
           onClick={createNewTask}
           className={styles.button}

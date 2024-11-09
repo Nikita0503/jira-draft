@@ -10,23 +10,21 @@ const FilePicker = ({ children, setFile }: IProps) => {
 
   const chooseAvatar = useCallback(() => {
     if (fileInputRef.current) {
+      fileInputRef.current.value = '';
       fileInputRef.current.click();
     }
   }, []);
 
-  const handleFileChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const files = event.target.files;
-      if (files) {
-        const file = files[0];
-        if (file) {
-          setFile(file);
-          console.log('Выбранный файл:', file);
-        }
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      const file = files[0];
+      if (file) {
+        setFile(file);
+        console.log('Выбранный файл:', file);
       }
-    },
-    []
-  );
+    }
+  };
 
   return (
     <div>
