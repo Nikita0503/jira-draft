@@ -19,6 +19,10 @@ const TaskListItem = ({ task }: IProps) => {
 
   const { deleteTask } = useTasks(parseInt(projectId!));
 
+  const goToProjectDetails = React.useCallback(() => {
+    navigate(`/projects/${projectId}`);
+  }, [projectId]);
+
   const goToTaskDetails = React.useCallback(() => {
     navigate(`/projects/${projectId}/tasks/${task.id}`);
   }, [projectId, task]);
@@ -41,10 +45,6 @@ const TaskListItem = ({ task }: IProps) => {
     },
     [task]
   );
-
-  const goToProjectDetails = React.useCallback(() => {
-    navigate(`/projects/${projectId}`);
-  }, [projectId]);
 
   return (
     <div className={styles.container} onClick={goToTaskDetails}>
