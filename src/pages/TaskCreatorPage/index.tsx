@@ -4,9 +4,12 @@ import StatusPicker from '@components/pickers/StatusPicker';
 import TaskUserPicker from '@components/pickers/TaskUserPicker';
 import TypePicker from '@components/pickers/TypePicker';
 import useTasks from '@hooks/useTasks';
-import { IStatus, IType, IUser } from '@interfaces';
+import { IProject, IStatus, IType, IUser } from '@interfaces';
 import { Button, TextField } from '@mui/material';
+import { projectInfoSelector } from '@selectors/projectSelectors';
+import { TRootState } from '@store';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './TaskCreatorPage.module.css';
 
@@ -20,6 +23,10 @@ const TaskCreatorPage = () => {
   const [status, setStatus] = React.useState<IStatus | undefined>();
   const [user, setUser] = React.useState<IUser | undefined>();
   const [files, setFiles] = React.useState<File[]>([]);
+
+  const projectInfo = useSelector<TRootState, IProject | undefined>(
+    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
+  );
 
   const { loading, createTask } = useTasks(parseInt(projectId!));
 
@@ -113,7 +120,11 @@ const TaskCreatorPage = () => {
           </div>
           <div className={styles.additionalInfoItem}>
             <span className={styles.additionalInfoItemTitle}>User:</span>
-            <TaskUserPicker user={user} setUser={setUser} />
+            <TaskUserPicker
+              usersInProject={projectInfo!.users}
+              user={user}
+              setUser={setUser}
+            />
           </div>
         </div>
 

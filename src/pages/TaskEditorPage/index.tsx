@@ -5,8 +5,9 @@ import StatusPicker from '@components/pickers/StatusPicker';
 import TaskUserPicker from '@components/pickers/TaskUserPicker';
 import TypePicker from '@components/pickers/TypePicker';
 import useTasks from '@hooks/useTasks';
-import { IFile, IStatus, ITask, IType, IUser } from '@interfaces';
+import { IFile, IProject, IStatus, ITask, IType, IUser } from '@interfaces';
 import { Button, TextField } from '@mui/material';
+import { projectInfoSelector } from '@selectors/projectSelectors';
 import { taskInfoSelector } from '@selectors/taskSelectors';
 import { TRootState } from '@store';
 import React from 'react';
@@ -49,6 +50,10 @@ const TaskEditorPage = ({
   const [user, setUser] = React.useState<IUser | undefined>(currentUser);
   const [files, setFiles] = React.useState<File[]>([]);
   const [oldFiles, setOldFiles] = React.useState<IFile[]>(currentFiles);
+
+  const projectInfo = useSelector<TRootState, IProject | undefined>(
+    (state: TRootState) => projectInfoSelector(projectId)(state)
+  );
 
   const { loading, updateTask } = useTasks(projectId);
 
@@ -105,16 +110,6 @@ const TaskEditorPage = ({
       oldFiles,
       goToProjectDetails
     );
-    // console.log({
-    //   title,
-    //   description,
-    //   status,
-    //   type,
-    //   user,
-    //   timeAllotted,
-    //   files,
-    //   oldFiles,
-    // });
   }, [
     taskId,
     title,
@@ -175,7 +170,11 @@ const TaskEditorPage = ({
           </div>
           <div className={styles.additionalInfoItem}>
             <span className={styles.additionalInfoItemTitle}>User:</span>
-            <TaskUserPicker user={user} setUser={setUser} />
+            <TaskUserPicker
+              usersInProject={projectInfo!.users}
+              user={user}
+              setUser={setUser}
+            />
           </div>
         </div>
         <span className={styles.fileListTitle}>Uploaded Files</span>

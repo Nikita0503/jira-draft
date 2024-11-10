@@ -7,12 +7,17 @@ import TaskUser from '../../TaskUser';
 import styles from './TaskUserPickerModal.module.css';
 
 export interface IProps {
+  usersInProject: IUser[];
   selectUser: (selectedUser: IUser) => void;
   closeModal: () => void;
 }
 
-const TaskUserPickerModal = ({ selectUser, closeModal }: IProps) => {
-  const { users, error, loading, fetchUsers } = useUsers();
+const TaskUserPickerModal = ({
+  usersInProject,
+  selectUser,
+  closeModal,
+}: IProps) => {
+  const { fetchUsers } = useUsers();
 
   React.useEffect(() => {
     fetchUsers();
@@ -24,7 +29,7 @@ const TaskUserPickerModal = ({ selectUser, closeModal }: IProps) => {
         <span className={styles.title}>Select User</span>
         <div className={styles.content}>
           <div>
-            {users.map((userItem: IUser) => (
+            {usersInProject.map((userItem: IUser) => (
               <div
                 key={userItem.id}
                 className={styles.userContainer}
