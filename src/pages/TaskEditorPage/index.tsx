@@ -50,7 +50,7 @@ const TaskEditorPage = ({
   const [files, setFiles] = React.useState<File[]>([]);
   const [oldFiles, setOldFiles] = React.useState<IFile[]>(currentFiles);
 
-  const { loading } = useTasks(projectId);
+  const { loading, updateTask } = useTasks(projectId);
 
   const navigate = useNavigate();
 
@@ -93,27 +93,39 @@ const TaskEditorPage = ({
   );
 
   const updateCurrentTask = React.useCallback(() => {
-    // createTask(
-    //   title,
-    //   description,
-    //   status!,
-    //   type!,
-    //   user!,
-    //   timeAllotted,
-    //   files,
-    //   goToProjectDetails
-    // );
-    console.log({
+    updateTask(
+      taskId,
       title,
       description,
-      status,
-      type,
-      user,
+      status!,
+      type!,
+      user!,
       timeAllotted,
       files,
       oldFiles,
-    });
-  }, [title, description, timeAllotted, type, status, user, files, oldFiles]);
+      goToProjectDetails
+    );
+    // console.log({
+    //   title,
+    //   description,
+    //   status,
+    //   type,
+    //   user,
+    //   timeAllotted,
+    //   files,
+    //   oldFiles,
+    // });
+  }, [
+    taskId,
+    title,
+    description,
+    timeAllotted,
+    type,
+    status,
+    user,
+    files,
+    oldFiles,
+  ]);
 
   const goToProjectDetails = React.useCallback(() => {
     navigate(-1);

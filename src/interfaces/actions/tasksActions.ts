@@ -1,4 +1,4 @@
-import { IStatus, ITask, IType, IUser } from '@interfaces';
+import { IFile, IStatus, ITask, IType, IUser } from '@interfaces';
 
 export interface ISetTasksAction {
   tasks: ITask[];
@@ -37,5 +37,19 @@ export interface ICreateTaskAsyncAction {
   user: IUser;
   timeAllotted: number;
   files: File[];
+  onSuccess?: () => void;
+}
+
+export interface IUpdateTaskAsyncAction {
+  projectId: number;
+  taskId: number;
+  title: string;
+  description: string;
+  status: IStatus;
+  type: IType;
+  user: IUser;
+  timeAllotted: number;
+  files: File[];
+  oldFiles: IFile[];
   onSuccess?: () => void;
 }

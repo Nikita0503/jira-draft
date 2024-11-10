@@ -1,8 +1,9 @@
 import {
   createTaskAsyncAction,
   fetchTasksAsyncAction,
+  updateTaskAsyncAction,
 } from '@actions/tasksActions';
-import { IStatus, ITask, IType, IUser } from '@interfaces';
+import { IFile, IStatus, ITask, IType, IUser } from '@interfaces';
 import { TAppDispatch, TRootState } from '@store';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -54,7 +55,39 @@ const useTasks = (projectId: number) => {
     [projectId]
   );
 
-  return { tasks, error, loading, fetchTasks, createTask };
+  const updateTask = React.useCallback(
+    (
+      taskId: number,
+      title: string,
+      description: string,
+      status: IStatus,
+      type: IType,
+      user: IUser,
+      timeAllotted: number,
+      files: File[],
+      oldFiles: IFile[],
+      onSuccess?: () => void
+    ) => {
+      dispatch(
+        updateTaskAsyncAction({
+          projectId: projectId,
+          taskId: taskId,
+          title: title,
+          description: description,
+          status: status,
+          type: type,
+          user: user,
+          timeAllotted: timeAllotted,
+          files: files,
+          oldFiles: oldFiles,
+          onSuccess: onSuccess,
+        })
+      );
+    },
+    [projectId]
+  );
+
+  return { tasks, error, loading, fetchTasks, createTask, updateTask };
 };
 
 export default useTasks;

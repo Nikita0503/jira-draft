@@ -1,4 +1,4 @@
-import { createTaskApi, fetchTasksApi } from '@api/tasksApi';
+import { createTaskApi, fetchTasksApi, updateTaskApi } from '@api/tasksApi';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   IAddTaskAction,
@@ -9,6 +9,7 @@ import {
   ISetLoadingAction,
   ISetTasksAction,
   IUpdateTaskAction,
+  IUpdateTaskAsyncAction,
 } from '../../interfaces/actions/tasksActions';
 
 export const setTasksAction = createAction<ISetTasksAction>(
@@ -92,6 +93,52 @@ export const createTaskAsyncAction = createAsyncThunk<
       }
     } catch (e: any) {
       console.log('tasksActions::createTaskAsyncAction error:', e);
+    } finally {
+      dispatch(setLoadingAction({ loading: false }));
+    }
+  }
+);
+
+export const updateTaskAsyncAction = createAsyncThunk<
+  void,
+  IUpdateTaskAsyncAction
+>(
+  'tasks/updateTaskAsyncAction',
+  async (
+    {
+      projectId,
+      taskId,
+      title,
+      description,
+      status,
+      type,
+      user,
+      timeAllotted,
+      files,
+      onSuccess,
+    }: IUpdateTaskAsyncAction,
+    { getState, dispatch }
+  ) => {
+    try {
+      dispatch(setLoadingAction({ loading: true }));
+      const res = await updateTaskApi(
+        projectId,
+        taskId,
+        title,
+        description,
+        status.id,
+        type.id,
+        user.id,
+        timeAllotted,
+        files
+      );
+      console.log('Updated Task: ', res);
+      dispatch(fetchTasksAsyncAction({ projectId: projectId }));
+      if (onSuccess) {
+        onSuccess();
+      }
+    } catch (e: any) {
+      console.log('tasksActions::updateTaskAsyncAction error:', e);
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
