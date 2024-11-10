@@ -1,5 +1,9 @@
+import { deleteFileApi } from '@api/filesApi';
 import { createTaskApi, fetchTasksApi, updateTaskApi } from '@api/tasksApi';
+import { ITask } from '@interfaces';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { taskInfoSelector } from '@selectors/taskSelectors';
+import { TRootState } from '@store';
 import {
   IAddTaskAction,
   ICreateTaskAsyncAction,
@@ -115,12 +119,23 @@ export const updateTaskAsyncAction = createAsyncThunk<
       user,
       timeAllotted,
       files,
+      oldFiles,
       onSuccess,
     }: IUpdateTaskAsyncAction,
     { getState, dispatch }
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
+      const state: TRootState = getState() as TRootState;
+      const taskInfo: ITask | undefined = taskInfoSelector(taskId)(state);
+      if (taskInfo) {
+        const deletedFiles = taskInfo.files.filter(
+          (file) => !oldFiles.some((oldFile) => oldFile.name === file.name)
+        );
+        for (let i = 0; i < deletedFiles.length; i++) {
+          await deleteFileApi(deletedFiles[i].id);
+        }
+      }
       const res = await updateTaskApi(
         projectId,
         taskId,
