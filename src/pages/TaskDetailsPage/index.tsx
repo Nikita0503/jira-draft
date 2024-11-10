@@ -4,6 +4,7 @@ import CommentListItem from '@components/listItems/CommentListItem';
 import TaskStatus from '@components/TaskStatus';
 import TaskType from '@components/TaskType';
 import TaskUser from '@components/TaskUser';
+import useTasks from '@hooks/useTasks';
 import { IComment, IFile, ITask } from '@interfaces';
 import { Button } from '@mui/material';
 import { taskInfoSelector } from '@selectors/taskSelectors';
@@ -73,9 +74,20 @@ const TaskDetailsPage = () => {
     (state: TRootState) => taskInfoSelector(parseInt(taskId!))(state)
   );
 
+  const { deleteTask } = useTasks(parseInt(projectId!));
+
   const navigate = useNavigate();
 
-  const deleteCurrentTask = React.useCallback(() => {}, []);
+  const deleteCurrentTask = React.useCallback(() => {
+    const isConfirmed = window.confirm('Are you sure you want to delete?');
+    if (isConfirmed) {
+      deleteTask(parseInt(taskId!), goToProjectDetails);
+    }
+  }, [taskId]);
+
+  const goToProjectDetails = React.useCallback(() => {
+    navigate(`/projects/${projectId}`);
+  }, [projectId]);
 
   const goToTaskEditor = React.useCallback(() => {
     navigate(`/projects/${projectId}/tasks/edit/${taskId}`);

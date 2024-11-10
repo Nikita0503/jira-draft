@@ -1,5 +1,6 @@
 import {
   createTaskAsyncAction,
+  deleteTaskAsyncAction,
   fetchTasksAsyncAction,
   updateTaskAsyncAction,
 } from '@actions/tasksActions';
@@ -87,7 +88,28 @@ const useTasks = (projectId: number) => {
     [projectId]
   );
 
-  return { tasks, error, loading, fetchTasks, createTask, updateTask };
+  const deleteTask = React.useCallback(
+    (taskId: number, onSuccess?: () => void) => {
+      dispatch(
+        deleteTaskAsyncAction({
+          projectId: projectId,
+          taskId: taskId,
+          onSuccess: onSuccess,
+        })
+      );
+    },
+    [projectId]
+  );
+
+  return {
+    tasks,
+    error,
+    loading,
+    fetchTasks,
+    createTask,
+    updateTask,
+    deleteTask,
+  };
 };
 
 export default useTasks;

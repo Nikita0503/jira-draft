@@ -63,3 +63,10 @@ export const updateTaskApi = async (
   );
   return res.data;
 };
+
+export const deleteTaskApi = async (projectId: number, taskId: number) => {
+  const res = await axiosInstance.delete(
+    `/projects/${projectId}/tasks/${taskId}`
+  );
+  return res.data;
+};

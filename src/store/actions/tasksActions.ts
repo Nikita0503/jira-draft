@@ -1,5 +1,10 @@
 import { deleteFileApi } from '@api/filesApi';
-import { createTaskApi, fetchTasksApi, updateTaskApi } from '@api/tasksApi';
+import {
+  createTaskApi,
+  deleteTaskApi,
+  fetchTasksApi,
+  updateTaskApi,
+} from '@api/tasksApi';
 import { ITask } from '@interfaces';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { taskInfoSelector } from '@selectors/taskSelectors';
@@ -7,6 +12,7 @@ import { TRootState } from '@store';
 import {
   IAddTaskAction,
   ICreateTaskAsyncAction,
+  IDeleteTaskAsyncAction,
   IFetchTasksAsyncAction,
   IRemoveTaskAction,
   ISetError,
@@ -154,6 +160,31 @@ export const updateTaskAsyncAction = createAsyncThunk<
       }
     } catch (e: any) {
       console.log('tasksActions::updateTaskAsyncAction error:', e);
+    } finally {
+      dispatch(setLoadingAction({ loading: false }));
+    }
+  }
+);
+
+export const deleteTaskAsyncAction = createAsyncThunk<
+  void,
+  IDeleteTaskAsyncAction
+>(
+  'tasks/deleteTaskAsyncAction',
+  async (
+    { projectId, taskId, onSuccess }: IDeleteTaskAsyncAction,
+    { getState, dispatch }
+  ) => {
+    try {
+      dispatch(setLoadingAction({ loading: true }));
+      const res = await deleteTaskApi(projectId, taskId);
+      console.log('Deleted Task: ', res);
+      dispatch(fetchTasksAsyncAction({ projectId: projectId }));
+      if (onSuccess) {
+        onSuccess();
+      }
+    } catch (e: any) {
+      console.log('tasksActions::deleteTaskAsyncAction error:', e);
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }

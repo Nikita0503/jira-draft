@@ -1,3 +1,4 @@
+import useTasks from '@hooks/useTasks';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import React from 'react';
@@ -16,9 +17,34 @@ const TaskListItem = ({ task }: IProps) => {
   const { projectId } = useParams();
   const navigate = useNavigate();
 
+  const { deleteTask } = useTasks(parseInt(projectId!));
+
   const goToTaskDetails = React.useCallback(() => {
     navigate(`/projects/${projectId}/tasks/${task.id}`);
   }, [projectId, task]);
+
+  const goToTaskEditor = React.useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+      navigate(`/projects/${projectId}/tasks/edit/${task.id}`);
+    },
+    [projectId, task]
+  );
+
+  const deleteCurrentTask = React.useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+      const isConfirmed = window.confirm('Are you sure you want to delete?');
+      if (isConfirmed) {
+        deleteTask(task.id, goToProjectDetails);
+      }
+    },
+    [task]
+  );
+
+  const goToProjectDetails = React.useCallback(() => {
+    navigate(`/projects/${projectId}`);
+  }, [projectId]);
 
   return (
     <div className={styles.container} onClick={goToTaskDetails}>
@@ -38,8 +64,12 @@ const TaskListItem = ({ task }: IProps) => {
         </div>
       </div>
       <div className={styles.actionsContainer}>
-        <EditIcon className={styles.actionIcon} />
-        <DeleteIcon className={styles.actionIcon} />
+        <div onClick={goToTaskEditor}>
+          <EditIcon className={styles.actionIcon} />
+        </div>
+        <div onClick={deleteCurrentTask}>
+          <DeleteIcon className={styles.actionIcon} />
+        </div>
       </div>
     </div>
   );

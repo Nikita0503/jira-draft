@@ -53,3 +53,9 @@ export interface IUpdateTaskAsyncAction {
   oldFiles: IFile[];
   onSuccess?: () => void;
 }
+
+export interface IDeleteTaskAsyncAction {
+  projectId: number;
+  taskId: number;
+  onSuccess?: () => void;
+}
