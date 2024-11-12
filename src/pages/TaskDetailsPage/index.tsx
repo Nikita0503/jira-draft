@@ -102,7 +102,7 @@ const TaskDetailsPage = () => {
     navigate(`/projects/${projectId}/tasks/edit/${taskId}`);
   }, [projectId, taskId]);
 
-  const goToCommentEditor = React.useCallback(() => {
+  const goToCommentCreator = React.useCallback(() => {
     navigate(`/projects/${projectId}/tasks/${taskId}/comments/create`);
   }, []);
 
@@ -112,7 +112,7 @@ const TaskDetailsPage = () => {
       <div className={styles.content}>
         <div className={styles.buttonsContainer}>
           <Button
-            onClick={goToCommentEditor}
+            onClick={goToCommentCreator}
             className={styles.button}
             variant="contained"
           >

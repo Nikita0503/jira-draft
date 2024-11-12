@@ -1,35 +1,36 @@
 import NewFileList from '@components/lists/NewFileList';
+import UploadedFileList from '@components/lists/UploadedFileList';
 import FilePicker from '@components/pickers/FilePicker';
 import useComments from '@hooks/useComments';
-import { IFile } from '@interfaces';
+import { IComment, IFile } from '@interfaces';
 import { Button, TextField } from '@mui/material';
+import { commentInfoSelector } from '@selectors/commentSelectors';
+import { TRootState } from '@store';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './CommentEditorPage.module.css';
 
-const FILES: IFile[] = [
-  {
-    id: 1,
-    taskId: 1,
-    name: 'https://cdn-icons-png.flaticon.com/512/747/747095.png',
-  },
-  {
-    id: 2,
-    taskId: 1,
-    name: 'https://cdn-icons-png.flaticon.com/512/762/762686.png',
-  },
-];
+interface IProps {
+  projectId: number;
+  taskId: number;
+  commentId: number;
+  currentMessage: string;
+  currentFiles: IFile[];
+}
 
-const CommentEditorPage = () => {
-  const { projectId, taskId } = useParams();
-
-  const [message, setMessage] = React.useState<string>('');
+const CommentEditorPage = ({
+  projectId,
+  taskId,
+  commentId,
+  currentMessage,
+  currentFiles,
+}: IProps) => {
+  const [message, setMessage] = React.useState<string>(currentMessage);
   const [files, setFiles] = React.useState<File[]>([]);
+  const [oldFiles, setOldFiles] = React.useState<IFile[]>(currentFiles);
 
-  const { loading, createComment } = useComments(
-    parseInt(projectId!),
-    parseInt(taskId!)
-  );
+  const { loading, updateComment } = useComments(projectId, taskId);
 
   const navigate = useNavigate();
 
@@ -60,9 +61,20 @@ const CommentEditorPage = () => {
     [files]
   );
 
-  const createNewComment = React.useCallback(() => {
-    createComment(message, files, goToTaskDetails);
-  }, [message, files]);
+  const deleteOldFile = React.useCallback(
+    (file: IFile) => {
+      setOldFiles((uploadedFiles: IFile[]) =>
+        uploadedFiles.filter(
+          (uploadedFile: IFile) => uploadedFile.name !== file.name
+        )
+      );
+    },
+    [oldFiles]
+  );
+
+  const updateCurrentComment = React.useCallback(() => {
+    updateComment(commentId, message, files, oldFiles, goToTaskDetails);
+  }, [commentId, message, files, oldFiles]);
 
   const goToTaskDetails = React.useCallback(() => {
     navigate(-1);
@@ -70,7 +82,7 @@ const CommentEditorPage = () => {
 
   return (
     <div className={styles.container}>
-      <span className={styles.title}>Create New Comment</span>
+      <span className={styles.title}>Update Current Comment</span>
       <div className={styles.content}>
         <TextField
           className={styles.textField}
@@ -79,6 +91,10 @@ const CommentEditorPage = () => {
           value={message}
           onChange={(event) => setMessage(event.target.value)}
         />
+        <span className={styles.fileListTitle}>Uploaded Files</span>
+        <div className={styles.fileList}>
+          <UploadedFileList files={oldFiles} deleteFile={deleteOldFile} />
+        </div>
         <span className={styles.fileListTitle}>New Files</span>
         <div className={styles.fileList}>
           <NewFileList files={files} deleteFile={deleteFile} />
@@ -89,16 +105,46 @@ const CommentEditorPage = () => {
           </Button>
         </FilePicker>
         <Button
-          onClick={createNewComment}
+          onClick={updateCurrentComment}
           className={styles.button}
           variant="contained"
           disabled={loading}
         >
-          Create New Comment
+          Update Current Comment
         </Button>
       </div>
     </div>
   );
 };
 
-export default CommentEditorPage;
+const CommentEditorHOC = () => {
+  const { projectId, commentId } = useParams();
+
+  const commentInfo = useSelector<TRootState, IComment | undefined>(
+    (state: TRootState) => commentInfoSelector(parseInt(commentId!))(state)
+  );
+
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (!commentInfo) {
+      navigate(-1);
+    }
+  }, [commentInfo]);
+
+  if (!commentInfo) {
+    return <div />;
+  }
+
+  return (
+    <CommentEditorPage
+      projectId={parseInt(projectId!)}
+      taskId={commentInfo.taskId}
+      commentId={commentInfo.id}
+      currentMessage={commentInfo.message}
+      currentFiles={commentInfo.files}
+    />
+  );
+};
+
+export default CommentEditorHOC;

@@ -1,4 +1,5 @@
 import ProtectedRoute from '@components/ProtectedRoute';
+import CommentCreatorPage from '@pages/CommentCreatorPage';
 import CommentEditorPage from '@pages/CommentEditorPage';
 import ProjectCreatorPage from '@pages/ProjectCreatorPage';
 import ProjectDetailsPage from '@pages/ProjectDetailsPage';
@@ -77,7 +78,7 @@ const AppNavigation = () => {
           path="projects/:projectId/tasks/:taskId/comments/create"
           element={
             <ProtectedRoute>
-              <CommentEditorPage />
+              <CommentCreatorPage />
             </ProtectedRoute>
           }
         />

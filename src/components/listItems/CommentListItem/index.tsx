@@ -1,5 +1,8 @@
+import useComments from '@hooks/useComments';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { IComment, IFile } from '../../../interfaces';
 import AddFileButton from '../../AddFileButton';
 import AttachedFile from '../../AttachedFile';
@@ -10,6 +13,35 @@ interface IProps {
 }
 
 const CommentListItem = ({ comment }: IProps) => {
+  const { projectId, taskId } = useParams();
+  const navigate = useNavigate();
+
+  const { deleteComment } = useComments(
+    parseInt(projectId!),
+    parseInt(taskId!)
+  );
+
+  const goToCommentEditor = React.useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+      navigate(
+        `/projects/${projectId}/tasks/${taskId}/comments/${comment.id}/edit`
+      );
+    },
+    [projectId, taskId, comment]
+  );
+
+  const deleteCurrentComment = React.useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+      const isConfirmed = window.confirm('Are you sure you want to delete?');
+      if (isConfirmed) {
+        deleteComment(comment.id);
+      }
+    },
+    [comment]
+  );
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -24,8 +56,12 @@ const CommentListItem = ({ comment }: IProps) => {
           <span className={styles.userName}>{comment.user.name}</span>
         </div>
         <div className={styles.actionsContainer}>
-          <EditIcon className={styles.actionIcon} />
-          <DeleteIcon className={styles.actionIcon} />
+          <div onClick={goToCommentEditor}>
+            <EditIcon className={styles.actionIcon} />
+          </div>
+          <div onClick={deleteCurrentComment}>
+            <DeleteIcon className={styles.actionIcon} />
+          </div>
         </div>
       </div>
       <span className={styles.title}>{comment.message}</span>
