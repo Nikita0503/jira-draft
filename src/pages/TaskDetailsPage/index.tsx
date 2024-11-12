@@ -1,9 +1,10 @@
 import AddFileButton from '@components/AddFileButton';
 import AttachedFile from '@components/AttachedFile';
-import CommentListItem from '@components/listItems/CommentListItem';
+import CommentList from '@components/lists/CommentList';
 import TaskStatus from '@components/TaskStatus';
 import TaskType from '@components/TaskType';
 import TaskUser from '@components/TaskUser';
+import useComments from '@hooks/useComments';
 import useTasks from '@hooks/useTasks';
 import { IComment, IFile, ITask } from '@interfaces';
 import { Button } from '@mui/material';
@@ -75,6 +76,14 @@ const TaskDetailsPage = () => {
   );
 
   const { deleteTask } = useTasks(parseInt(projectId!));
+  const { comments, error, loading, fetchComments } = useComments(
+    parseInt(projectId!),
+    parseInt(taskId!)
+  );
+
+  React.useEffect(() => {
+    fetchComments();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -148,11 +157,7 @@ const TaskDetailsPage = () => {
         </div>
         <span className={styles.commentListTitle}>Comments:</span>
         <div className={styles.commentList}>
-          {COMMENTS.map((comment: IComment) => (
-            <div key={comment.id} className={styles.commentContainer}>
-              <CommentListItem comment={comment} />
-            </div>
-          ))}
+          <CommentList comments={comments} error={error} loading={loading} />
         </div>
       </div>
     </div>
