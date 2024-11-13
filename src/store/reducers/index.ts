@@ -3,6 +3,7 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import authReducer from './authReducer';
 import commentsReducer from './commentsReducer';
+import currentUserReducer from './currentUserReducer';
 import projectsReducer from './projectsReducer';
 import statusesReducer from './statusesReducer';
 import tasksReducer from './tasksReducer';
@@ -20,6 +21,7 @@ const persistConfig = {
     'statuses',
     'types',
     'users',
+    'currentUser',
   ],
 };
 
@@ -31,6 +33,7 @@ const rootReducer = combineReducers({
   statuses: statusesReducer,
   types: typesReducer,
   users: usersReducer,
+  currentUser: currentUserReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);
