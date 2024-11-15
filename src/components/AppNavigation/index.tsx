@@ -1,3 +1,4 @@
+import PageLayout from '@components/layouts/PageLayout';
 import ProtectedRoute from '@components/ProtectedRoute';
 import CommentCreatorPage from '@pages/CommentCreatorPage';
 import CommentEditorPage from '@pages/CommentEditorPage';
@@ -22,7 +23,9 @@ const AppNavigation = () => {
           path="projects"
           element={
             <ProtectedRoute>
-              <ProjectsPage />
+              <PageLayout title="Projects">
+                <ProjectsPage />
+              </PageLayout>
             </ProtectedRoute>
           }
         />
@@ -30,7 +33,9 @@ const AppNavigation = () => {
           path="projects/:projectId"
           element={
             <ProtectedRoute>
-              <ProjectDetailsPage />
+              <PageLayout title="Project Details">
+                <ProjectDetailsPage />
+              </PageLayout>
             </ProtectedRoute>
           }
         />
@@ -38,7 +43,9 @@ const AppNavigation = () => {
           path="projects/:projectId/tasks/:taskId"
           element={
             <ProtectedRoute>
-              <TaskDetailsPage />
+              <PageLayout title="Task Details">
+                <TaskDetailsPage />
+              </PageLayout>
             </ProtectedRoute>
           }
         />
@@ -46,7 +53,9 @@ const AppNavigation = () => {
           path="projects/create"
           element={
             <ProtectedRoute>
-              <ProjectCreatorPage />
+              <PageLayout title="Project Creator">
+                <ProjectCreatorPage />
+              </PageLayout>
             </ProtectedRoute>
           }
         />
@@ -54,7 +63,9 @@ const AppNavigation = () => {
           path="projects/edit/:projectId"
           element={
             <ProtectedRoute>
-              <ProjectEditorPage />
+              <PageLayout title="Project Editor">
+                <ProjectEditorPage />
+              </PageLayout>
             </ProtectedRoute>
           }
         />
@@ -62,7 +73,9 @@ const AppNavigation = () => {
           path="projects/:projectId/tasks/create"
           element={
             <ProtectedRoute>
-              <TaskCreatorPage />
+              <PageLayout title="Task Creator">
+                <TaskCreatorPage />
+              </PageLayout>
             </ProtectedRoute>
           }
         />
@@ -70,7 +83,9 @@ const AppNavigation = () => {
           path="projects/:projectId/tasks/edit/:taskId"
           element={
             <ProtectedRoute>
-              <TaskEditorPage />
+              <PageLayout title="Task Editor">
+                <TaskEditorPage />
+              </PageLayout>
             </ProtectedRoute>
           }
         />
@@ -78,7 +93,9 @@ const AppNavigation = () => {
           path="projects/:projectId/tasks/:taskId/comments/create"
           element={
             <ProtectedRoute>
-              <CommentCreatorPage />
+              <PageLayout title="Comment Creator">
+                <CommentCreatorPage />
+              </PageLayout>
             </ProtectedRoute>
           }
         />
@@ -86,7 +103,9 @@ const AppNavigation = () => {
           path="projects/:projectId/tasks/:taskId/comments/:commentId/edit"
           element={
             <ProtectedRoute>
-              <CommentEditorPage />
+              <PageLayout title="Comment Editor">
+                <CommentEditorPage />
+              </PageLayout>
             </ProtectedRoute>
           }
         />
