@@ -10,22 +10,26 @@ import styles from './ProjectEditorPage.module.css';
 
 interface IProps {
   projectId: number;
-  title: string;
-  description: string;
+  currentTitle: string;
+  currentDescription: string;
 }
 
-const ProjectEditorPage = ({ projectId, title, description }: IProps) => {
-  const [newTitle, setNewTitle] = React.useState<string>(title);
-  const [newDescription, setNewDescription] =
-    React.useState<string>(description);
+const ProjectEditorPage = ({
+  projectId,
+  currentTitle,
+  currentDescription,
+}: IProps) => {
+  const [title, setTitle] = React.useState<string>(currentTitle);
+  const [descripton, setDescription] =
+    React.useState<string>(currentDescription);
 
   const { loading, updateProject } = useProjects();
 
   const navigate = useNavigate();
 
   const updateCurrentProject = React.useCallback(() => {
-    updateProject(projectId, newTitle, newDescription, goToProjects);
-  }, [projectId, newTitle, newDescription]);
+    updateProject(projectId, title, descripton, goToProjects);
+  }, [projectId, title, descripton]);
 
   const goToProjects = React.useCallback(() => {
     navigate(-1);
@@ -39,15 +43,15 @@ const ProjectEditorPage = ({ projectId, title, description }: IProps) => {
           className={styles.textField}
           label="Title"
           variant="filled"
-          value={newTitle}
-          onChange={(event) => setNewTitle(event.target.value)}
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
         />
         <TextField
           className={styles.textField}
           label="Desription"
           variant="filled"
-          value={newDescription}
-          onChange={(event) => setNewDescription(event.target.value)}
+          value={descripton}
+          onChange={(event) => setDescription(event.target.value)}
         />
         <Button
           onClick={updateCurrentProject}
@@ -84,8 +88,8 @@ const ProjectEditorHOC = () => {
   return (
     <ProjectEditorPage
       projectId={projectInfo.id}
-      title={projectInfo.title}
-      description={projectInfo.description}
+      currentTitle={projectInfo.title}
+      currentDescription={projectInfo.description}
     />
   );
 };

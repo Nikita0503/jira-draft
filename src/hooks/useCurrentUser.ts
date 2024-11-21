@@ -1,4 +1,7 @@
-import { fetchCurrentUserAsyncAction } from '@actions/currentUserActions';
+import {
+  fetchCurrentUserAsyncAction,
+  updateCurrentUserAsyncAction,
+} from '@actions/currentUserActions';
 import { IUser } from '@interfaces';
 import { TAppDispatch, TRootState } from '@store';
 import React from 'react';
@@ -23,7 +26,24 @@ const useCurrentUser = () => {
     dispatch(fetchCurrentUserAsyncAction());
   }, []);
 
-  return { currentUser, error, loading, fetchCurrentUser };
+  const updateCurrentUser = React.useCallback(
+    (
+      name: string,
+      avatar: File | string | undefined,
+      onSuccess?: () => void
+    ) => {
+      dispatch(
+        updateCurrentUserAsyncAction({
+          name: name,
+          avatar: avatar,
+          onSuccess: onSuccess,
+        })
+      );
+    },
+    []
+  );
+
+  return { currentUser, error, loading, fetchCurrentUser, updateCurrentUser };
 };
 
 export default useCurrentUser;

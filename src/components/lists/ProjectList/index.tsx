@@ -12,6 +12,7 @@ interface IProps {
 }
 
 const ProjectList = ({ projects, error, loading }: IProps) => {
+  console.log({ error, projects });
   if (loading) {
     return <CircularProgress />;
   }

@@ -11,3 +11,9 @@ export interface ISetError {
 export interface ISetLoadingAction {
   loading: boolean;
 }
+
+export interface IUpdateCurrentUserAsyncAction {
+  name: string;
+  avatar: File | string | undefined;
+  onSuccess?: () => void;
+}

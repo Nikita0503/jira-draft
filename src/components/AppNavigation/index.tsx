@@ -2,6 +2,7 @@ import PageLayout from '@components/layouts/PageLayout';
 import ProtectedRoute from '@components/ProtectedRoute';
 import CommentCreatorPage from '@pages/CommentCreatorPage';
 import CommentEditorPage from '@pages/CommentEditorPage';
+import ProfilePage from '@pages/ProfilePage';
 import ProjectCreatorPage from '@pages/ProjectCreatorPage';
 import ProjectDetailsPage from '@pages/ProjectDetailsPage';
 import ProjectEditorPage from '@pages/ProjectEditorPage';
@@ -105,6 +106,16 @@ const AppNavigation = () => {
             <ProtectedRoute>
               <PageLayout title="Comment Editor">
                 <CommentEditorPage />
+              </PageLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="profile"
+          element={
+            <ProtectedRoute>
+              <PageLayout title="Profile">
+                <ProfilePage />
               </PageLayout>
             </ProtectedRoute>
           }
