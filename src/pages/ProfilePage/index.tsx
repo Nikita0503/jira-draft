@@ -23,6 +23,11 @@ const ProfilePage = ({ currentEmail, currentName, currentAvatar }: IProps) => {
 
   const { loading, updateCurrentUser } = useCurrentUser();
 
+  React.useEffect(() => {
+    setName(currentName);
+    setAvatar(currentAvatar);
+  }, [currentName, currentAvatar]);
+
   const deleteAvatar = React.useCallback(() => {
     setAvatar(undefined);
   }, []);
