@@ -1,10 +1,9 @@
-import AddFileButton from '@components/AddFileButton';
-import AttachedFile from '@components/AttachedFile';
 import CommentList from '@components/lists/CommentList';
 import NotFoundStub from '@components/stubs/NotFoundStub';
 import TaskStatus from '@components/TaskStatus';
 import TaskType from '@components/TaskType';
 import TaskUser from '@components/TaskUser';
+import UploadedFile from '@components/UploadedFile';
 import useComments from '@hooks/useComments';
 import useTasks from '@hooks/useTasks';
 import { IFile, ITask } from '@interfaces';
@@ -94,15 +93,18 @@ const TaskDetailsPage = ({ taskInfo }: IProps) => {
             <TaskUser user={taskInfo!.user} />
           </div>
         </div>
-        <span className={styles.fileListTitle}>Files:</span>
-        <div className={styles.fileList}>
-          {taskInfo!.files.map((file: IFile) => (
-            <div key={file.id} className={styles.fileContainer}>
-              <AttachedFile file={file} />
+        {taskInfo!.files.length > 0 && (
+          <>
+            <span className={styles.fileListTitle}>Files:</span>
+            <div className={styles.fileList}>
+              {taskInfo!.files.map((file: IFile) => (
+                <div key={file.id} className={styles.fileContainer}>
+                  <UploadedFile file={file} />
+                </div>
+              ))}
             </div>
-          ))}
-          <AddFileButton addFile={() => {}} />
-        </div>
+          </>
+        )}
         <span className={styles.commentListTitle}>Comments:</span>
         <div className={styles.commentList}>
           <CommentList comments={comments} error={error} loading={loading} />

@@ -1,11 +1,10 @@
+import UploadedFile from '@components/UploadedFile';
 import useComments from '@hooks/useComments';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IComment, IFile } from '../../../interfaces';
-import AddFileButton from '../../AddFileButton';
-import AttachedFile from '../../AttachedFile';
 import styles from './CommentListItem.module.css';
 
 interface IProps {
@@ -68,10 +67,9 @@ const CommentListItem = ({ comment }: IProps) => {
       <div className={styles.fileList}>
         {comment.files.map((file: IFile) => (
           <div key={file.id} className={styles.fileContainer}>
-            <AttachedFile file={file} />
+            <UploadedFile file={file} />
           </div>
         ))}
-        <AddFileButton addFile={() => {}} />
       </div>
     </div>
   );
