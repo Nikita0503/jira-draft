@@ -71,9 +71,3 @@
 .button {
   margin-top: 4px !important;
 }
-
-@media only screen and (max-width: 1000px) {
-  .content {
-    width: 50vw;
-  }
-}
