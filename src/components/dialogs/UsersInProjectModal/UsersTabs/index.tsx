@@ -3,8 +3,9 @@ import DeleteIcon from '@mui/icons-material/DeleteForeverSharp';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import * as React from 'react';
-import { IUser } from '../../../interfaces';
-import UsersInProjectList from './UsersInProjectList';
+import { IUser } from '../../../../interfaces';
+import UsersInProjectList from '../UsersInProjectList';
+import styles from './UsersTabs.module.css';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -48,8 +49,8 @@ export default function UsersTabs({
   };
 
   return (
-    <div style={{ width: '100%' }}>
-      <div style={{ borderBottom: 1, borderColor: 'divider' }}>
+    <div className={styles.container}>
+      <div className={styles.content}>
         <Tabs value={value} onChange={handleChange} aria-label="users-tabs">
           <Tab
             label="Users In Project"

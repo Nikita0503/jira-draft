@@ -1,0 +1,10 @@
+.container {
+  display: 'flex';
+  flex: 1;
+  flex-direction: 'column';
+}
+
+.content {
+  border-bottom: 1;
+  border-color: 'divider';
+}
