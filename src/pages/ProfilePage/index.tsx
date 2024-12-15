@@ -21,7 +21,7 @@ const ProfilePage = ({ currentEmail, currentName, currentAvatar }: IProps) => {
     currentAvatar
   );
 
-  const { loading, updateCurrentUser } = useCurrentUser();
+  const { loading, updateCurrentUser, logout } = useCurrentUser();
 
   React.useEffect(() => {
     setName(currentName);
@@ -36,6 +36,13 @@ const ProfilePage = ({ currentEmail, currentName, currentAvatar }: IProps) => {
     updateCurrentUser(name, avatar);
   }, [name, avatar]);
 
+  const logoutUser = React.useCallback(() => {
+    const isConfirmed = window.confirm('Are you sure?');
+    if (isConfirmed) {
+      logout();
+    }
+  }, []);
+
   return (
     <div className={styles.container}>
       <span className={styles.title}>Your Profile</span>
@@ -48,7 +55,6 @@ const ProfilePage = ({ currentEmail, currentName, currentAvatar }: IProps) => {
             </Button>
           </FilePicker>
         </div>
-
         <TextField
           className={styles.textField}
           label="Email"
@@ -70,6 +76,9 @@ const ProfilePage = ({ currentEmail, currentName, currentAvatar }: IProps) => {
           variant="contained"
         >
           Update Profile
+        </Button>
+        <Button className={styles.button} onClick={logoutUser} color="error">
+          Logout
         </Button>
       </div>
     </div>

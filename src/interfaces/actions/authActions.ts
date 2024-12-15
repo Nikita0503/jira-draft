@@ -1,7 +1,7 @@
 import { TUserRole } from '@interfaces';
 
 export interface ISetAccessTokenAction {
-  accessToken: string;
+  accessToken: string | undefined;
 }
 
 export interface ISetLoadingAction {

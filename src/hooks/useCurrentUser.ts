@@ -1,3 +1,4 @@
+import { setAccessTokenAction } from '@actions/authActions';
 import {
   fetchCurrentUserAsyncAction,
   updateCurrentUserAsyncAction,
@@ -43,7 +44,18 @@ const useCurrentUser = () => {
     []
   );
 
-  return { currentUser, error, loading, fetchCurrentUser, updateCurrentUser };
+  const logout = React.useCallback(() => {
+    dispatch(setAccessTokenAction({ accessToken: undefined }));
+  }, []);
+
+  return {
+    currentUser,
+    error,
+    loading,
+    fetchCurrentUser,
+    updateCurrentUser,
+    logout,
+  };
 };
 
 export default useCurrentUser;
