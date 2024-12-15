@@ -4,6 +4,7 @@ import FilePicker from '@components/pickers/FilePicker';
 import StatusPicker from '@components/pickers/StatusPicker';
 import TaskUserPicker from '@components/pickers/TaskUserPicker';
 import TypePicker from '@components/pickers/TypePicker';
+import NotFoundStub from '@components/stubs/NotFoundStub';
 import useTasks from '@hooks/useTasks';
 import { IFile, IProject, IStatus, ITask, IType, IUser } from '@interfaces';
 import { Button, TextField } from '@mui/material';
@@ -210,16 +211,8 @@ const TaskEditorHOC = () => {
     (state: TRootState) => taskInfoSelector(parseInt(taskId!))(state)
   );
 
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    if (!taskInfo) {
-      navigate(-1);
-    }
-  }, [taskInfo]);
-
   if (!taskInfo) {
-    return <div />;
+    return <NotFoundStub text="Task not found" />;
   }
 
   return (

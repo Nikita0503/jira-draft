@@ -1,6 +1,7 @@
 import NewFileList from '@components/lists/NewFileList';
 import UploadedFileList from '@components/lists/UploadedFileList';
 import FilePicker from '@components/pickers/FilePicker';
+import NotFoundStub from '@components/stubs/NotFoundStub';
 import useComments from '@hooks/useComments';
 import { IComment, IFile } from '@interfaces';
 import { Button, TextField } from '@mui/material';
@@ -124,16 +125,8 @@ const CommentEditorHOC = () => {
     (state: TRootState) => commentInfoSelector(parseInt(commentId!))(state)
   );
 
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    if (!commentInfo) {
-      navigate(-1);
-    }
-  }, [commentInfo]);
-
   if (!commentInfo) {
-    return <div />;
+    return <NotFoundStub text="Comment not found" />;
   }
 
   return (

@@ -1,6 +1,7 @@
 import AddFileButton from '@components/AddFileButton';
 import AttachedFile from '@components/AttachedFile';
 import CommentList from '@components/lists/CommentList';
+import NotFoundStub from '@components/stubs/NotFoundStub';
 import TaskStatus from '@components/TaskStatus';
 import TaskType from '@components/TaskType';
 import TaskUser from '@components/TaskUser';
@@ -15,12 +16,12 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './TaskDetailsPage.module.css';
 
-const TaskDetailsPage = () => {
-  const { projectId, taskId } = useParams();
+interface IProps {
+  taskInfo: ITask;
+}
 
-  const taskInfo = useSelector<TRootState, ITask | undefined>(
-    (state: TRootState) => taskInfoSelector(parseInt(taskId!))(state)
-  );
+const TaskDetailsPage = ({ taskInfo }: IProps) => {
+  const { projectId, taskId } = useParams();
 
   const { deleteTask } = useTasks(parseInt(projectId!));
   const { comments, error, loading, fetchComments } = useComments(
@@ -111,4 +112,18 @@ const TaskDetailsPage = () => {
   );
 };
 
-export default TaskDetailsPage;
+const ProjectDetailsHOC = () => {
+  const { taskId } = useParams();
+
+  const taskInfo = useSelector<TRootState, ITask | undefined>(
+    (state: TRootState) => taskInfoSelector(parseInt(taskId!))(state)
+  );
+
+  if (!taskInfo) {
+    return <NotFoundStub text="Task not found" />;
+  }
+
+  return <TaskDetailsPage taskInfo={taskInfo} />;
+};
+
+export default ProjectDetailsHOC;

@@ -1,3 +1,4 @@
+import NotFoundStub from '@components/stubs/NotFoundStub';
 import useProjects from '@hooks/useProjects';
 import { IProject } from '@interfaces';
 import { Button, TextField } from '@mui/material';
@@ -73,16 +74,8 @@ const ProjectEditorHOC = () => {
     (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
   );
 
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    if (!projectInfo) {
-      navigate(-1);
-    }
-  }, [projectInfo]);
-
   if (!projectInfo) {
-    return <div />;
+    return <NotFoundStub text="Project not found" />;
   }
 
   return (

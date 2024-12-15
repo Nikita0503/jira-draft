@@ -1,5 +1,6 @@
 import TaskList from '@components/lists/TaskList';
 import UsersInProjectPicker from '@components/pickers/UsersInProjectPicker';
+import NotFoundStub from '@components/stubs/NotFoundStub';
 import useProjects from '@hooks/useProjects';
 import useTasks from '@hooks/useTasks';
 import { IProject } from '@interfaces';
@@ -11,12 +12,12 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './ProjectDetailsPage.module.css';
 
-const ProjectDetailsPage = () => {
-  const { projectId } = useParams();
+interface IProps {
+  projectInfo: IProject;
+}
 
-  const projectInfo = useSelector<TRootState, IProject | undefined>(
-    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
-  );
+const ProjectDetailsPage = ({ projectInfo }: IProps) => {
+  const { projectId } = useParams();
 
   const { deleteProject } = useProjects();
   const { tasks, error, loading, fetchTasks } = useTasks(parseInt(projectId!));
@@ -26,8 +27,6 @@ const ProjectDetailsPage = () => {
   }, []);
 
   const navigate = useNavigate();
-
-  const showModalUsersInProject = React.useCallback(() => {}, []);
 
   const deleteCurrentProject = React.useCallback(() => {
     const isConfirmed = window.confirm('Are you sure you want to delete?');
@@ -86,4 +85,18 @@ const ProjectDetailsPage = () => {
   );
 };
 
-export default ProjectDetailsPage;
+const ProjectDetailsHOC = () => {
+  const { projectId } = useParams();
+
+  const projectInfo = useSelector<TRootState, IProject | undefined>(
+    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
+  );
+
+  if (!projectInfo) {
+    return <NotFoundStub text="Project not found" />;
+  }
+
+  return <ProjectDetailsPage projectInfo={projectInfo} />;
+};
+
+export default ProjectDetailsHOC;
