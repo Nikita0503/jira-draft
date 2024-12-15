@@ -13,7 +13,7 @@ const ProfileAvatar = ({ avatar, deleteAvatar }: IProps) => {
     if (avatar instanceof File) {
       return URL.createObjectURL(avatar);
     } else if (typeof avatar === 'string') {
-      return avatar;
+      return `http://localhost:5000/${avatar}`;
     } else {
       return EMPTY_PHOTO_URL;
     }

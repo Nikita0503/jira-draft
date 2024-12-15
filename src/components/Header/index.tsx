@@ -12,7 +12,9 @@ interface IProps {
 
 const Header = ({ title, currentUser }: IProps) => {
   const avatarUrl = React.useMemo(() => {
-    return currentUser?.avatar ? currentUser.avatar : EMPTY_PHOTO_URL;
+    return currentUser?.avatar
+      ? `http://localhost:5000/${currentUser.avatar}`
+      : EMPTY_PHOTO_URL;
   }, [currentUser]);
 
   const navigate = useNavigate();
