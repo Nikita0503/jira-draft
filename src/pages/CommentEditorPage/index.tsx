@@ -118,7 +118,7 @@ const CommentEditorPage = ({
 };
 
 const CommentEditorHOC = () => {
-  const { projectId, commentId } = useParams();
+  const { projectId, taskId, commentId } = useParams();
 
   const commentInfo = useSelector<TRootState, IComment | undefined>(
     (state: TRootState) => commentInfoSelector(parseInt(commentId!))(state)
@@ -139,8 +139,8 @@ const CommentEditorHOC = () => {
   return (
     <CommentEditorPage
       projectId={parseInt(projectId!)}
-      taskId={commentInfo.taskId}
-      commentId={commentInfo.id}
+      taskId={parseInt(taskId!)}
+      commentId={parseInt(commentId!)}
       currentMessage={commentInfo.message}
       currentFiles={commentInfo.files}
     />

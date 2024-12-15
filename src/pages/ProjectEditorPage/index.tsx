@@ -87,7 +87,7 @@ const ProjectEditorHOC = () => {
 
   return (
     <ProjectEditorPage
-      projectId={projectInfo.id}
+      projectId={parseInt(projectId!)}
       currentTitle={projectInfo.title}
       currentDescription={projectInfo.description}
     />

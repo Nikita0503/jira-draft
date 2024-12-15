@@ -204,7 +204,7 @@ const TaskEditorPage = ({
 };
 
 const TaskEditorHOC = () => {
-  const { taskId } = useParams();
+  const { projectId, taskId } = useParams();
 
   const taskInfo = useSelector<TRootState, ITask | undefined>(
     (state: TRootState) => taskInfoSelector(parseInt(taskId!))(state)
@@ -224,8 +224,8 @@ const TaskEditorHOC = () => {
 
   return (
     <TaskEditorPage
-      projectId={taskInfo.projectId}
-      taskId={taskInfo.id}
+      projectId={parseInt(projectId!)}
+      taskId={parseInt(taskId!)}
       currentTitle={taskInfo.title}
       currentDescription={taskInfo.description}
       currentTimeAllotted={taskInfo.timeAllotted}
