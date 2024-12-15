@@ -12,7 +12,7 @@ import SignUpPage from '@pages/SignUpPage';
 import TaskCreatorPage from '@pages/TaskCreatorPage';
 import TaskDetailsPage from '@pages/TaskDetailsPage';
 import TaskEditorPage from '@pages/TaskEditorPage';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 const AppNavigation = () => {
   return (
@@ -120,6 +120,7 @@ const AppNavigation = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="*" element={<Navigate to="/projects" />} />
       </Routes>
     </BrowserRouter>
   );
