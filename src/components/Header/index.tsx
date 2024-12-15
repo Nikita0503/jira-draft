@@ -1,4 +1,4 @@
-import { EMPTY_PHOTO_URL } from '@constants';
+import { EMPTY_PHOTO_URL, IMAGE_BASE_URL } from '@constants';
 import { IUser } from '@interfaces';
 import { Button } from '@mui/material';
 import React from 'react';
@@ -13,7 +13,7 @@ interface IProps {
 const Header = ({ title, currentUser }: IProps) => {
   const avatarUrl = React.useMemo(() => {
     return currentUser?.avatar
-      ? `http://localhost:5000/${currentUser.avatar}`
+      ? `${IMAGE_BASE_URL}/${currentUser.avatar}`
       : EMPTY_PHOTO_URL;
   }, [currentUser]);
 

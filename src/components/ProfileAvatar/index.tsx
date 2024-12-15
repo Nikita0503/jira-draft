@@ -1,4 +1,4 @@
-import { EMPTY_PHOTO_URL } from '@constants';
+import { EMPTY_PHOTO_URL, IMAGE_BASE_URL } from '@constants';
 import DeleteIcon from '@mui/icons-material/DeleteForeverSharp';
 import React from 'react';
 import styles from './ProfileAvatar.module.css';
@@ -13,7 +13,7 @@ const ProfileAvatar = ({ avatar, deleteAvatar }: IProps) => {
     if (avatar instanceof File) {
       return URL.createObjectURL(avatar);
     } else if (typeof avatar === 'string') {
-      return `http://localhost:5000/${avatar}`;
+      return `${IMAGE_BASE_URL}/${avatar}`;
     } else {
       return EMPTY_PHOTO_URL;
     }

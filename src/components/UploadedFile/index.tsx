@@ -1,3 +1,4 @@
+import { IMAGE_BASE_URL } from '@constants';
 import { IFile } from '@interfaces';
 import DeleteIcon from '@mui/icons-material/DeleteForeverSharp';
 import React from 'react';
@@ -10,7 +11,7 @@ interface IProps {
 
 const UploadedFile = ({ file, deleteFile }: IProps) => {
   const fileUrl = React.useMemo(() => {
-    return `http://localhost:5000/${file.name}`;
+    return `${IMAGE_BASE_URL}/${file.name}`;
   }, [file]);
 
   const deleteCurrentFile = React.useCallback(() => {
