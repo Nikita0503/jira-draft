@@ -1,3 +1,4 @@
+import { EMPTY_PHOTO_URL } from '@constants';
 import { IUser } from '@interfaces';
 import { Button } from '@mui/material';
 import React from 'react';
@@ -11,9 +12,7 @@ interface IProps {
 
 const Header = ({ title, currentUser }: IProps) => {
   const avatarUrl = React.useMemo(() => {
-    return currentUser?.avatar
-      ? currentUser.avatar
-      : 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
+    return currentUser?.avatar ? currentUser.avatar : EMPTY_PHOTO_URL;
   }, [currentUser]);
 
   const navigate = useNavigate();

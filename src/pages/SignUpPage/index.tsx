@@ -1,5 +1,6 @@
 import { signUpAsyncAction } from '@actions/authActions';
 import FilePicker from '@components/pickers/FilePicker';
+import { EMPTY_PHOTO_URL } from '@constants';
 import { TUserRole } from '@interfaces';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
@@ -20,9 +21,7 @@ const SignUpPage = () => {
   const [avatar, setAvatar] = React.useState<File | undefined>(undefined);
 
   const avatarUrl = React.useMemo(() => {
-    return avatar
-      ? URL.createObjectURL(avatar)
-      : 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
+    return avatar ? URL.createObjectURL(avatar) : EMPTY_PHOTO_URL;
   }, [avatar]);
 
   const loading = useSelector<TRootState, boolean>(

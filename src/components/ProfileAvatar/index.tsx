@@ -1,3 +1,4 @@
+import { EMPTY_PHOTO_URL } from '@constants';
 import DeleteIcon from '@mui/icons-material/DeleteForeverSharp';
 import React from 'react';
 import styles from './ProfileAvatar.module.css';
@@ -14,7 +15,7 @@ const ProfileAvatar = ({ avatar, deleteAvatar }: IProps) => {
     } else if (typeof avatar === 'string') {
       return avatar;
     } else {
-      return 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
+      return EMPTY_PHOTO_URL;
     }
   }, [avatar]);
 
@@ -25,9 +26,11 @@ const ProfileAvatar = ({ avatar, deleteAvatar }: IProps) => {
   return (
     <div className={styles.container}>
       <img className={styles.image} src={avatarUrl} />
-      <div onClick={deleteCurrentAvatar} className={styles.deleteIcon}>
-        <DeleteIcon color="error" />
-      </div>
+      {avatarUrl != EMPTY_PHOTO_URL && (
+        <div onClick={deleteCurrentAvatar} className={styles.deleteIcon}>
+          <DeleteIcon color="error" />
+        </div>
+      )}
     </div>
   );
 };

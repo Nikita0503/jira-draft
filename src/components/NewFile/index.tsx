@@ -1,3 +1,4 @@
+import { EMPTY_PHOTO_URL } from '@constants';
 import DeleteIcon from '@mui/icons-material/DeleteForeverSharp';
 import React from 'react';
 import styles from './NewFile.module.css';
@@ -9,9 +10,7 @@ interface IProps {
 
 const NewFile = ({ file, deleteFile }: IProps) => {
   const fileUrl = React.useMemo(() => {
-    return file
-      ? URL.createObjectURL(file)
-      : 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
+    return file ? URL.createObjectURL(file) : EMPTY_PHOTO_URL;
   }, [file]);
 
   const deleteCurrentFile = React.useCallback(() => {
