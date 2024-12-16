@@ -6,8 +6,9 @@ import TaskUser from '@components/TaskUser';
 import UploadedFile from '@components/UploadedFile';
 import useComments from '@hooks/useComments';
 import useTasks from '@hooks/useTasks';
-import { IFile, ITask } from '@interfaces';
+import { IFile, IProject, ITask } from '@interfaces';
 import { Button } from '@mui/material';
+import { projectInfoSelector } from '@selectors/projectSelectors';
 import { taskInfoSelector } from '@selectors/taskSelectors';
 import { TRootState } from '@store';
 import React from 'react';
@@ -115,11 +116,19 @@ const TaskDetailsPage = ({ taskInfo }: IProps) => {
 };
 
 const ProjectDetailsHOC = () => {
-  const { taskId } = useParams();
+  const { projectId, taskId } = useParams();
+
+  const projectInfo = useSelector<TRootState, IProject | undefined>(
+    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
+  );
 
   const taskInfo = useSelector<TRootState, ITask | undefined>(
     (state: TRootState) => taskInfoSelector(parseInt(taskId!))(state)
   );
+
+  if (!projectInfo) {
+    return <NotFoundStub text="Project not found" />;
+  }
 
   if (!taskInfo) {
     return <NotFoundStub text="Task not found" />;
