@@ -46,6 +46,10 @@ const SignUpPage = () => {
     );
   }, [email, name, password, repeatPassword, isAdmin, avatar]);
 
+  const deleteAvatar = React.useCallback(() => {
+    setAvatar(undefined);
+  }, []);
+
   const goToProjects = React.useCallback(() => {
     navigate('/projects');
   }, []);
@@ -65,6 +69,13 @@ const SignUpPage = () => {
               Choose Avatar
             </Button>
           </FilePicker>
+          <Button
+            onClick={deleteAvatar}
+            className={styles.button}
+            variant="contained"
+          >
+            Delete Avatar
+          </Button>
         </div>
         <TextField
           className={styles.textField}
