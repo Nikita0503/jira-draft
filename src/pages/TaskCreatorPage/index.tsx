@@ -3,6 +3,7 @@ import FilePicker from '@components/pickers/FilePicker';
 import StatusPicker from '@components/pickers/StatusPicker';
 import TaskUserPicker from '@components/pickers/TaskUserPicker';
 import TypePicker from '@components/pickers/TypePicker';
+import NotFoundStub from '@components/stubs/NotFoundStub';
 import useTasks from '@hooks/useTasks';
 import { IProject, IStatus, IType, IUser } from '@interfaces';
 import { Button, TextField } from '@mui/material';
@@ -13,9 +14,11 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './TaskCreatorPage.module.css';
 
-const TaskCreatorPage = () => {
-  const { projectId } = useParams();
+interface IProps {
+  projectId: number;
+}
 
+const TaskCreatorPage = ({ projectId }: IProps) => {
   const [title, setTitle] = React.useState<string>('');
   const [description, setDescription] = React.useState<string>('');
   const [timeAllotted, setTimeAllotted] = React.useState<number>(0);
@@ -25,10 +28,10 @@ const TaskCreatorPage = () => {
   const [files, setFiles] = React.useState<File[]>([]);
 
   const projectInfo = useSelector<TRootState, IProject | undefined>(
-    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
+    (state: TRootState) => projectInfoSelector(projectId)(state)
   );
 
-  const { loading, createTask } = useTasks(parseInt(projectId!));
+  const { loading, createTask } = useTasks(projectId);
 
   const navigate = useNavigate();
 
@@ -150,4 +153,18 @@ const TaskCreatorPage = () => {
   );
 };
 
-export default TaskCreatorPage;
+const TaskCreatorHOC = () => {
+  const { projectId } = useParams();
+
+  const projectInfo = useSelector<TRootState, IProject | undefined>(
+    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
+  );
+
+  if (!projectInfo) {
+    return <NotFoundStub text="Project not found" />;
+  }
+
+  return <TaskCreatorPage projectId={parseInt(projectId!)} />;
+};
+
+export default TaskCreatorHOC;

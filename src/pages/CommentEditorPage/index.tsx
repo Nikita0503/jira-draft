@@ -3,9 +3,11 @@ import UploadedFileList from '@components/lists/UploadedFileList';
 import FilePicker from '@components/pickers/FilePicker';
 import NotFoundStub from '@components/stubs/NotFoundStub';
 import useComments from '@hooks/useComments';
-import { IComment, IFile } from '@interfaces';
+import { IComment, IFile, IProject, ITask } from '@interfaces';
 import { Button, TextField } from '@mui/material';
 import { commentInfoSelector } from '@selectors/commentSelectors';
+import { projectInfoSelector } from '@selectors/projectSelectors';
+import { taskInfoSelector } from '@selectors/taskSelectors';
 import { TRootState } from '@store';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -121,9 +123,25 @@ const CommentEditorPage = ({
 const CommentEditorHOC = () => {
   const { projectId, taskId, commentId } = useParams();
 
+  const projectInfo = useSelector<TRootState, IProject | undefined>(
+    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
+  );
+
+  const taskInfo = useSelector<TRootState, ITask | undefined>(
+    (state: TRootState) => taskInfoSelector(parseInt(taskId!))(state)
+  );
+
   const commentInfo = useSelector<TRootState, IComment | undefined>(
     (state: TRootState) => commentInfoSelector(parseInt(commentId!))(state)
   );
+
+  if (!projectInfo) {
+    return <NotFoundStub text="Project not found" />;
+  }
+
+  if (!taskInfo) {
+    return <NotFoundStub text="Task not found" />;
+  }
 
   if (!commentInfo) {
     return <NotFoundStub text="Comment not found" />;

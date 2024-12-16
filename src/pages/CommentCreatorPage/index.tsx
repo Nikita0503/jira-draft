@@ -1,21 +1,27 @@
 import NewFileList from '@components/lists/NewFileList';
 import FilePicker from '@components/pickers/FilePicker';
+import NotFoundStub from '@components/stubs/NotFoundStub';
 import useComments from '@hooks/useComments';
+import { IProject, ITask } from '@interfaces';
 import { Button, TextField } from '@mui/material';
+import { projectInfoSelector } from '@selectors/projectSelectors';
+import { taskInfoSelector } from '@selectors/taskSelectors';
+import { TRootState } from '@store';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './CommentCreatorPage.module.css';
 
-const CommentCreatorPage = () => {
-  const { projectId, taskId } = useParams();
+interface IProps {
+  projectId: number;
+  taskId: number;
+}
 
+const CommentCreatorPage = ({ projectId, taskId }: IProps) => {
   const [message, setMessage] = React.useState<string>('');
   const [files, setFiles] = React.useState<File[]>([]);
 
-  const { loading, createComment } = useComments(
-    parseInt(projectId!),
-    parseInt(taskId!)
-  );
+  const { loading, createComment } = useComments(projectId, taskId);
 
   const navigate = useNavigate();
 
@@ -87,4 +93,31 @@ const CommentCreatorPage = () => {
   );
 };
 
-export default CommentCreatorPage;
+const CommentCreatorHOC = () => {
+  const { projectId, taskId } = useParams();
+
+  const projectInfo = useSelector<TRootState, IProject | undefined>(
+    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
+  );
+
+  const taskInfo = useSelector<TRootState, ITask | undefined>(
+    (state: TRootState) => taskInfoSelector(parseInt(taskId!))(state)
+  );
+
+  if (!projectInfo) {
+    return <NotFoundStub text="Project not found" />;
+  }
+
+  if (!taskInfo) {
+    return <NotFoundStub text="Task not found" />;
+  }
+
+  return (
+    <CommentCreatorPage
+      projectId={parseInt(projectId!)}
+      taskId={parseInt(taskId!)}
+    />
+  );
+};
+
+export default CommentCreatorHOC;

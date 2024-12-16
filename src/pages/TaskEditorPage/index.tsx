@@ -207,9 +207,17 @@ const TaskEditorPage = ({
 const TaskEditorHOC = () => {
   const { projectId, taskId } = useParams();
 
+  const projectInfo = useSelector<TRootState, IProject | undefined>(
+    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
+  );
+
   const taskInfo = useSelector<TRootState, ITask | undefined>(
     (state: TRootState) => taskInfoSelector(parseInt(taskId!))(state)
   );
+
+  if (!projectInfo) {
+    return <NotFoundStub text="Project not found" />;
+  }
 
   if (!taskInfo) {
     return <NotFoundStub text="Task not found" />;
