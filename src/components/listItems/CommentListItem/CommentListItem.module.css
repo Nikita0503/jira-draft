@@ -23,7 +23,7 @@
 .userAvatar {
   width: 25px;
   height: 25px;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 25px;
 }
 

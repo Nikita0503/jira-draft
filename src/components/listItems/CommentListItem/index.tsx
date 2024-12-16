@@ -1,4 +1,5 @@
 import UploadedFile from '@components/UploadedFile';
+import { EMPTY_PHOTO_URL, IMAGE_BASE_URL } from '@constants';
 import useComments from '@hooks/useComments';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
@@ -13,6 +14,13 @@ interface IProps {
 
 const CommentListItem = ({ comment }: IProps) => {
   const { projectId, taskId } = useParams();
+
+  const avatarUrl = React.useMemo(() => {
+    return comment.user.avatar
+      ? `${IMAGE_BASE_URL}/${comment.user.avatar}`
+      : EMPTY_PHOTO_URL;
+  }, [comment]);
+
   const navigate = useNavigate();
 
   const { deleteComment } = useComments(
@@ -45,13 +53,7 @@ const CommentListItem = ({ comment }: IProps) => {
     <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.userContainer}>
-          <img
-            className={styles.userAvatar}
-            src={
-              comment.user.avatar ??
-              'https://cdn-icons-png.flaticon.com/512/1077/1077114.png'
-            }
-          />
+          <img className={styles.userAvatar} src={avatarUrl} />
           <span className={styles.userName}>{comment.user.name}</span>
         </div>
         <div className={styles.actionsContainer}>
