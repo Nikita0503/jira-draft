@@ -1,3 +1,4 @@
+import useIsAdmin from '@hooks/useIsAdmin';
 import useProjects from '@hooks/useProjects';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
@@ -11,6 +12,8 @@ interface IProps {
 }
 
 const ProjectListItem = ({ project }: IProps) => {
+  const { isAdmin } = useIsAdmin();
+
   const navigate = useNavigate();
 
   const { deleteProject } = useProjects();
@@ -53,12 +56,16 @@ const ProjectListItem = ({ project }: IProps) => {
         </div>
       </div>
       <div className={styles.actionsContainer}>
-        <div onClick={goToProjectEditor}>
-          <EditIcon className={styles.actionIcon} />
-        </div>
-        <div onClick={deleteCurrentProject}>
-          <DeleteIcon className={styles.actionIcon} />
-        </div>
+        {isAdmin && (
+          <div onClick={goToProjectEditor}>
+            <EditIcon className={styles.actionIcon} />
+          </div>
+        )}
+        {isAdmin && (
+          <div onClick={deleteCurrentProject}>
+            <DeleteIcon className={styles.actionIcon} />
+          </div>
+        )}
       </div>
     </div>
   );

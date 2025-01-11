@@ -1,3 +1,4 @@
+import useIsAdmin from '@hooks/useIsAdmin';
 import useTasks from '@hooks/useTasks';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
@@ -15,6 +16,9 @@ interface IProps {
 
 const TaskListItem = ({ task }: IProps) => {
   const { projectId } = useParams();
+
+  const { isAdmin } = useIsAdmin();
+
   const navigate = useNavigate();
 
   const { deleteTask } = useTasks(parseInt(projectId!));
@@ -67,9 +71,11 @@ const TaskListItem = ({ task }: IProps) => {
         <div onClick={goToTaskEditor}>
           <EditIcon className={styles.actionIcon} />
         </div>
-        <div onClick={deleteCurrentTask}>
-          <DeleteIcon className={styles.actionIcon} />
-        </div>
+        {isAdmin && (
+          <div onClick={deleteCurrentTask}>
+            <DeleteIcon className={styles.actionIcon} />
+          </div>
+        )}
       </div>
     </div>
   );
