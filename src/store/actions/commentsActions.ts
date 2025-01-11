@@ -3,7 +3,7 @@ import {
   deleteCommentApi,
   fetchCommentsApi,
   updateCommentApi,
-} from '@api/commnetsApi';
+} from '@api/commentsApi';
 import { deleteFileApi } from '@api/filesApi';
 import { IComment } from '@interfaces';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';

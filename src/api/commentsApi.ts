@@ -1,5 +1,16 @@
 import axiosInstance from './axios';
 
+export const fetchCommentApi = async (
+  projectId: number,
+  taskId: number,
+  commentId: number
+) => {
+  const res = await axiosInstance.get(
+    `/projects/${projectId}/tasks/${taskId}/comments/${commentId}`
+  );
+  return res.data;
+};
+
 export const fetchCommentsApi = async (projectId: number, taskId: number) => {
   const res = await axiosInstance.get(
     `/projects/${projectId}/tasks/${taskId}/comments`

@@ -2,15 +2,12 @@ import NewFileList from '@components/lists/NewFileList';
 import UploadedFileList from '@components/lists/UploadedFileList';
 import FilePicker from '@components/pickers/FilePicker';
 import NotFoundStub from '@components/stubs/NotFoundStub';
+import useComment from '@hooks/useComment';
 import useComments from '@hooks/useComments';
-import { IComment, IFile, IProject, ITask } from '@interfaces';
-import { Button, TextField } from '@mui/material';
-import { commentInfoSelector } from '@selectors/commentSelectors';
-import { projectInfoSelector } from '@selectors/projectSelectors';
-import { taskInfoSelector } from '@selectors/taskSelectors';
-import { TRootState } from '@store';
+import useCurrentUser from '@hooks/useCurrentUser';
+import { IFile } from '@interfaces';
+import { Button, CircularProgress, TextField } from '@mui/material';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './CommentEditorPage.module.css';
 
@@ -123,28 +120,25 @@ const CommentEditorPage = ({
 const CommentEditorHOC = () => {
   const { projectId, taskId, commentId } = useParams();
 
-  const projectInfo = useSelector<TRootState, IProject | undefined>(
-    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
-  );
+  const { currentUser } = useCurrentUser();
+  const { comment, error, loading } = useComment(projectId, taskId, commentId);
 
-  const taskInfo = useSelector<TRootState, ITask | undefined>(
-    (state: TRootState) => taskInfoSelector(parseInt(taskId!))(state)
-  );
-
-  const commentInfo = useSelector<TRootState, IComment | undefined>(
-    (state: TRootState) => commentInfoSelector(parseInt(commentId!))(state)
-  );
-
-  if (!projectInfo) {
-    return <NotFoundStub text="Project not found" />;
+  if (loading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <CircularProgress />
+      </div>
+    );
   }
 
-  if (!taskInfo) {
-    return <NotFoundStub text="Task not found" />;
+  if (error || !comment) {
+    return (
+      <NotFoundStub text="Something went wrong. Probably comment was not found" />
+    );
   }
 
-  if (!commentInfo) {
-    return <NotFoundStub text="Comment not found" />;
+  if (currentUser?.id !== comment.user.id) {
+    return <NotFoundStub text="You can't edit this comment, it is not your " />;
   }
 
   return (
@@ -152,8 +146,8 @@ const CommentEditorHOC = () => {
       projectId={parseInt(projectId!)}
       taskId={parseInt(taskId!)}
       commentId={parseInt(commentId!)}
-      currentMessage={commentInfo.message}
-      currentFiles={commentInfo.files}
+      currentMessage={comment.message}
+      currentFiles={comment.files}
     />
   );
 };
