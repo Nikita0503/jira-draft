@@ -6,14 +6,11 @@ import TaskUser from '@components/TaskUser';
 import UploadedFile from '@components/UploadedFile';
 import useComments from '@hooks/useComments';
 import useIsAdmin from '@hooks/useIsAdmin';
+import useTask from '@hooks/useTask';
 import useTasks from '@hooks/useTasks';
-import { IFile, IProject, ITask } from '@interfaces';
-import { Button } from '@mui/material';
-import { projectInfoSelector } from '@selectors/projectSelectors';
-import { taskInfoSelector } from '@selectors/taskSelectors';
-import { TRootState } from '@store';
+import { IFile, ITask } from '@interfaces';
+import { Button, CircularProgress } from '@mui/material';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './TaskDetailsPage.module.css';
 
@@ -119,26 +116,26 @@ const TaskDetailsPage = ({ taskInfo }: IProps) => {
   );
 };
 
-const ProjectDetailsHOC = () => {
+const TaskDetailsHOC = () => {
   const { projectId, taskId } = useParams();
 
-  const projectInfo = useSelector<TRootState, IProject | undefined>(
-    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
-  );
+  const { task, error, loading } = useTask(projectId, taskId);
 
-  const taskInfo = useSelector<TRootState, ITask | undefined>(
-    (state: TRootState) => taskInfoSelector(parseInt(taskId!))(state)
-  );
-
-  if (!projectInfo) {
-    return <NotFoundStub text="Project not found" />;
+  if (loading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <CircularProgress />
+      </div>
+    );
   }
 
-  if (!taskInfo) {
-    return <NotFoundStub text="Task not found" />;
+  if (error || !task) {
+    return (
+      <NotFoundStub text="Something went wrong. Probably task was not found" />
+    );
   }
 
-  return <TaskDetailsPage taskInfo={taskInfo} />;
+  return <TaskDetailsPage taskInfo={task} />;
 };
 
-export default ProjectDetailsHOC;
+export default TaskDetailsHOC;

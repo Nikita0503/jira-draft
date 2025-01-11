@@ -2,14 +2,12 @@ import TaskList from '@components/lists/TaskList';
 import UsersInProjectPicker from '@components/pickers/UsersInProjectPicker';
 import NotFoundStub from '@components/stubs/NotFoundStub';
 import useIsAdmin from '@hooks/useIsAdmin';
+import useProject from '@hooks/useProject';
 import useProjects from '@hooks/useProjects';
 import useTasks from '@hooks/useTasks';
 import { IProject } from '@interfaces';
-import { Button } from '@mui/material';
-import { projectInfoSelector } from '@selectors/projectSelectors';
-import { TRootState } from '@store';
+import { Button, CircularProgress } from '@mui/material';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './ProjectDetailsPage.module.css';
 
@@ -94,15 +92,23 @@ const ProjectDetailsPage = ({ projectInfo }: IProps) => {
 const ProjectDetailsHOC = () => {
   const { projectId } = useParams();
 
-  const projectInfo = useSelector<TRootState, IProject | undefined>(
-    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
-  );
+  const { project, error, loading } = useProject(projectId);
 
-  if (!projectInfo) {
-    return <NotFoundStub text="Project not found" />;
+  if (loading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <CircularProgress />
+      </div>
+    );
   }
 
-  return <ProjectDetailsPage projectInfo={projectInfo} />;
+  if (error || !project) {
+    return (
+      <NotFoundStub text="Something went wrong. Probably project was not found" />
+    );
+  }
+
+  return <ProjectDetailsPage projectInfo={project} />;
 };
 
 export default ProjectDetailsHOC;

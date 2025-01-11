@@ -1,5 +1,10 @@
 import axiosInstance from './axios';
 
+export const fetchProjectApi = async (projectId: number) => {
+  const res = await axiosInstance.get(`/projects/${projectId}`);
+  return res.data;
+};
+
 export const fetchProjectsApi = async () => {
   const res = await axiosInstance.get('/projects');
   return res.data;
