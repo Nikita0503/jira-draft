@@ -1,11 +1,8 @@
 import NotFoundStub from '@components/stubs/NotFoundStub';
+import useProject from '@hooks/useProject';
 import useProjects from '@hooks/useProjects';
-import { IProject } from '@interfaces';
-import { Button, TextField } from '@mui/material';
-import { projectInfoSelector } from '@selectors/projectSelectors';
-import { TRootState } from '@store';
+import { Button, CircularProgress, TextField } from '@mui/material';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './ProjectEditorPage.module.css';
 
@@ -70,19 +67,27 @@ const ProjectEditorPage = ({
 const ProjectEditorHOC = () => {
   const { projectId } = useParams();
 
-  const projectInfo = useSelector<TRootState, IProject | undefined>(
-    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
-  );
+  const { project, error, loading } = useProject(projectId);
 
-  if (!projectInfo) {
-    return <NotFoundStub text="Project not found" />;
+  if (loading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (error || !project) {
+    return (
+      <NotFoundStub text="Something went wrong. Probably project was not found" />
+    );
   }
 
   return (
     <ProjectEditorPage
       projectId={parseInt(projectId!)}
-      currentTitle={projectInfo.title}
-      currentDescription={projectInfo.description}
+      currentTitle={project.title}
+      currentDescription={project.description}
     />
   );
 };

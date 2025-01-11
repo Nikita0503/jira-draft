@@ -5,11 +5,11 @@ import StatusPicker from '@components/pickers/StatusPicker';
 import TaskUserPicker from '@components/pickers/TaskUserPicker';
 import TypePicker from '@components/pickers/TypePicker';
 import NotFoundStub from '@components/stubs/NotFoundStub';
+import useTask from '@hooks/useTask';
 import useTasks from '@hooks/useTasks';
-import { IFile, IProject, IStatus, ITask, IType, IUser } from '@interfaces';
-import { Button, TextField } from '@mui/material';
+import { IFile, IProject, IStatus, IType, IUser } from '@interfaces';
+import { Button, CircularProgress, TextField } from '@mui/material';
 import { projectInfoSelector } from '@selectors/projectSelectors';
-import { taskInfoSelector } from '@selectors/taskSelectors';
 import { TRootState } from '@store';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -207,33 +207,33 @@ const TaskEditorPage = ({
 const TaskEditorHOC = () => {
   const { projectId, taskId } = useParams();
 
-  const projectInfo = useSelector<TRootState, IProject | undefined>(
-    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
-  );
+  const { task, error, loading } = useTask(projectId, taskId);
 
-  const taskInfo = useSelector<TRootState, ITask | undefined>(
-    (state: TRootState) => taskInfoSelector(parseInt(taskId!))(state)
-  );
-
-  if (!projectInfo) {
-    return <NotFoundStub text="Project not found" />;
+  if (loading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <CircularProgress />
+      </div>
+    );
   }
 
-  if (!taskInfo) {
-    return <NotFoundStub text="Task not found" />;
+  if (error || !task) {
+    return (
+      <NotFoundStub text="Something went wrong. Probably task was not found" />
+    );
   }
 
   return (
     <TaskEditorPage
       projectId={parseInt(projectId!)}
       taskId={parseInt(taskId!)}
-      currentTitle={taskInfo.title}
-      currentDescription={taskInfo.description}
-      currentTimeAllotted={taskInfo.timeAllotted}
-      currentType={taskInfo.type}
-      currentStatus={taskInfo.status}
-      currentUser={taskInfo.user}
-      currentFiles={taskInfo.files}
+      currentTitle={task.title}
+      currentDescription={task.description}
+      currentTimeAllotted={task.timeAllotted}
+      currentType={task.type}
+      currentStatus={task.status}
+      currentUser={task.user}
+      currentFiles={task.files}
     />
   );
 };

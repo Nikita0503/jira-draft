@@ -4,9 +4,10 @@ import StatusPicker from '@components/pickers/StatusPicker';
 import TaskUserPicker from '@components/pickers/TaskUserPicker';
 import TypePicker from '@components/pickers/TypePicker';
 import NotFoundStub from '@components/stubs/NotFoundStub';
+import useProject from '@hooks/useProject';
 import useTasks from '@hooks/useTasks';
 import { IProject, IStatus, IType, IUser } from '@interfaces';
-import { Button, TextField } from '@mui/material';
+import { Button, CircularProgress, TextField } from '@mui/material';
 import { projectInfoSelector } from '@selectors/projectSelectors';
 import { TRootState } from '@store';
 import React from 'react';
@@ -156,12 +157,20 @@ const TaskCreatorPage = ({ projectId }: IProps) => {
 const TaskCreatorHOC = () => {
   const { projectId } = useParams();
 
-  const projectInfo = useSelector<TRootState, IProject | undefined>(
-    (state: TRootState) => projectInfoSelector(parseInt(projectId!))(state)
-  );
+  const { project, error, loading } = useProject(projectId);
 
-  if (!projectInfo) {
-    return <NotFoundStub text="Project not found" />;
+  if (loading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (error || !project) {
+    return (
+      <NotFoundStub text="Something went wrong. Probably project was not found" />
+    );
   }
 
   return <TaskCreatorPage projectId={parseInt(projectId!)} />;
