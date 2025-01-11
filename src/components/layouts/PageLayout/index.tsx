@@ -1,5 +1,6 @@
 import Header from '@components/Header';
 import useCurrentUser from '@hooks/useCurrentUser';
+import React from 'react';
 import styles from './PageLayout.module.css';
 
 interface IProps {
@@ -8,7 +9,11 @@ interface IProps {
 }
 
 const PageLayout = ({ title, children }: IProps) => {
-  const { currentUser } = useCurrentUser();
+  const { currentUser, fetchCurrentUser } = useCurrentUser();
+
+  React.useEffect(() => {
+    fetchCurrentUser();
+  }, []);
 
   return (
     <div className={styles.container}>

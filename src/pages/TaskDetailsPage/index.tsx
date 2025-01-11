@@ -5,6 +5,7 @@ import TaskType from '@components/TaskType';
 import TaskUser from '@components/TaskUser';
 import UploadedFile from '@components/UploadedFile';
 import useComments from '@hooks/useComments';
+import useIsAdmin from '@hooks/useIsAdmin';
 import useTasks from '@hooks/useTasks';
 import { IFile, IProject, ITask } from '@interfaces';
 import { Button } from '@mui/material';
@@ -22,6 +23,8 @@ interface IProps {
 
 const TaskDetailsPage = ({ taskInfo }: IProps) => {
   const { projectId, taskId } = useParams();
+
+  const { isAdmin } = useIsAdmin();
 
   const { deleteTask } = useTasks(parseInt(projectId!));
   const { comments, error, loading, fetchComments } = useComments(
@@ -74,6 +77,7 @@ const TaskDetailsPage = ({ taskInfo }: IProps) => {
             Edit Task
           </Button>
           <Button
+            disabled={!isAdmin}
             onClick={deleteCurrentTask}
             className={styles.button}
             variant="outlined"

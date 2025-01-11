@@ -1,6 +1,8 @@
 import UploadedFile from '@components/UploadedFile';
 import { EMPTY_PHOTO_URL, IMAGE_BASE_URL } from '@constants';
 import useComments from '@hooks/useComments';
+import useCurrentUser from '@hooks/useCurrentUser';
+import useIsAdmin from '@hooks/useIsAdmin';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import React from 'react';
@@ -14,6 +16,13 @@ interface IProps {
 
 const CommentListItem = ({ comment }: IProps) => {
   const { projectId, taskId } = useParams();
+
+  const { isAdmin } = useIsAdmin();
+  const { currentUser } = useCurrentUser();
+
+  const isCurrentUserComment = React.useMemo(() => {
+    return currentUser?.id === comment.user.id;
+  }, [currentUser, comment]);
 
   const avatarUrl = React.useMemo(() => {
     return comment.user.avatar
@@ -57,12 +66,16 @@ const CommentListItem = ({ comment }: IProps) => {
           <span className={styles.userName}>{comment.user.name}</span>
         </div>
         <div className={styles.actionsContainer}>
-          <div onClick={goToCommentEditor}>
-            <EditIcon className={styles.actionIcon} />
-          </div>
-          <div onClick={deleteCurrentComment}>
-            <DeleteIcon className={styles.actionIcon} />
-          </div>
+          {isCurrentUserComment && (
+            <div onClick={goToCommentEditor}>
+              <EditIcon className={styles.actionIcon} />
+            </div>
+          )}
+          {(isCurrentUserComment || isAdmin) && (
+            <div onClick={deleteCurrentComment}>
+              <DeleteIcon className={styles.actionIcon} />
+            </div>
+          )}
         </div>
       </div>
       <span className={styles.title}>{comment.message}</span>

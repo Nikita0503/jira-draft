@@ -18,6 +18,13 @@
   font-weight: bold;
 }
 
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+}
+
 .icon {
   cursor: pointer;
 }

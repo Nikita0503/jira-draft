@@ -1,4 +1,9 @@
-import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import { setAccessTokenAction } from '@actions/authActions';
+import axios, {
+  AxiosError,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from 'axios';
 import store from '../store';
 
 const axiosInstance = axios.create({
@@ -16,6 +21,15 @@ axiosInstance.interceptors.request.use(
   },
   (error: AxiosError) => {
     Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.response.use(
+  (response: AxiosResponse) => response,
+  (error: AxiosError) => {
+    if (error.response?.status === 401) {
+      store.dispatch(setAccessTokenAction({ accessToken: undefined }));
+    }
   }
 );
 

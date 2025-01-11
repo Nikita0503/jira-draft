@@ -1,4 +1,5 @@
 import ProjectList from '@components/lists/ProjectList';
+import useIsAdmin from '@hooks/useIsAdmin';
 import useProjects from '@hooks/useProjects';
 import { Button } from '@mui/material';
 import React from 'react';
@@ -6,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './ProjectsPage.module.css';
 
 const ProjectsPage = () => {
+  const { isAdmin } = useIsAdmin();
   const { projects, error, loading, fetchProjects } = useProjects();
 
   React.useEffect(() => {
@@ -24,6 +26,7 @@ const ProjectsPage = () => {
       <div className={styles.content}>
         <div className={styles.buttonsContainer}>
           <Button
+            disabled={!isAdmin}
             onClick={goToProjectCreator}
             className={styles.button}
             variant="contained"

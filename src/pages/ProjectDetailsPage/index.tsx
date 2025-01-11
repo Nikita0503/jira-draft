@@ -1,6 +1,7 @@
 import TaskList from '@components/lists/TaskList';
 import UsersInProjectPicker from '@components/pickers/UsersInProjectPicker';
 import NotFoundStub from '@components/stubs/NotFoundStub';
+import useIsAdmin from '@hooks/useIsAdmin';
 import useProjects from '@hooks/useProjects';
 import useTasks from '@hooks/useTasks';
 import { IProject } from '@interfaces';
@@ -18,6 +19,8 @@ interface IProps {
 
 const ProjectDetailsPage = ({ projectInfo }: IProps) => {
   const { projectId } = useParams();
+
+  const { isAdmin } = useIsAdmin();
 
   const { deleteProject } = useProjects();
   const { tasks, error, loading, fetchTasks } = useTasks(parseInt(projectId!));
@@ -57,6 +60,7 @@ const ProjectDetailsPage = ({ projectInfo }: IProps) => {
             usersInProject={projectInfo?.users ?? []}
           />
           <Button
+            disabled={!isAdmin}
             onClick={goToTaskCreator}
             className={styles.button}
             variant="contained"
@@ -64,6 +68,7 @@ const ProjectDetailsPage = ({ projectInfo }: IProps) => {
             Create Task
           </Button>
           <Button
+            disabled={!isAdmin}
             onClick={goToProjectEditor}
             className={styles.button}
             variant="contained"
@@ -71,6 +76,7 @@ const ProjectDetailsPage = ({ projectInfo }: IProps) => {
             Edit Project
           </Button>
           <Button
+            disabled={!isAdmin}
             onClick={deleteCurrentProject}
             className={styles.button}
             variant="outlined"
