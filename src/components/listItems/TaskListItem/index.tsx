@@ -1,3 +1,4 @@
+import TaskTimeAllotted from '@components/TaskTimeAllotted';
 import useIsAdmin from '@hooks/useIsAdmin';
 import useTasks from '@hooks/useTasks';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
@@ -64,6 +65,9 @@ const TaskListItem = ({ task }: IProps) => {
           </div>
           <div className={styles.additionalInfoItem}>
             <TaskUser user={task.user} />
+          </div>
+          <div className={styles.additionalInfoItem}>
+            <TaskTimeAllotted timeAllotted={task.timeAllotted} />
           </div>
         </div>
       </div>

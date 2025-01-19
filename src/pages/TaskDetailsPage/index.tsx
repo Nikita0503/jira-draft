@@ -1,6 +1,7 @@
 import CommentList from '@components/lists/CommentList';
 import NotFoundStub from '@components/stubs/NotFoundStub';
 import TaskStatus from '@components/TaskStatus';
+import TaskTimeAllotted from '@components/TaskTimeAllotted';
 import TaskType from '@components/TaskType';
 import TaskUser from '@components/TaskUser';
 import UploadedFile from '@components/UploadedFile';
@@ -93,6 +94,9 @@ const TaskDetailsPage = ({ taskInfo }: IProps) => {
           </div>
           <div className={styles.additionalInfoItem}>
             <TaskUser user={taskInfo!.user} />
+          </div>
+          <div className={styles.additionalInfoItem}>
+            <TaskTimeAllotted timeAllotted={taskInfo!.timeAllotted} />
           </div>
         </div>
         {taskInfo!.files.length > 0 && (
