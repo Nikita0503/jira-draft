@@ -66,9 +66,11 @@ const TaskListItem = ({ task }: IProps) => {
           <div className={styles.additionalInfoItem}>
             <TaskUser user={task.user} />
           </div>
-          <div className={styles.additionalInfoItem}>
-            <TaskTimeAllotted timeAllotted={task.timeAllotted} />
-          </div>
+          {task?.timeAllotted && (
+            <div className={styles.additionalInfoItem}>
+              <TaskTimeAllotted timeAllotted={task.timeAllotted} />
+            </div>
+          )}
         </div>
       </div>
       <div className={styles.actionsContainer}>
