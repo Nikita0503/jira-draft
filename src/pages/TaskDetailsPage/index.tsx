@@ -95,11 +95,9 @@ const TaskDetailsPage = ({ taskInfo }: IProps) => {
           <div className={styles.additionalInfoItem}>
             <TaskUser user={taskInfo!.user} />
           </div>
-          {taskInfo?.timeAllotted && (
-            <div className={styles.additionalInfoItem}>
-              <TaskTimeAllotted timeAllotted={taskInfo.timeAllotted} />
-            </div>
-          )}
+          <div className={styles.additionalInfoItem}>
+            <TaskTimeAllotted timeAllotted={taskInfo!.timeAllotted} />
+          </div>
         </div>
         {taskInfo!.files.length > 0 && (
           <>
