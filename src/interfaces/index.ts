@@ -39,7 +39,6 @@ export interface ITask {
   id: number;
   title: string;
   description: string;
-  timeTracked: number;
   timeAllotted: number;
   projectId: number;
   statusId: number;
