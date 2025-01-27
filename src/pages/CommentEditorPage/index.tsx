@@ -80,6 +80,10 @@ const CommentEditorPage = ({
     navigate(-1);
   }, []);
 
+  const isValid = React.useMemo<boolean>(() => {
+    return !!message.trim();
+  }, [message]);
+
   return (
     <div className={styles.container}>
       <span className={styles.title}>Update Current Comment</span>
@@ -108,7 +112,7 @@ const CommentEditorPage = ({
           onClick={updateCurrentComment}
           className={styles.button}
           variant="contained"
-          disabled={loading}
+          disabled={loading || !isValid}
         >
           Update Current Comment
         </Button>

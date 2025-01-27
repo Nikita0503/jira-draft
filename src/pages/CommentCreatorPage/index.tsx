@@ -56,6 +56,10 @@ const CommentCreatorPage = ({ projectId, taskId }: IProps) => {
     navigate(-1);
   }, []);
 
+  const isValid = React.useMemo<boolean>(() => {
+    return !!message.trim();
+  }, [message]);
+
   return (
     <div className={styles.container}>
       <span className={styles.title}>Create New Comment</span>
@@ -80,7 +84,7 @@ const CommentCreatorPage = ({ projectId, taskId }: IProps) => {
           onClick={createNewComment}
           className={styles.button}
           variant="contained"
-          disabled={loading}
+          disabled={loading || !isValid}
         >
           Create New Comment
         </Button>
