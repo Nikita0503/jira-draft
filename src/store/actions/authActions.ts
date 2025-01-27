@@ -68,6 +68,10 @@ export const signUpAsyncAction = createAsyncThunk<void, ISignUpAsyncAction>(
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
+      if (password !== repeatPassword) {
+        alert('Passwords do not match');
+        return;
+      }
       const res = await signUpApi(email, name, password, role, avatar);
       if (res.token) {
         dispatch(setAccessTokenAction({ accessToken: res.token }));
