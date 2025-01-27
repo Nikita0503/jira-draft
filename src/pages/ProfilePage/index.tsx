@@ -43,6 +43,10 @@ const ProfilePage = ({ currentEmail, currentName, currentAvatar }: IProps) => {
     }
   }, []);
 
+  const isValid = React.useMemo<boolean>(() => {
+    return !!name.trim();
+  }, [name]);
+
   return (
     <div className={styles.container}>
       <span className={styles.title}>Your Profile</span>
@@ -70,10 +74,10 @@ const ProfilePage = ({ currentEmail, currentName, currentAvatar }: IProps) => {
           onChange={(event) => setName(event.target.value)}
         />
         <Button
-          disabled={loading}
           onClick={updateCurrentUserProfile}
           className={styles.button}
           variant="contained"
+          disabled={loading || !isValid}
         >
           Update Profile
         </Button>
