@@ -33,6 +33,10 @@ const ProjectEditorPage = ({
     navigate(-1);
   }, []);
 
+  const isValid = React.useMemo<boolean>(() => {
+    return !!title.trim();
+  }, [title]);
+
   return (
     <div className={styles.container}>
       <span className={styles.title}>Update Project</span>
@@ -55,7 +59,7 @@ const ProjectEditorPage = ({
           onClick={updateCurrentProject}
           className={styles.button}
           variant="contained"
-          disabled={loading}
+          disabled={loading || !isValid}
         >
           Update Project
         </Button>

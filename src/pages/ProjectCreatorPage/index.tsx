@@ -20,6 +20,10 @@ const ProjectCreatorPage = () => {
     navigate(-1);
   }, []);
 
+  const isValid = React.useMemo<boolean>(() => {
+    return !!title.trim();
+  }, [title]);
+
   return (
     <div className={styles.container}>
       <span className={styles.title}>Create New Project</span>
@@ -42,7 +46,7 @@ const ProjectCreatorPage = () => {
           onClick={createNewProject}
           className={styles.button}
           variant="contained"
-          disabled={loading}
+          disabled={loading || !isValid}
         >
           Create New Project
         </Button>
