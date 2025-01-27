@@ -1,5 +1,6 @@
 import { fetchCurrentUserApi, updateCurrentUserApi } from '@api/currentUserApi';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { handleErrorResponse } from '@utils/errorHandlers';
 import {
   ISetCurrentUserAction,
   ISetError,
@@ -56,6 +57,7 @@ export const updateCurrentUserAsyncAction = createAsyncThunk<
       }
     } catch (e: any) {
       console.log('tasksActions::updateTaskAsyncAction error:', e);
+      handleErrorResponse(e);
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }

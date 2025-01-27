@@ -7,6 +7,7 @@ import {
   updateProjectApi,
 } from '@api/projectsApi';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { handleErrorResponse } from '@utils/errorHandlers';
 import {
   IAddProjectAction,
   IAddUserToProjectAsyncAction,
@@ -82,6 +83,7 @@ export const createProjectAsyncAction = createAsyncThunk<
       }
     } catch (e: any) {
       console.log('projectsActions::createProjectAsyncAction error:', e);
+      handleErrorResponse(e);
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
@@ -107,6 +109,7 @@ export const updateProjectAsyncAction = createAsyncThunk<
       }
     } catch (e: any) {
       console.log('projectsActions::updateProjectAsyncAction error:', e);
+      handleErrorResponse(e);
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }

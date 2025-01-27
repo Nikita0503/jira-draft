@@ -9,6 +9,7 @@ import { IComment } from '@interfaces';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { commentInfoSelector } from '@selectors/commentSelectors';
 import { TRootState } from '@store';
+import { handleErrorResponse } from '@utils/errorHandlers';
 import {
   IAddCommentAction,
   ICreateCommentAsyncAction,
@@ -93,6 +94,7 @@ export const createCommentAsyncAction = createAsyncThunk<
       }
     } catch (e: any) {
       console.log('commentsActions::createCommentAsyncAction error:', e);
+      handleErrorResponse(e);
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
@@ -145,6 +147,7 @@ export const updateCommentAsyncAction = createAsyncThunk<
       }
     } catch (e: any) {
       console.log('commentsActions::updateCommentAsyncAction error:', e);
+      handleErrorResponse(e);
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }

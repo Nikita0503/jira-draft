@@ -9,6 +9,7 @@ import { ITask } from '@interfaces';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { taskInfoSelector } from '@selectors/taskSelectors';
 import { TRootState } from '@store';
+import { handleErrorResponse } from '@utils/errorHandlers';
 import {
   IAddTaskAction,
   ICreateTaskAsyncAction,
@@ -103,6 +104,7 @@ export const createTaskAsyncAction = createAsyncThunk<
       }
     } catch (e: any) {
       console.log('tasksActions::createTaskAsyncAction error:', e);
+      handleErrorResponse(e);
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
@@ -160,6 +162,7 @@ export const updateTaskAsyncAction = createAsyncThunk<
       }
     } catch (e: any) {
       console.log('tasksActions::updateTaskAsyncAction error:', e);
+      handleErrorResponse(e);
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
