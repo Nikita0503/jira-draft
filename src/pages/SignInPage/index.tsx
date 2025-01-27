@@ -36,6 +36,10 @@ const SignInPage = () => {
     navigate('/sign-up');
   }, []);
 
+  const isValid = React.useMemo(() => {
+    return !!email.trim() && !!password.trim();
+  }, [email, password]);
+
   return (
     <div className={styles.container}>
       <span className={styles.title}>Sign In</span>
@@ -56,10 +60,10 @@ const SignInPage = () => {
           type="password"
         />
         <Button
-          disabled={loading}
           onClick={signIn}
           className={styles.button}
           variant="contained"
+          disabled={loading || !isValid}
         >
           Sign In
         </Button>
