@@ -80,6 +80,17 @@ const TaskCreatorPage = ({ projectId }: IProps) => {
     navigate(-1);
   }, []);
 
+  const isValid = React.useMemo(() => {
+    return (
+      !!title.trim() &&
+      !!description.trim() &&
+      !!status &&
+      !!type &&
+      !!user &&
+      !!timeAllotted
+    );
+  }, [title, description, status, type, user, timeAllotted]);
+
   return (
     <div className={styles.container}>
       <span className={styles.title}>Create New Task</span>
@@ -145,7 +156,7 @@ const TaskCreatorPage = ({ projectId }: IProps) => {
           onClick={createNewTask}
           className={styles.button}
           variant="contained"
-          disabled={loading}
+          disabled={loading || !isValid}
         >
           Create New Task
         </Button>

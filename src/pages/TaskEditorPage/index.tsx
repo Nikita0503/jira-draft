@@ -127,6 +127,17 @@ const TaskEditorPage = ({
     navigate(-1);
   }, []);
 
+  const isValid = React.useMemo(() => {
+    return (
+      !!title.trim() &&
+      !!description.trim() &&
+      !!status &&
+      !!type &&
+      !!user &&
+      !!timeAllotted
+    );
+  }, [title, description, status, type, user, timeAllotted]);
+
   return (
     <div className={styles.container}>
       <span className={styles.title}>Update Current Task</span>
@@ -195,7 +206,7 @@ const TaskEditorPage = ({
           onClick={updateCurrentTask}
           className={styles.button}
           variant="contained"
-          disabled={loading}
+          disabled={loading || !isValid}
         >
           Update Current Task
         </Button>
