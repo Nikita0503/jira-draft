@@ -32,8 +32,8 @@ export const signInAsyncAction = createAsyncThunk<void, ISignInAsyncAction>(
         onSuccess();
       }
     } catch (e: any) {
+      console.log('authActions::signInAsyncAction error:', e);
       const errorDetails = e.response.data;
-      console.log('authActions::signInAsyncAction error:', errorDetails);
       let errorText = '';
       if (errorDetails.message) {
         errorText = errorText + `${errorDetails.message}. `;
@@ -81,8 +81,8 @@ export const signUpAsyncAction = createAsyncThunk<void, ISignUpAsyncAction>(
         onSuccess();
       }
     } catch (e: any) {
+      console.log('authActions::signUpAsyncAction error:', e);
       const errorDetails = e.response.data;
-      console.log('authActions::signUpAsyncAction error:', errorDetails);
       let errorText = '';
       if (errorDetails.message) {
         errorText = errorText + `${errorDetails.message}. `;
