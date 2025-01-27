@@ -58,6 +58,16 @@ const SignUpPage = () => {
     navigate('/sign-in');
   }, []);
 
+  const isValid = React.useMemo<boolean>(() => {
+    return (
+      !!email.trim() &&
+      !!name.trim() &&
+      !!password.trim() &&
+      !!repeatPassword.trim() &&
+      password === repeatPassword
+    );
+  }, [email, name, password, repeatPassword]);
+
   return (
     <div className={styles.container}>
       <span className={styles.title}>Sign Up</span>
@@ -117,10 +127,10 @@ const SignUpPage = () => {
           <span>Sign up as Admin</span>
         </div>
         <Button
-          disabled={loading}
           onClick={signUp}
           className={styles.button}
           variant="contained"
+          disabled={loading || !isValid}
         >
           Sign Up
         </Button>

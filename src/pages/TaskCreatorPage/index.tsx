@@ -80,7 +80,7 @@ const TaskCreatorPage = ({ projectId }: IProps) => {
     navigate(-1);
   }, []);
 
-  const isValid = React.useMemo(() => {
+  const isValid = React.useMemo<boolean>(() => {
     return (
       !!title.trim() &&
       !!description.trim() &&

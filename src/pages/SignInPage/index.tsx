@@ -36,7 +36,7 @@ const SignInPage = () => {
     navigate('/sign-up');
   }, []);
 
-  const isValid = React.useMemo(() => {
+  const isValid = React.useMemo<boolean>(() => {
     return !!email.trim() && !!password.trim();
   }, [email, password]);
 
