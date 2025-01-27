@@ -30,6 +30,7 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 401) {
       store.dispatch(setAccessTokenAction({ accessToken: undefined }));
     }
+    return Promise.reject(error);
   }
 );
 
