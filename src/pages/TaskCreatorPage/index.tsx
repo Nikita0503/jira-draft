@@ -87,7 +87,7 @@ const TaskCreatorPage = ({ projectId }: IProps) => {
       !!status &&
       !!type &&
       !!user &&
-      !!timeAllotted
+      timeAllotted >= 0
     );
   }, [title, description, status, type, user, timeAllotted]);
 
