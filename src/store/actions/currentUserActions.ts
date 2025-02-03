@@ -1,4 +1,8 @@
-import { fetchCurrentUserApi, updateCurrentUserApi } from '@api/currentUserApi';
+import {
+  deleteCurrentUserAvatarApi,
+  fetchCurrentUserApi,
+  updateCurrentUserApi,
+} from '@api/currentUserApi';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { handleErrorResponse } from '@utils/errorHandlers';
 import {
@@ -49,6 +53,9 @@ export const updateCurrentUserAsyncAction = createAsyncThunk<
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
+      if (!avatar) {
+        await deleteCurrentUserAvatarApi();
+      }
       const res = await updateCurrentUserApi(name, avatar);
       console.log('Updated User: ', res);
       dispatch(fetchCurrentUserAsyncAction());

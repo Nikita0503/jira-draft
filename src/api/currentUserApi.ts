@@ -17,3 +17,8 @@ export const updateCurrentUserApi = async (
   const res = await axiosInstance.put(`/users`, formData);
   return res.data;
 };
+
+export const deleteCurrentUserAvatarApi = async () => {
+  const res = await axiosInstance.delete('/users/avatar');
+  return res.data;
+};
