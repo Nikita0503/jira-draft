@@ -1,3 +1,4 @@
+import RequirementsDocumentIcon from '@components/requirementsDocument/RequirementsDocumentIcon';
 import { EMPTY_PHOTO_URL, IMAGE_BASE_URL } from '@constants';
 import { IUser } from '@interfaces';
 import { Button } from '@mui/material';
@@ -27,6 +28,7 @@ const Header = ({ title, currentUser }: IProps) => {
     <div className={styles.container}>
       <span className={styles.title}>{title}</span>
       <div className={styles.userDataContainer}>
+        <RequirementsDocumentIcon />
         <img className={styles.avatar} src={avatarUrl} />
         <Button
           onClick={goToProfile}
