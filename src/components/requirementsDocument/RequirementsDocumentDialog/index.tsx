@@ -24,7 +24,7 @@ const RequirementsDocumentDialog = ({ closeModal }: IProps) => {
   }, []);
 
   return (
-    <Dialog onClose={closeModal} open={true}>
+    <Dialog onClose={closeModal} open={true} maxWidth="xl" fullWidth>
       <div className={styles.container}>
         <RequirementsDocumentSideList
           sections={SECTIONS}

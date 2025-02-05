@@ -11,7 +11,7 @@ const RequirementsDocumentContent = ({ sections }: IProps) => {
     <div className={styles.container}>
       {sections.map((section: any) => (
         <div id={section.id} key={section.id}>
-          <RequirementsDocumentSection text={section.text} />
+          <RequirementsDocumentSection sectionId={section.id} />
         </div>
       ))}
     </div>
