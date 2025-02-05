@@ -17,7 +17,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
   padding: 16px;
   border-radius: 8px;
   display: flex;
@@ -26,7 +25,7 @@
 }
 
 .fullImage {
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 80vw;
+  max-height: 80vh;
   border-radius: 8px;
 }
