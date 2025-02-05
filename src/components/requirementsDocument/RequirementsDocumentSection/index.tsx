@@ -1,6 +1,7 @@
 import { ERequirementsDocumentSections } from 'interfaces/requirementsDocument';
 import React from 'react';
 import GeneralDescriptionSection from '../sections/GeneralDescriptionSection';
+import ProjectsSection from '../sections/ProjectsSection';
 import SignInSection from '../sections/SignInSection';
 import SignUpSection from '../sections/SignUpSection';
 import styles from './RequirementsDocumentSection.module.css';
@@ -17,6 +18,8 @@ const RequirementsDocumentSection = ({ sectionId }: IProps) => {
       return <SignInSection />;
     } else if (sectionId === ERequirementsDocumentSections.SIGN_UP) {
       return <SignUpSection />;
+    } else if (sectionId === ERequirementsDocumentSections.PROJECTS) {
+      return <ProjectsSection />;
     }
   }, [sectionId]);
 
