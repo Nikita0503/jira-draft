@@ -92,6 +92,7 @@ const GeneralDescriptionSection = () => {
         these capabilities.{' '}
         <b>The mobile app and website should not handle this</b>.
         <br />
+        <br />
         Users can leave <b>comments</b> on tasks.
       </SectionText>
 

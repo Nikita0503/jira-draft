@@ -10,9 +10,9 @@ interface IProps {
 const RequirementsDocumentSideList = ({ sections, onSectionClick }: IProps) => {
   return (
     <div className={styles.container}>
-      {sections.map((section: any) => (
+      {sections.map((section: ISection) => (
         <RequirementsDocumentSideListItem
-          key={section.title}
+          key={`${section.title}`}
           title={section.title}
           onClick={() => onSectionClick(section)}
         />

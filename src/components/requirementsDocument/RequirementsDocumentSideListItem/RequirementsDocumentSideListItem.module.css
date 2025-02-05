@@ -1,6 +1,19 @@
 .container {
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-  border: 1px solid black;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-radius: 6px;
+  transition: 300ms;
+  border: 0.5px solid rgb(216, 216, 216);
+}
+
+.container:hover {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  transition: 300ms;
 }
 
 .icon {

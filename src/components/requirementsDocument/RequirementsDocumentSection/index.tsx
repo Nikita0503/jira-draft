@@ -1,5 +1,8 @@
+import { ERequirementsDocumentSections } from 'interfaces/requirementsDocument';
 import React from 'react';
 import GeneralDescriptionSection from '../sections/GeneralDescriptionSection';
+import SignInSection from '../sections/SignInSection';
+import SignUpSection from '../sections/SignUpSection';
 import styles from './RequirementsDocumentSection.module.css';
 
 interface IProps {
@@ -8,10 +11,12 @@ interface IProps {
 
 const RequirementsDocumentSection = ({ sectionId }: IProps) => {
   const section = React.useMemo(() => {
-    if (sectionId === 1) {
+    if (sectionId === ERequirementsDocumentSections.GENERAL_DESCRIPTION) {
       return <GeneralDescriptionSection />;
-    } else {
-      return <GeneralDescriptionSection />;
+    } else if (sectionId === ERequirementsDocumentSections.SIGN_IN) {
+      return <SignInSection />;
+    } else if (sectionId === ERequirementsDocumentSections.SIGN_UP) {
+      return <SignUpSection />;
     }
   }, [sectionId]);
 
