@@ -16,4 +16,5 @@ export const SECTIONS: ISection[] = [
   { id: ERequirementsDocumentSections.SIGN_IN, title: 'Sign In' },
   { id: ERequirementsDocumentSections.SIGN_UP, title: 'Sign Up' },
   { id: ERequirementsDocumentSections.PROJECTS, title: 'Projects' },
+  { id: ERequirementsDocumentSections.CREATE_TASK, title: 'Create Task' },
 ];

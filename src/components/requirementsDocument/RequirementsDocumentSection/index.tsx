@@ -1,5 +1,6 @@
 import { ERequirementsDocumentSections } from 'interfaces/requirementsDocument';
 import React from 'react';
+import CreateTaskSection from '../sections/CreateTaskSection';
 import GeneralDescriptionSection from '../sections/GeneralDescriptionSection';
 import ProjectsSection from '../sections/ProjectsSection';
 import SignInSection from '../sections/SignInSection';
@@ -20,6 +21,8 @@ const RequirementsDocumentSection = ({ sectionId }: IProps) => {
       return <SignUpSection />;
     } else if (sectionId === ERequirementsDocumentSections.PROJECTS) {
       return <ProjectsSection />;
+    } else if (sectionId === ERequirementsDocumentSections.CREATE_TASK) {
+      return <CreateTaskSection />;
     }
   }, [sectionId]);
 
