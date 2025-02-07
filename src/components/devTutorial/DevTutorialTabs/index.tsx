@@ -1,5 +1,6 @@
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import { ETechnologies } from '@utils/tutorialSets';
 import * as React from 'react';
 import styles from './DevTutorialTabs.module.css';
 
@@ -26,7 +27,8 @@ const TabContent = (props: TabPanelProps) => {
 };
 
 interface IProps {
-  tutorials: JSX.Element[];
+  //tutorials: JSX.Element[];
+  tutorials: any;
 }
 
 export default function DevTutorialTabs({ tutorials }: IProps) {
@@ -41,46 +43,46 @@ export default function DevTutorialTabs({ tutorials }: IProps) {
       <div className={styles.content}>
         <Tabs value={value} onChange={handleChange} aria-label="users-tabs">
           <Tab
-            label="React"
+            label={ETechnologies.REACT}
             id="dev-tutorial-tab-2"
             aria-controls="dev-tutorial-tabpanel-2"
           />
           <Tab
-            label="React Native"
+            label={ETechnologies.REACT_NATIVE}
             id="dev-tutorial-tab-2"
             aria-controls="dev-tutorial-tabpanel-2"
           />
           <Tab
-            label="Angular"
+            label={ETechnologies.ANGULAR}
             id="dev-tutorial-tab-3"
             aria-controls="dev-tutorial-tabpanel-3"
           />
           <Tab
-            label="Express"
+            label={ETechnologies.EXPRESS}
             id="dev-tutorial-tab-4"
             aria-controls="dev-tutorial-tabpanel-4"
           />
           <Tab
-            label="Testing"
+            label={ETechnologies.TESTING}
             id="dev-tutorial-tab-5"
             aria-controls="dev-tutorial-tabpanel-5"
           />
         </Tabs>
       </div>
       <TabContent value={value} index={0}>
-        {tutorials[0]}
+        {tutorials[ETechnologies.REACT]}
       </TabContent>
       <TabContent value={value} index={1}>
-        {tutorials[1]}
+        {tutorials[ETechnologies.REACT_NATIVE]}
       </TabContent>
       <TabContent value={value} index={2}>
-        {tutorials[2]}
+        {tutorials[ETechnologies.ANGULAR]}
       </TabContent>
       <TabContent value={value} index={3}>
-        {tutorials[3]}
+        {tutorials[ETechnologies.EXPRESS]}
       </TabContent>
       <TabContent value={value} index={4}>
-        {tutorials[4]}
+        {tutorials[ETechnologies.TESTING]}
       </TabContent>
     </div>
   );
