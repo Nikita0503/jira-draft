@@ -1,3 +1,4 @@
+import DevTutorialIcon from '@components/devTutorial/DevTutorialIcon';
 import RequirementsDocumentIcon from '@components/requirementsDocument/RequirementsDocumentIcon';
 import { EMPTY_PHOTO_URL, IMAGE_BASE_URL } from '@constants';
 import { IUser } from '@interfaces';
@@ -28,6 +29,7 @@ const Header = ({ title, currentUser }: IProps) => {
     <div className={styles.container}>
       <span className={styles.title}>{title}</span>
       <div className={styles.userDataContainer}>
+        <DevTutorialIcon />
         <RequirementsDocumentIcon />
         <img className={styles.avatar} src={avatarUrl} />
         <Button
