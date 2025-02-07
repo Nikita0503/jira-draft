@@ -1,4 +1,5 @@
 import { signInAsyncAction } from '@actions/authActions';
+import SupportButtons from '@components/SupportButtons';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { TAppDispatch, TRootState } from '@store';
@@ -42,6 +43,9 @@ const SignInPage = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.supportButtonsContainer}>
+        <SupportButtons title={'Sign In'} />
+      </div>
       <span className={styles.title}>Sign In</span>
       <div className={styles.content}>
         <TextField

@@ -35,3 +35,11 @@
 .button {
   color: #ffffff;
 }
+
+.supportButtonsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}

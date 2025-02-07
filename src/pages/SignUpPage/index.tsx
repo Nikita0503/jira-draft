@@ -1,5 +1,6 @@
 import { signUpAsyncAction } from '@actions/authActions';
 import FilePicker from '@components/pickers/FilePicker';
+import SupportButtons from '@components/SupportButtons';
 import { EMPTY_PHOTO_URL } from '@constants';
 import { TUserRole } from '@interfaces';
 import Button from '@mui/material/Button';
@@ -70,6 +71,9 @@ const SignUpPage = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.supportButtonsContainer}>
+        <SupportButtons title={'Sign Up'} />
+      </div>
       <span className={styles.title}>Sign Up</span>
       <div className={styles.content}>
         <div className={styles.avatarContainer}>

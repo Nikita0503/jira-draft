@@ -1,5 +1,4 @@
-import DevTutorialIcon from '@components/devTutorial/DevTutorialIcon';
-import RequirementsDocumentIcon from '@components/requirementsDocument/RequirementsDocumentIcon';
+import SupportButtons from '@components/SupportButtons';
 import { EMPTY_PHOTO_URL, IMAGE_BASE_URL } from '@constants';
 import { IUser } from '@interfaces';
 import { Button } from '@mui/material';
@@ -29,8 +28,9 @@ const Header = ({ title, currentUser }: IProps) => {
     <div className={styles.container}>
       <span className={styles.title}>{title}</span>
       <div className={styles.userDataContainer}>
-        <DevTutorialIcon title={title} />
-        <RequirementsDocumentIcon />
+        <div className={styles.supportButtonsContainer}>
+          <SupportButtons title={title} />
+        </div>
         <img className={styles.avatar} src={avatarUrl} />
         <Button
           onClick={goToProfile}
