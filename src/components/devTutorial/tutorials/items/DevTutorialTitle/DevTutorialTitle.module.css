@@ -1,0 +1,9 @@
+.container {
+  padding-top: 32px;
+  padding-bottom: 8px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}

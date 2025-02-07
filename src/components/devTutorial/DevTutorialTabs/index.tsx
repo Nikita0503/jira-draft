@@ -25,7 +25,11 @@ const TabContent = (props: TabPanelProps) => {
   );
 };
 
-export default function DevTutorialTabs() {
+interface IProps {
+  tutorials: JSX.Element[];
+}
+
+export default function DevTutorialTabs({ tutorials }: IProps) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -64,19 +68,19 @@ export default function DevTutorialTabs() {
         </Tabs>
       </div>
       <TabContent value={value} index={0}>
-        1
+        {tutorials[0]}
       </TabContent>
       <TabContent value={value} index={1}>
-        2
+        {tutorials[1]}
       </TabContent>
       <TabContent value={value} index={2}>
-        3
+        {tutorials[2]}
       </TabContent>
       <TabContent value={value} index={3}>
-        4
+        {tutorials[3]}
       </TabContent>
       <TabContent value={value} index={4}>
-        5
+        {tutorials[4]}
       </TabContent>
     </div>
   );
