@@ -3,7 +3,11 @@ import React from 'react';
 import DevTutorialDialog from '../DevTutorialDialog';
 import styles from './DevTutorialIcon.module.css';
 
-const DevTutorialIcon = () => {
+interface IProps {
+  title: string;
+}
+
+const DevTutorialIcon = ({ title }: IProps) => {
   const [open, setOpen] = React.useState(false);
 
   const openModal = React.useCallback(() => {
@@ -17,7 +21,7 @@ const DevTutorialIcon = () => {
   return (
     <div className={styles.container}>
       <TipsAndUpdatesOutlined onClick={openModal} className={styles.icon} />
-      {open && <DevTutorialDialog closeModal={closeModal} />}
+      {open && <DevTutorialDialog title={title} closeModal={closeModal} />}
     </div>
   );
 };

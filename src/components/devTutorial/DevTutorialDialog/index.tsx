@@ -1,14 +1,18 @@
 import Dialog from '@mui/material/Dialog';
+import DevTutorialTabs from '../DevTutorialTabs';
 import styles from './DevTutorialDialog.module.css';
 
 export interface IProps {
+  title: string;
   closeModal: () => void;
 }
 
-const DevTutorialDialog = ({ closeModal }: IProps) => {
+const DevTutorialDialog = ({ title, closeModal }: IProps) => {
   return (
     <Dialog onClose={closeModal} open={true} maxWidth="xl" fullWidth>
-      <div className={styles.container}>hgello</div>
+      <div className={styles.container}>
+        <DevTutorialTabs />
+      </div>
     </Dialog>
   );
 };

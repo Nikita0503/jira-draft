@@ -29,7 +29,7 @@ const Header = ({ title, currentUser }: IProps) => {
     <div className={styles.container}>
       <span className={styles.title}>{title}</span>
       <div className={styles.userDataContainer}>
-        <DevTutorialIcon />
+        <DevTutorialIcon title={title} />
         <RequirementsDocumentIcon />
         <img className={styles.avatar} src={avatarUrl} />
         <Button
