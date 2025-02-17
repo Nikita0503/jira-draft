@@ -1,3 +1,4 @@
+import ImageModal from '@components/dialogs/ImageModal';
 import { IMAGE_BASE_URL } from '@constants';
 import { IFile } from '@interfaces';
 import DeleteIcon from '@mui/icons-material/DeleteForeverSharp';
@@ -10,6 +11,16 @@ interface IProps {
 }
 
 const UploadedFile = ({ file, deleteFile }: IProps) => {
+  const [open, setOpen] = React.useState(false);
+
+  const openModal = React.useCallback(() => {
+    setOpen(true);
+  }, []);
+
+  const closeModal = React.useCallback(() => {
+    setOpen(false);
+  }, []);
+
   const fileUrl = React.useMemo(() => {
     return `${IMAGE_BASE_URL}/${file.name}`;
   }, [file]);
@@ -21,13 +32,14 @@ const UploadedFile = ({ file, deleteFile }: IProps) => {
   }, [file, deleteFile]);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={openModal}>
       <img className={styles.image} src={fileUrl} />
       {deleteFile && (
         <div onClick={deleteCurrentFile} className={styles.deleteIcon}>
           <DeleteIcon color="error" />
         </div>
       )}
+      {open && <ImageModal imageUrl={fileUrl} closeModal={closeModal} />}
     </div>
   );
 };
