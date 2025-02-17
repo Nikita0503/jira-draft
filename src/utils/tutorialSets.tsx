@@ -1,15 +1,19 @@
+import CommonDevTutorialAngular from '@components/devTutorial/tutorials/angular/CommonDevTutorialAngular';
 import CreateTaskPageDevTutorialAngular from '@components/devTutorial/tutorials/angular/CreateTaskPageDevTutorialAngular';
 import ProjectsPageDevTutorialAngular from '@components/devTutorial/tutorials/angular/ProjectsPageDevTutorialAngular';
 import SignInPageDevTutorialAngular from '@components/devTutorial/tutorials/angular/SignInPageDevTutorialAngular';
 import SignUpPageDevTutorialAngular from '@components/devTutorial/tutorials/angular/SignUpPageDevTutorialAngular';
+import CommonDevTutorialExpress from '@components/devTutorial/tutorials/express/CommonDevTutorialExpress';
 import CreateTaskPageDevTutorialExpress from '@components/devTutorial/tutorials/express/CreateTaskPageDevTutorialExpress';
 import ProjectsPageDevTutorialExpress from '@components/devTutorial/tutorials/express/ProjectsPageDevTutorialExpress';
 import SignInPageDevTutorialExpress from '@components/devTutorial/tutorials/express/SignInPageDevTutorialExpress';
 import SignUpPageDevTutorialExpress from '@components/devTutorial/tutorials/express/SignUpPageDevTutorialExpress';
+import CommonDevTutorialReact from '@components/devTutorial/tutorials/react/CommonDevTutorialReact';
 import CreateTaskPageDevTutorialReact from '@components/devTutorial/tutorials/react/CreateTaskPageDevTutorialReact';
 import ProjectsPageDevTutorialReact from '@components/devTutorial/tutorials/react/ProjectsPageDevTutorialReact';
 import SignInPageDevTutorialReact from '@components/devTutorial/tutorials/react/SignInPageDevTutorialReact';
 import SignUpPageDevTutorialReact from '@components/devTutorial/tutorials/react/SignUpPageDevTutorialReact';
+import CommonDevTutorialReactNative from '@components/devTutorial/tutorials/reactNative/CommonDevTutorialReactNative';
 import CreateTaskPageDevTutorialReactNative from '@components/devTutorial/tutorials/reactNative/CreateTaskPageDevTutorialReactNative';
 import ProjectsPageDevTutorialReactNative from '@components/devTutorial/tutorials/reactNative/ProjectsPageDevTutorialReactNative';
 import SignInPageDevTutorialReactNative from '@components/devTutorial/tutorials/reactNative/SignInPageDevTutorialReactNative';
@@ -26,6 +30,14 @@ export enum ETechnologies {
   EXPRESS = 'Express',
   TESTING = 'Testing',
 }
+
+export const commonDevTutorialsSet = {
+  [ETechnologies.REACT]: <CommonDevTutorialReact />,
+  [ETechnologies.REACT_NATIVE]: <CommonDevTutorialReactNative />,
+  [ETechnologies.ANGULAR]: <CommonDevTutorialAngular />,
+  [ETechnologies.EXPRESS]: <CommonDevTutorialExpress />,
+  [ETechnologies.TESTING]: <CommonDevTutorialExpress />,
+};
 
 export const signInDevTutorialsSet = {
   [ETechnologies.REACT]: <SignInPageDevTutorialReact />,
@@ -61,7 +73,9 @@ export const createTaskDevTutorialsSet = {
 
 export const getTutorialSet = (title: string) => {
   let tutorialSet;
-  if (title === 'Sign In') {
+  if (title === 'Common') {
+    tutorialSet = commonDevTutorialsSet;
+  } else if (title === 'Sign In') {
     tutorialSet = signInDevTutorialsSet;
   } else if (title === 'Sign Up') {
     tutorialSet = signUpDevTutorialsSet;
