@@ -699,12 +699,12 @@ export default useProject;
       </DevTutorialText>
 
       <DevTutorialText>
-        Code readability is also crucial. Use clear variable and function names.
-        A component should not be too large; break it down into smaller
-        components. This will not only improve readability but also make
-        optimization much easier. Avoid props-drilling for the same reason.
-        Also, avoid excessive conditions in conditional rendering and inline
-        styles.
+        <b>Code readability is also crucial</b>. Use{' '}
+        <b>clear variable and function names</b>. A component{' '}
+        <b>should not be too large</b>; break it down into smaller components.
+        This will not only improve readability but also make optimization much
+        easier. Avoid props-drilling for the same reason. Also, avoid excessive
+        conditions in conditional rendering and inline styles.
       </DevTutorialText>
 
       <DevTutorialText>
